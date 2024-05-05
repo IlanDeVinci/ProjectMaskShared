@@ -99,6 +99,9 @@ public class HeroEntity : MonoBehaviour
     private CameraFollowable _cameraFollowable;
     public bool isHorizontalMoving => _moveDirX != 0f;
 
+    private Vector2 velocityBeforePause;
+    private bool isPaused = false;
+
     private void Awake()
     {
         _cameraFollowable = GetComponent<CameraFollowable>();
@@ -631,90 +634,110 @@ public class HeroEntity : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _ApplyGroundDetection();
-        _ApplyWallDetection();
-        _UpdateCameraFollowPosition();
-        HeroHorizontalMovementSettings horizontalMovementSettings = _GetCurrentHorizontalMovementSettings();
-        HeroHorizontalMovementSettings horizontalMovementSettingsDash = _GetCurrentHorizontalMovementSettingsDash();
-        _timeSinceDash += Time.fixedDeltaTime;
-        _timeSinceSlideStart += Time.fixedDeltaTime;
-        _slideTimer += Time.fixedDeltaTime;
-        _dashTimer += Time.fixedDeltaTime;
+        if (!GlobalManager.isGamePaused)
+        {
+            isPaused = false;
+            _ApplyGroundDetection();
+            _ApplyWallDetection();
+            _UpdateCameraFollowPosition();
+            HeroHorizontalMovementSettings horizontalMovementSettings = _GetCurrentHorizontalMovementSettings();
+            HeroHorizontalMovementSettings horizontalMovementSettingsDash = _GetCurrentHorizontalMovementSettingsDash();
+            _timeSinceDash += Time.fixedDeltaTime;
+            _timeSinceSlideStart += Time.fixedDeltaTime;
+            _slideTimer += Time.fixedDeltaTime;
+            _dashTimer += Time.fixedDeltaTime;
 
-        if (isDashing && !_dashSettings.isLongDash)
-        {
-            _UpdateDash();
-        }
-        else
-        {
-            if (_AreOrientAndMovementOpposite())
+            if (isDashing && !_dashSettings.isLongDash)
             {
-                if (isDashing && _dashSettings.isLongDash)
-                {
-                    _TurnBack(horizontalMovementSettingsDash);
-                }
-                else
-                {
-                    _TurnBack(horizontalMovementSettings);
-                }
+                _UpdateDash();
             }
             else
             {
-                if (isDashing && _dashSettings.isLongDash)
+                if (_AreOrientAndMovementOpposite())
                 {
-                    _UpdateHorizontalSpeed(horizontalMovementSettingsDash);
+                    if (isDashing && _dashSettings.isLongDash)
+                    {
+                        _TurnBack(horizontalMovementSettingsDash);
+                    }
+                    else
+                    {
+                        _TurnBack(horizontalMovementSettings);
+                    }
                 }
                 else
                 {
-                    _UpdateHorizontalSpeed(horizontalMovementSettings);
+                    if (isDashing && _dashSettings.isLongDash)
+                    {
+                        _UpdateHorizontalSpeed(horizontalMovementSettingsDash);
+                    }
+                    else
+                    {
+                        _UpdateHorizontalSpeed(horizontalMovementSettings);
+                    }
+
+                    _ChangeOrientFromHorizontalMovement();
                 }
-
-                _ChangeOrientFromHorizontalMovement();
             }
-        }
 
 
-        if (isJumping)
-        {
-            _UpdateJump();
-        }
-        else
-        {
-            if (!IsTouchingGround && (!isDashing || _dashSettings.isLongDash))
+            if (isJumping)
             {
-                _ApplyFallGravity(_fallSettings);
+                _UpdateJump();
             }
             else
             {
-                if (_jumpState != JumpState.JumpImpulsion && _jumpState != JumpState.WallJump)
+                if (!IsTouchingGround && (!isDashing || _dashSettings.isLongDash))
                 {
-                    _ResetVerticalSpeed();
+                    _ApplyFallGravity(_fallSettings);
+                }
+                else
+                {
+                    if (_jumpState != JumpState.JumpImpulsion && _jumpState != JumpState.WallJump)
+                    {
+                        _ResetVerticalSpeed();
+                    }
                 }
             }
-        }
 
-        _ApplyCeilingDetection();
+            _ApplyCeilingDetection();
 
-        if (isSliding)
-        {
-            enterSlide();
-            UpdateSlide();
+            if (isSliding)
+            {
+                enterSlide();
+                UpdateSlide();
+            }
+            else
+            {
+                wasSliding = false;
+            }
+
+            if (isDashing && _dashSettings.isLongDash)
+            {
+                _UpdateDash();
+            }
+
+            _ApplyHorizontalSpeed();
+
+            _ApplyVerticalSpeed();
+
+            _ResetSpeedOnWallCollision();
         }
         else
         {
-            wasSliding = false;
+            if (!isPaused)
+            {
+                StartCoroutine(Pause());
+            }
         }
+    }
 
-        if (isDashing && _dashSettings.isLongDash)
-        {
-            _UpdateDash();
-        }
-
-        _ApplyHorizontalSpeed();
-
-        _ApplyVerticalSpeed();
-
-        _ResetSpeedOnWallCollision();
+    private IEnumerator Pause()
+    {
+        isPaused = true;
+        velocityBeforePause = _rigidbody.velocity;
+        _rigidbody.velocity = Vector2.zero;
+        yield return new WaitUntil(() => GlobalManager.isGamePaused == false);
+        _rigidbody.velocity = velocityBeforePause;
     }
 
     private void _ApplyFallGravity(HeroFallSettings settings)

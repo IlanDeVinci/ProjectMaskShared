@@ -1,6 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
+using Random = System.Random;
 
 public class KnifeThrow : MonoBehaviour
 {
@@ -11,45 +12,55 @@ public class KnifeThrow : MonoBehaviour
     [SerializeField] private float offsetx = 0;
     [SerializeField] private float offsety = 0;
 
-    private bool isReloading;
-    private float shootTime = 0;
+    private bool isReloading = false;
+    private float shootTime = 0f;
     private Vector2 launchPos;
 
     public float orientX = 1;
 
     public void ThrowKnife(float orientx)
     {
-        if (!isReloading)
+        if (isReloading == false)
         {
-            shootTime = Time.time;
+            Debug.Log("shooted");
+
+            shootTime = 0f;
             isReloading = true;
+            var random = new Random();
+            float launchSpeed = speed + random.Next(-2, 2);
             if (orientx > 0)
             {
                 launchPos = new Vector2(transform.position.x + offsetx, transform.position.y + offsety);
 
                 savedProjectile = Instantiate(projectile, launchPos, Quaternion.identity);
-                savedProjectile.GetComponent<Rigidbody2D>().velocity = new Vector2(speed, 0);
+                savedProjectile.GetComponent<Rigidbody2D>().velocity = new Vector2(launchSpeed, 0);
+                savedProjectile.GetComponent<KnifePrefab>().knifeSpeed = 0.1f;
             }
             else
             {
                 launchPos = new Vector2(transform.position.x - offsetx, transform.position.y + offsety);
 
                 savedProjectile = Instantiate(projectile, launchPos, Quaternion.identity);
-                savedProjectile.GetComponent<Rigidbody2D>().velocity = new Vector2(-speed, 0);
+                savedProjectile.GetComponent<Rigidbody2D>().velocity = new Vector2(-launchSpeed, 0);
+                savedProjectile.GetComponent<KnifePrefab>().knifeSpeed = -0.1f;
+
                 savedProjectile.GetComponent<SpriteRenderer>().flipX = true;
             }
+        }
+        else
+        {
+            Debug.Log("cant shoot");
         }
     }
 
     // Start is called before the first frame update
-    void Start()
-    {
-    }
+
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (shootTime + reloadtime < Time.time)
+        shootTime += Time.deltaTime;
+        if (shootTime > reloadtime)
         {
             isReloading = false;
         }

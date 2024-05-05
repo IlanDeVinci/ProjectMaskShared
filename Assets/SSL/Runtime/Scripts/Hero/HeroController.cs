@@ -28,73 +28,76 @@ public class HeroController : MonoBehaviour
 
     private void Update()
     {
-        _UpdateJumpBuffer();
-        _entity.SetMoveDirX(GetInputMoveX());
+        if (!GlobalManager.isGamePaused)
+        {
+            _UpdateJumpBuffer();
+            _entity.SetMoveDirX(GetInputMoveX());
 
-        if (_EntityHasExitGround())
-        {
-            _ResetCoyoteTime();
-        }
-        else
-        {
-            _UpdateCoyoteTime();
-        }
-
-        if (_GetInputDownJump())
-        {
-            if ((_entity.canJump) || (IsCoyoteTimeActive() && !_entity.isJumping))
+            if (_EntityHasExitGround())
             {
-                _entity.JumpStart();
+                _ResetCoyoteTime();
             }
             else
             {
-                _ResetJumpBuffer();
+                _UpdateCoyoteTime();
             }
-        }
 
-        if (IsJumpBufferActive())
-        {
-            if ((_entity.canJump) || (IsCoyoteTimeActive() && !_entity.isJumping))
+            if (_GetInputDownJump())
             {
-                _entity.JumpStart();
-            }
-        }
-
-        if (_entity.isJumpImpulsing)
-        {
-            if (!_GetInputJump() && _entity.isJumpMinDurationReached)
-            {
-                _entity.StopJumpImpulsion();
-            }
-        }
-
-        if (_GetInputDownShift())
-        {
-            if (!_entity.isDashing)
-            {
-                _entity.DashStart();
-            }
-        }
-
-        if (_GetInputShift())
-        {
-            _entity.DashPressed();
-
-            /*
-                if (_entity.isDashing)
+                if ((_entity.canJump) || (IsCoyoteTimeActive() && !_entity.isJumping))
                 {
-                    Debug.Log("stopdash");
-                    _entity.DashEnd();
+                    _entity.JumpStart();
                 }
-                */
-        }
+                else
+                {
+                    _ResetJumpBuffer();
+                }
+            }
 
-        if (_isAttackDown())
-        {
-            knifeThrow.ThrowKnife(_entity._orientX);
-        }
+            if (IsJumpBufferActive())
+            {
+                if ((_entity.canJump) || (IsCoyoteTimeActive() && !_entity.isJumping))
+                {
+                    _entity.JumpStart();
+                }
+            }
 
-        _entityWasTouchingGround = _entity.IsTouchingGround;
+            if (_entity.isJumpImpulsing)
+            {
+                if (!_GetInputJump() && _entity.isJumpMinDurationReached)
+                {
+                    _entity.StopJumpImpulsion();
+                }
+            }
+
+            if (_GetInputDownShift())
+            {
+                if (!_entity.isDashing)
+                {
+                    _entity.DashStart();
+                }
+            }
+
+            if (_GetInputShift())
+            {
+                _entity.DashPressed();
+
+                /*
+                    if (_entity.isDashing)
+                    {
+                        Debug.Log("stopdash");
+                        _entity.DashEnd();
+                    }
+                    */
+            }
+
+            if (_isAttackDown())
+            {
+                knifeThrow.ThrowKnife(_entity._orientX);
+            }
+
+            _entityWasTouchingGround = _entity.IsTouchingGround;
+        }
     }
 
     private bool _isAttackDown()

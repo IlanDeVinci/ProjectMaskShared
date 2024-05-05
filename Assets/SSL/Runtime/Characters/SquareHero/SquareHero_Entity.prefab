@@ -1102,6 +1102,7 @@ GameObject:
   - component: {fileID: 6480041685457909243}
   - component: {fileID: 3950254860742165989}
   - component: {fileID: 7858150932034380112}
+  - component: {fileID: -6790622949921503499}
   m_Layer: 0
   m_Name: SquareHero_Entity
   m_TagString: Untagged
@@ -1170,11 +1171,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 266dd13b7ebb25341a65e246a80ff121, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 0}
-  speed: 2
-  reloadtime: 0.5
-  offsetx: 0
-  offsety: 0
+  projectile: {fileID: 444212717403469413, guid: 54d34ee507b2ef7489a3648e69b28fb3, type: 3}
+  speed: 20
+  reloadtime: 0.25
+  offsetx: 0.2
+  offsety: 0.1
   orientX: 1
 --- !u!114 &642062994834468552
 MonoBehaviour:
@@ -1358,6 +1359,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adb9ab15fab31964d84d4ff0d0d1a3af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-6790622949921503499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6771865885331362632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f65b01bc707549c4e8bd67533c57beee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSlider: {fileID: 0}
+  maxHealth: 200
+  totalLives: 3
 --- !u!1 &8032715401077901592
 GameObject:
   m_ObjectHideFlags: 0

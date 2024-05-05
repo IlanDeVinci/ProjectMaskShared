@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c88265c57ca9548b4870850dc87643, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _entity: {fileID: 0}
+  _entity: {fileID: 6480041685457909243, guid: 58ffc10b51f5a6a4996c22f63f520b49, type: 3}
+  knifeThrow: {fileID: 6515367439888720361, guid: 58ffc10b51f5a6a4996c22f63f520b49, type: 3}
   _jumpBufferDuration: 0.15
   _coyoteTimeDuration: 0.2
   _guiDebug: 0

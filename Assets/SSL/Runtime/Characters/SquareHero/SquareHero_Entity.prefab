@@ -1094,6 +1094,7 @@ GameObject:
   m_Component:
   - component: {fileID: 182482925853841835}
   - component: {fileID: 7212136366118121974}
+  - component: {fileID: 6515367439888720361}
   - component: {fileID: 642062994834468552}
   - component: {fileID: 6193737249500875827}
   - component: {fileID: 8337427146718729378}
@@ -1157,6 +1158,24 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &6515367439888720361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6771865885331362632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 266dd13b7ebb25341a65e246a80ff121, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 0}
+  speed: 2
+  reloadtime: 0.5
+  offsetx: 0
+  offsety: 0
+  orientX: 1
 --- !u!114 &642062994834468552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1308,6 +1327,7 @@ MonoBehaviour:
       speedMax: 11
     dashTransition: 0.5
   _orientVisualRoot: {fileID: 3024582456938629764}
+  _orientX: 1
   _guiDebug: 1
 --- !u!114 &3950254860742165989
 MonoBehaviour:

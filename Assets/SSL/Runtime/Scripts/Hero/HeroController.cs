@@ -5,6 +5,10 @@ public class HeroController : MonoBehaviour
     [Header("Entity")] [SerializeField] private HeroEntity _entity;
     private bool _entityWasTouchingGround = false;
 
+    [Header("Knife Throw")] [SerializeField]
+    private KnifeThrow knifeThrow;
+
+
     [Header("Jump Buffer")] [SerializeField]
     private float _jumpBufferDuration = 0.2f;
 
@@ -85,8 +89,17 @@ public class HeroController : MonoBehaviour
                 */
         }
 
+        if (_isAttackDown())
+        {
+            knifeThrow.ThrowKnife(_entity._orientX);
+        }
 
         _entityWasTouchingGround = _entity.IsTouchingGround;
+    }
+
+    private bool _isAttackDown()
+    {
+        return Input.GetKeyDown(KeyCode.F);
     }
 
     private bool _EntityHasExitGround()

@@ -1184,7 +1184,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6771865885331362632}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fc77de865b2172e4f91aa757ac6168ff, type: 3}
   m_Name: 
@@ -1295,8 +1295,20 @@ MonoBehaviour:
     groundDuration: 0.15
     airSpeed: 20
     airDuration: 0.18
+    isLongDash: 1
+    longDashGroundSettings:
+      acceleration: 20
+      deceleration: 20
+      turnBackFrictions: 50
+      speedMax: 10
+    longDashAirSettings:
+      acceleration: 20
+      deceleration: 20
+      turnBackFrictions: 30
+      speedMax: 11
+    dashTransition: 0.5
   _orientVisualRoot: {fileID: 3024582456938629764}
-  _guiDebug: 0
+  _guiDebug: 1
 --- !u!114 &3950254860742165989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1304,7 +1316,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6771865885331362632}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72de2c478c1b78d45b757a0d949c5fc1, type: 3}
   m_Name: 

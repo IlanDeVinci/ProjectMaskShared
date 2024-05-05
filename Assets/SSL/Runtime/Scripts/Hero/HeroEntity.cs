@@ -185,24 +185,33 @@ public class HeroEntity : MonoBehaviour
         }
     }
 
+    public void DashPressed()
+    {
+        if (_dashSettings.isLongDash) _dashTimer = 0f;
+    }
+
 
     public void DashStart()
     {
-        if (canDash)
-        {
-            if (_moveDirX != 0)
-            {
-                _dashOrient = _moveDirX;
-            }
-            else
-            {
-                _dashOrient = _orientX;
-            }
+        _dashState = DashState.Dashing;
+        _dashTimer = 0f;
 
-            _dashState = DashState.Dashing;
-            _timeSinceDash = 0f;
-            _dashTimer = 0f;
-            isAirDash = !IsTouchingGround;
+        if (!_dashSettings.isLongDash)
+        {
+            if (canDash)
+            {
+                if (_moveDirX != 0)
+                {
+                    _dashOrient = _moveDirX;
+                }
+                else
+                {
+                    _dashOrient = _orientX;
+                }
+
+                _timeSinceDash = 0f;
+                isAirDash = !IsTouchingGround;
+            }
         }
     }
 
@@ -223,96 +232,123 @@ public class HeroEntity : MonoBehaviour
 
     private void _UpdateDash()
     {
-        _dashTimer += Time.fixedDeltaTime;
-        _orientX = _dashOrient;
-        if (isAirDash)
+        if (!_dashSettings.isLongDash)
         {
-            _jumpState = JumpState.NotJumping;
-            if (_dashOrient == 1)
+            _orientX = _dashOrient;
+            if (isAirDash)
             {
-                if (!IsTouchingWallRight)
+                _jumpState = JumpState.NotJumping;
+                if (_dashOrient == 1)
                 {
-                    if (_dashTimer < _dashSettings.airDuration)
+                    if (!IsTouchingWallRight)
                     {
-                        _horizontalSpeed = _dashSettings.airSpeed;
+                        if (_dashTimer < _dashSettings.airDuration)
+                        {
+                            _horizontalSpeed = _dashSettings.airSpeed;
+                        }
+                        else
+                        {
+                            ClampHorizontalSpeed();
+                            _dashState = DashState.NotDashing;
+                        }
                     }
                     else
                     {
-                        ClampHorizontalSpeed();
+                        _dashTimer = _dashSettings.airDuration;
+                        _ResetHorizontalSpeed();
                         _dashState = DashState.NotDashing;
                     }
                 }
                 else
                 {
-                    _dashTimer = _dashSettings.airDuration;
-                    _ResetHorizontalSpeed();
-                    _dashState = DashState.NotDashing;
+                    if (!IsTouchingWallLeft)
+                    {
+                        if (_dashTimer < _dashSettings.airDuration)
+                        {
+                            _horizontalSpeed = _dashSettings.airSpeed;
+                        }
+                        else
+                        {
+                            ClampHorizontalSpeed();
+                            _dashState = DashState.NotDashing;
+                        }
+                    }
+                    else
+                    {
+                        _dashTimer = _dashSettings.airDuration;
+                        _ResetHorizontalSpeed();
+                        _dashState = DashState.NotDashing;
+                    }
                 }
             }
             else
             {
-                if (!IsTouchingWallLeft)
+                if (_dashOrient == 1)
                 {
-                    if (_dashTimer < _dashSettings.airDuration)
+                    if (!IsTouchingWallRight)
                     {
-                        _horizontalSpeed = _dashSettings.airSpeed;
+                        if (_dashTimer < _dashSettings.groundDuration)
+                        {
+                            _horizontalSpeed = _dashSettings.groundSpeed;
+                        }
+                        else
+                        {
+                            ClampHorizontalSpeed();
+                            _dashState = DashState.NotDashing;
+                        }
                     }
                     else
                     {
-                        ClampHorizontalSpeed();
+                        _dashTimer = _dashSettings.groundDuration;
+                        _ResetHorizontalSpeed();
                         _dashState = DashState.NotDashing;
                     }
                 }
                 else
                 {
-                    _dashTimer = _dashSettings.airDuration;
-                    _ResetHorizontalSpeed();
-                    _dashState = DashState.NotDashing;
+                    if (!IsTouchingWallLeft)
+                    {
+                        if (_dashTimer < _dashSettings.groundDuration)
+                        {
+                            _horizontalSpeed = _dashSettings.groundSpeed;
+                        }
+                        else
+                        {
+                            ClampHorizontalSpeed();
+                            _dashState = DashState.NotDashing;
+                        }
+                    }
+                    else
+                    {
+                        _dashTimer = _dashSettings.groundDuration;
+                        _ResetHorizontalSpeed();
+                        _dashState = DashState.NotDashing;
+                    }
                 }
             }
         }
         else
         {
-            if (_dashOrient == 1)
+            if (_dashTimer > _dashSettings.dashTransition)
             {
-                if (!IsTouchingWallRight)
-                {
-                    if (_dashTimer < _dashSettings.groundDuration)
-                    {
-                        _horizontalSpeed = _dashSettings.groundSpeed;
-                    }
-                    else
-                    {
-                        ClampHorizontalSpeed();
-                        _dashState = DashState.NotDashing;
-                    }
-                }
-                else
-                {
-                    _dashTimer = _dashSettings.groundDuration;
-                    _ResetHorizontalSpeed();
-                    _dashState = DashState.NotDashing;
-                }
+                _dashState = DashState.NotDashing;
             }
-            else
+            else if (!_AreOrientAndMovementOpposite() && _moveDirX != 0 &&
+                     _horizontalSpeed >
+                     _dashSettings.longDashGroundSettings.speedMax / 1.1)
             {
-                if (!IsTouchingWallLeft)
+                float percent = _dashTimer / _dashSettings.dashTransition;
+                if (IsTouchingGround)
                 {
-                    if (_dashTimer < _dashSettings.groundDuration)
-                    {
-                        _horizontalSpeed = _dashSettings.groundSpeed;
-                    }
-                    else
-                    {
-                        ClampHorizontalSpeed();
-                        _dashState = DashState.NotDashing;
-                    }
+                    _horizontalSpeed = Mathf.Lerp(_dashSettings.longDashGroundSettings.speedMax,
+                        _groundHorizontalMovementSettings.speedMax,
+                        percent);
                 }
                 else
                 {
-                    _dashTimer = _dashSettings.groundDuration;
-                    _ResetHorizontalSpeed();
-                    _dashState = DashState.NotDashing;
+                    _horizontalSpeed = Mathf.Lerp(_dashSettings.longDashAirSettings.speedMax,
+                        _airHorizontalMovementSettings.speedMax,
+                        percent);
                 }
             }
         }
@@ -323,22 +359,30 @@ public class HeroEntity : MonoBehaviour
         return IsTouchingGround ? _groundHorizontalMovementSettings : _airHorizontalMovementSettings;
     }
 
+    private HeroHorizontalMovementSettings _GetCurrentHorizontalMovementSettingsDash()
+    {
+        return IsTouchingGround ? _dashSettings.longDashGroundSettings : _dashSettings.longDashAirSettings;
+    }
+
     public void JumpStart()
     {
-        if (!isSliding)
+        if (!IsTouchingCeiling)
         {
-            _jumpState = JumpState.JumpImpulsion;
-            _jumpTimer = 0f;
-            if (_jumpIndex < _jumpSettings.Length)
+            if (!isSliding)
             {
-                _jumpIndex += 1;
+                _jumpState = JumpState.JumpImpulsion;
+                _jumpTimer = 0f;
+                if (_jumpIndex < _jumpSettings.Length)
+                {
+                    _jumpIndex += 1;
+                }
             }
-        }
-        else
-        {
-            _jumpState = JumpState.WallJump;
-            _jumpTimer = 0f;
-            _timeSinceDash = _dashSettings.cooldown / 2;
+            else
+            {
+                _jumpState = JumpState.WallJump;
+                _jumpTimer = 0f;
+                _timeSinceDash = _dashSettings.cooldown / 2;
+            }
         }
 
         _slideTimer = slidingCooldown;
@@ -352,7 +396,7 @@ public class HeroEntity : MonoBehaviour
     private void _UpdateJumpStateImpulsion(int index)
     {
         _jumpTimer += Time.fixedDeltaTime;
-        if (_jumpTimer < _jumpSettings[index - 1].jumpMaxDuration)
+        if (_jumpTimer < _jumpSettings[index - 1].jumpMaxDuration && !IsTouchingCeiling)
         {
             _verticalSpeed = _jumpSettings[index - 1].jumpSpeed;
         }
@@ -378,7 +422,7 @@ public class HeroEntity : MonoBehaviour
     private void _UpdateJumpStateWalljump()
     {
         _jumpTimer += Time.fixedDeltaTime;
-        if (_jumpTimer < _wallJumpSettings.wallJumpMaxDuration)
+        if (_jumpTimer < _wallJumpSettings.wallJumpMaxDuration && !IsTouchingCeiling)
         {
             _verticalSpeed = _wallJumpSettings.wallJumpVerticalSpeed;
             _horizontalSpeed = _wallJumpSettings.wallJumpHorizontalSpeed;
@@ -422,16 +466,18 @@ public class HeroEntity : MonoBehaviour
     private IEnumerator fixCeiling()
     {
         float i = 1;
-        _verticalSpeed = 0;
         isFixingCeiling = true;
         while (IsTouchingCeiling)
         {
+            IsTouchingWallLeft = false;
+            IsTouchingWallRight = false;
             _jumpState = JumpState.Falling;
-            i += Time.deltaTime * 2;
+            i *= 2;
             _verticalSpeed -= i;
             yield return new WaitForFixedUpdate();
         }
 
+        _verticalSpeed = -_jumpFallSettings.fallSpeedMax / 6;
         isFixingCeiling = false;
     }
 
@@ -447,6 +493,8 @@ public class HeroEntity : MonoBehaviour
 
         if (IsTouchingCeiling && !isFixingCeiling)
         {
+            _verticalSpeed = -1;
+            _jumpState = JumpState.Falling;
             StartCoroutine(fixCeiling());
         }
     }
@@ -587,10 +635,13 @@ public class HeroEntity : MonoBehaviour
         _ApplyWallDetection();
         _UpdateCameraFollowPosition();
         HeroHorizontalMovementSettings horizontalMovementSettings = _GetCurrentHorizontalMovementSettings();
+        HeroHorizontalMovementSettings horizontalMovementSettingsDash = _GetCurrentHorizontalMovementSettingsDash();
         _timeSinceDash += Time.fixedDeltaTime;
         _timeSinceSlideStart += Time.fixedDeltaTime;
         _slideTimer += Time.fixedDeltaTime;
-        if (isDashing)
+        _dashTimer += Time.fixedDeltaTime;
+
+        if (isDashing && !_dashSettings.isLongDash)
         {
             _UpdateDash();
         }
@@ -598,11 +649,26 @@ public class HeroEntity : MonoBehaviour
         {
             if (_AreOrientAndMovementOpposite())
             {
-                _TurnBack(horizontalMovementSettings);
+                if (isDashing && _dashSettings.isLongDash)
+                {
+                    _TurnBack(horizontalMovementSettingsDash);
+                }
+                else
+                {
+                    _TurnBack(horizontalMovementSettings);
+                }
             }
             else
             {
-                _UpdateHorizontalSpeed(horizontalMovementSettings);
+                if (isDashing && _dashSettings.isLongDash)
+                {
+                    _UpdateHorizontalSpeed(horizontalMovementSettingsDash);
+                }
+                else
+                {
+                    _UpdateHorizontalSpeed(horizontalMovementSettings);
+                }
+
                 _ChangeOrientFromHorizontalMovement();
             }
         }
@@ -614,7 +680,7 @@ public class HeroEntity : MonoBehaviour
         }
         else
         {
-            if (!IsTouchingGround && !isDashing)
+            if (!IsTouchingGround && (!isDashing || _dashSettings.isLongDash))
             {
                 _ApplyFallGravity(_fallSettings);
             }
@@ -637,6 +703,11 @@ public class HeroEntity : MonoBehaviour
         else
         {
             wasSliding = false;
+        }
+
+        if (isDashing && _dashSettings.isLongDash)
+        {
+            _UpdateDash();
         }
 
         _ApplyHorizontalSpeed();
@@ -699,6 +770,8 @@ public class HeroEntity : MonoBehaviour
         {
             GUILayout.Label($"In Air");
         }
+
+        GUILayout.Label($"dashtime = {_dashTimer}");
 
         GUILayout.Label($"isSliding = {isSliding}");
         GUILayout.Label($"Slide Timer = {_slideTimer}");

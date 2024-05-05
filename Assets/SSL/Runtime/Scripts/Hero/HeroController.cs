@@ -2,25 +2,26 @@ using UnityEngine;
 
 public class HeroController : MonoBehaviour
 {
-    [Header("Entity")]
-    [SerializeField] private HeroEntity _entity;
+    [Header("Entity")] [SerializeField] private HeroEntity _entity;
     private bool _entityWasTouchingGround = false;
 
-    [Header("Jump Buffer")]
-    [SerializeField] private float _jumpBufferDuration = 0.2f;
+    [Header("Jump Buffer")] [SerializeField]
+    private float _jumpBufferDuration = 0.2f;
+
     private float _jumpBufferTimer = 0f;
 
-    [Header("Coyote Time")]
-    [SerializeField] private float _coyoteTimeDuration = 0.2f;
+    [Header("Coyote Time")] [SerializeField]
+    private float _coyoteTimeDuration = 0.2f;
+
     private float _coyoteTimeCountdown = -1f;
 
-    [Header("Debug")]
-    [SerializeField] private bool _guiDebug = false;
+    [Header("Debug")] [SerializeField] private bool _guiDebug = false;
 
     private void Start()
     {
         _CancelJumpBuffer();
     }
+
     private void Update()
     {
         _UpdateJumpBuffer();
@@ -71,6 +72,20 @@ public class HeroController : MonoBehaviour
             }
         }
 
+        if (_GetInputShift())
+        {
+            _entity.DashPressed();
+
+            /*
+                if (_entity.isDashing)
+                {
+                    Debug.Log("stopdash");
+                    _entity.DashEnd();
+                }
+                */
+        }
+
+
         _entityWasTouchingGround = _entity.IsTouchingGround;
     }
 
@@ -88,11 +103,13 @@ public class HeroController : MonoBehaviour
     {
         _coyoteTimeCountdown = _coyoteTimeDuration;
     }
+
     private void _UpdateCoyoteTime()
     {
         if (!IsCoyoteTimeActive()) return;
         _coyoteTimeCountdown -= Time.deltaTime;
     }
+
     private void _CancelJumpBuffer()
     {
         _jumpBufferTimer = _jumpBufferDuration;
@@ -103,26 +120,37 @@ public class HeroController : MonoBehaviour
         if (!IsJumpBufferActive()) return;
         _jumpBufferTimer += Time.deltaTime;
     }
+
     private bool IsJumpBufferActive()
     {
         return _jumpBufferTimer < _jumpBufferDuration;
     }
+
     private void _ResetJumpBuffer()
     {
         _jumpBufferTimer = 0f;
     }
+
     private bool _GetInputDownShift()
     {
         return Input.GetKeyDown(KeyCode.LeftShift);
     }
+
+    private bool _GetInputShift()
+    {
+        return Input.GetKey(KeyCode.LeftShift);
+    }
+
     private bool _GetInputJump()
     {
         return Input.GetKey(KeyCode.Space);
     }
+
     private bool _GetInputDownJump()
     {
         return Input.GetKeyDown(KeyCode.Space);
     }
+
     private bool IsInputDash()
     {
         bool inputDash = false;
@@ -130,6 +158,7 @@ public class HeroController : MonoBehaviour
         {
             inputDash = true;
         }
+
         return inputDash;
     }
 
@@ -149,6 +178,7 @@ public class HeroController : MonoBehaviour
 
         return inputMoveX;
     }
+
     private void OnGUI()
     {
         if (!_guiDebug) return;

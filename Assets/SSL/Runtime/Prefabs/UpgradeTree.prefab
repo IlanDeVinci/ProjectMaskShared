@@ -93,8 +93,8 @@ MonoBehaviour:
   mDelta: 150
   xPos: 0
   yPos: 0
-  maxXPos: 1500
-  maxYPos: 1100
+  maxXPos: 1800
+  maxYPos: 1400
   mSpeed: 350
   canMove: 1
   ease: 3
@@ -107,29 +107,29 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 1
-        outSlope: 1
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.75
-        value: 0.75
-        inSlope: 1.0910525
-        outSlope: 1.0910525
+        inSlope: 1.3036901
+        outSlope: 1.3036901
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.2987932
-        outWeight: 1
+        inWeight: 0
+        outWeight: 0.23809023
+      - serializedVersion: 3
+        time: 0.41936624
+        value: 0.5534253
+        inSlope: 1.2580433
+        outSlope: 1.2580433
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: -0.060052123
-        outSlope: -0.060052123
+        inSlope: 0
+        outSlope: 0
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.81612897
+        inWeight: 0
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2

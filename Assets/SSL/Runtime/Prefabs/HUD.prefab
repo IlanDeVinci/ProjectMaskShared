@@ -529,6 +529,7 @@ GameObject:
   - component: {fileID: 3667298649627103733}
   - component: {fileID: 5176385620885227217}
   - component: {fileID: 7041943559951044687}
+  - component: {fileID: 7492839833088019687}
   m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
@@ -650,6 +651,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinText: {fileID: 4258312765678466756}
+--- !u!114 &7492839833088019687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2757197008705851768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbdebfe162047e64196a0b599c3643bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2760855964140665741
 GameObject:
   m_ObjectHideFlags: 0

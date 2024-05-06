@@ -41,7 +41,6 @@ public class TeleType : MonoBehaviour
         counter = 0;
         int indexOfName = textMeshPro.text.IndexOf(':');
         int newCount = totalVisibleChars;
-        Debug.Log(indexOfName);
         if (indexOfName != -1)
         {
             counter = indexOfName;

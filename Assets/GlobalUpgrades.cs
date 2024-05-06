@@ -20,9 +20,19 @@ public class GlobalUpgrades : MonoBehaviour
             instance = this;
         }
         DontDestroyOnLoad(gameObject);
+
+
+        foreach(Upgrade upgrade in Upgrades)
+        {
+            if(upgrade.column > columnNumber) columnNumber = upgrade.column;
+            if(upgrade.row > rowNumber) rowNumber = upgrade.row;
+        }
     }
 
     [SerializeField] public List<Upgrade>? Upgrades;
+    [SerializeField] public int rowNumber = 0;
+    [SerializeField] public int columnNumber = 0;
+
 
     [Serializable]
     public class Upgrade

@@ -94,6 +94,9 @@ public class HeroEntity : MonoBehaviour
 
     public float _orientX = 1f;
 
+    [Header("Etat Player")]
+    public bool isPlayerVisible = true;
+
     [Header("Debug")] [SerializeField] private bool _guiDebug = false;
 
     private CameraFollowable _cameraFollowable;

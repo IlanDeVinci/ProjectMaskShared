@@ -1,3 +1,4 @@
+using PrimeTween;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ public class TeleType : MonoBehaviour
     private Coroutine coroutine;
     [SerializeField] private AudioSource soundSource;
     [SerializeField] private AudioClip soundClip;
+    public Tween tween;
 
 
     // Start is called before the first frame update
@@ -21,7 +23,8 @@ public class TeleType : MonoBehaviour
     public void ShowAll()
     {
         StopCoroutine(coroutine);
-        textMeshPro.maxVisibleCharacters = totalVisibleChars;
+        tween.Complete();
+        //textMeshPro.maxVisibleCharacters = totalVisibleChars;
         isDone = true;
     }
 
@@ -32,22 +35,24 @@ public class TeleType : MonoBehaviour
 
     private IEnumerator TypeWriter()
     {
+        textMeshPro.maxVisibleCharacters = 0;
         isDone = false;
-        textMeshPro.alpha = 0;
         yield return new WaitForEndOfFrame();
         totalVisibleChars = textMeshPro.textInfo.characterCount;
         counter = 0;
         int indexOfName = textMeshPro.text.IndexOf(':');
         int newCount = totalVisibleChars;
-        //Debug.Log(indexOfName);
+        Debug.Log(indexOfName);
         if (indexOfName != -1)
         {
             counter = indexOfName;
         }
-
-        visibleCount = 0;
+        textMeshPro.maxVisibleCharacters = counter;
         int audioCounter = 0;
-        while (visibleCount <= totalVisibleChars - 1)
+        tween = Tween.TextMaxVisibleCharacters(textMeshPro, totalVisibleChars, totalVisibleChars/10, ease:Ease.Linear);
+        textMeshPro.alpha = 1;
+
+        while (tween.isAlive)
         {
             if (audioCounter % 3 == 0)
             {
@@ -57,19 +62,10 @@ public class TeleType : MonoBehaviour
             }
 
             audioCounter++;
-            visibleCount = counter % (totalVisibleChars + 1);
-            textMeshPro.maxVisibleCharacters = visibleCount;
-            counter++;
-            textMeshPro.alpha = 1;
             yield return new WaitForSeconds(0.03f);
-
-            newCount = textMeshPro.textInfo.characterCount;
-            if (totalVisibleChars != newCount)
-            {
-                yield break;
-            }
         }
 
+        yield return tween.ToYieldInstruction();
         isDone = true;
     }
 }

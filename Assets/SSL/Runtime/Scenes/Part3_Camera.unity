@@ -856,10 +856,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2672213085910174628, guid: 848780e1ebad08a41ab77af2f988bf89, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4844179866240665098, guid: 848780e1ebad08a41ab77af2f988bf89, type: 3}
       propertyPath: m_Name
       value: Coin
@@ -2779,6 +2775,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8017208222632049549, guid: 85d676030caaef646839f261f054a070, type: 3}
+      propertyPath: ease
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8017208222632049549, guid: 85d676030caaef646839f261f054a070, type: 3}
+      propertyPath: xPos
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2820,7 +2824,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1796122712390703743, guid: 9de5143967be3334ab12c5ced2e48b33, type: 3}
       propertyPath: Dialogs.Array.data[0]
-      value: "Bowser: Dialogue num\xE9ro 1 blabla"
+      value: "Bowser: Dialogue num\xE9ro 1 blablaDialogue num\xE9ro 1 blablaDialogue
+        num\xE9ro 1 blablaDialogue num\xE9ro 1 blabla"
       objectReference: {fileID: 0}
     - target: {fileID: 1796122712390703743, guid: 9de5143967be3334ab12c5ced2e48b33, type: 3}
       propertyPath: Dialogs.Array.data[1]

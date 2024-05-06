@@ -528,6 +528,7 @@ GameObject:
   - component: {fileID: 4643656287723230064}
   - component: {fileID: 3667298649627103733}
   - component: {fileID: 5176385620885227217}
+  - component: {fileID: 7041943559951044687}
   m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
@@ -636,6 +637,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvasGroup: {fileID: 6786217156008592263}
   panel: {fileID: 2603362006166038012}
+--- !u!114 &7041943559951044687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2757197008705851768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef43a43c53141504a97e7f32a91e8a29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinText: {fileID: 4258312765678466756}
 --- !u!1 &2760855964140665741
 GameObject:
   m_ObjectHideFlags: 0
@@ -1957,6 +1971,10 @@ PrefabInstance:
     - target: {fileID: 707121666636600899, guid: e75a4fee66b33674fabebe41fc482527, type: 3}
       propertyPath: m_Name
       value: Panel
+      objectReference: {fileID: 0}
+    - target: {fileID: 2767668053979696010, guid: e75a4fee66b33674fabebe41fc482527, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7912357418192021976, guid: e75a4fee66b33674fabebe41fc482527, type: 3}
       propertyPath: m_Pivot.x

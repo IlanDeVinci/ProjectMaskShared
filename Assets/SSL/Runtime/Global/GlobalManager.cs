@@ -5,5 +5,6 @@ using UnityEngine;
 public static class GlobalManager
 {
     public static bool isGamePaused;
-    public static bool playerMoney;
+    public static int playerMoney;
+    public static string playerName;
 }

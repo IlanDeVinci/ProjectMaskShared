@@ -9,7 +9,7 @@ public class KnifePrefab : MonoBehaviour
 
     [SerializeField] private float lifetime = 2f;
     [SerializeField] private SpriteRenderer sprite;
-    [SerializeField] private BoxCollider2D collider;
+    [SerializeField] private BoxCollider2D boxCollider;
 
     private float lifeTimer;
     private bool hasHitTarget;
@@ -80,7 +80,7 @@ public class KnifePrefab : MonoBehaviour
         rb.gravityScale = 0;
         //rb.velocity = new Vector2(knifeSpeed / 10, 0);
         Tween.PositionX(rb.transform, rb.position.x + knifeSpeed, 0.2f);
-        Destroy(collider);
+        Destroy(boxCollider);
         rb.velocity = Vector2.zero;
         Tween.Alpha(sprite, 0, 1, Ease.OutSine);
         Destroy(gameObject, 1);

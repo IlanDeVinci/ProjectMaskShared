@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 
 [Serializable]
+#nullable enable
 public static class GlobalUpgrades
 {
     public static List<Upgrade> upgradeList;

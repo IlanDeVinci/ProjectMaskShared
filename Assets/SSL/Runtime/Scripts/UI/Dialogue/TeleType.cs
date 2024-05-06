@@ -10,7 +10,6 @@ public class TeleType : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textMeshPro;
     private int totalVisibleChars = 0;
     public int counter = 0;
-    private int visibleCount = 0;
     public bool isDone = false;
     private Coroutine coroutine;
     [SerializeField] private AudioSource soundSource;

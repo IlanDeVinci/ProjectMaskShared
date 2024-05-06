@@ -93,13 +93,13 @@ MonoBehaviour:
   mDelta: 150
   xPos: 0
   yPos: 0
-  maxXPos: 750
-  maxYPos: 550
-  mSpeed: 200
+  maxXPos: 1500
+  maxYPos: 1100
+  mSpeed: 350
   canMove: 1
   ease: 3
   settings:
-    duration: 1
+    duration: 0.7
     ease: -1
     customEase:
       serializedVersion: 2
@@ -114,8 +114,8 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.5
-        value: 0.5
+        time: 0.75
+        value: 0.75
         inSlope: 1.0910525
         outSlope: 1.0910525
         tangentMode: 0
@@ -140,6 +140,7 @@ MonoBehaviour:
     endDelay: 0
     useUnscaledTime: 0
     useFixedUpdate: 0
+  buttonPrefab: {fileID: 4415847970771201964, guid: 80b7b10fe5c1aa14d905cbbe97fabd60, type: 3}
 --- !u!1 &2767668053979696010
 GameObject:
   m_ObjectHideFlags: 0
@@ -175,7 +176,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 6000, y: 2500}
+  m_SizeDelta: {x: 8000, y: 4000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4244401166797937874
 CanvasRenderer:

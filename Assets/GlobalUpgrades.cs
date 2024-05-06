@@ -1,20 +1,39 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 [Serializable]
-#nullable enable
-public static class GlobalUpgrades
+public class GlobalUpgrades : MonoBehaviour
 {
-    public static List<Upgrade>? upgradeList;
+    private static GlobalUpgrades instance;
+    public static GlobalUpgrades Instance => instance;
+
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        else
+        {
+            instance = this;
+        }
+        DontDestroyOnLoad(gameObject);
+    }
+
+    [SerializeField] public List<Upgrade>? Upgrades;
+
+    [Serializable]
     public class Upgrade
     {
-        public int upgradeId;
-        public bool isUpgradeAcquired;
-        public Upgrade? previousUpgrade;
-        public int upgradeCost;
-        public string? upgradeName;
-        public string? upgradeDescription;
+        [SerializeField] public int upgradeId;
+        [SerializeField] public bool isUpgradeAcquired;
+        [SerializeField] public int previousUpgradeId;
+        [SerializeField] public int upgradeCost;
+        [SerializeField] public string upgradeName;
+        [SerializeField] public string upgradeDescription;
+        [SerializeField] public int column;
+        [SerializeField] public int row;
     }
 }

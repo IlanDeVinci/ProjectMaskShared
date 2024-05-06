@@ -7,14 +7,14 @@ using System;
 #nullable enable
 public static class GlobalUpgrades
 {
-    public static List<Upgrade> upgradeList;
+    public static List<Upgrade>? upgradeList;
     public class Upgrade
     {
         public int upgradeId;
         public bool isUpgradeAcquired;
         public Upgrade? previousUpgrade;
         public int upgradeCost;
-        public string upgradeName;
-        public string upgradeDescription;
+        public string? upgradeName;
+        public string? upgradeDescription;
     }
 }

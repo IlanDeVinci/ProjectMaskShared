@@ -46,6 +46,12 @@ public class HeroController : MonoBehaviour
             {
                 if ((_entity.canJump) || (IsCoyoteTimeActive() && !_entity.isJumping))
                 {
+                    if (!IsCoyoteTimeActive() && !_entity.IsTouchingGround && !_entity.isSliding)
+                    {
+                        Debug.Log("coyoto");
+                        _entity._jumpIndex = 1;
+                    }
+
                     _entity.JumpStart();
                 }
                 else

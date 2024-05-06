@@ -40,7 +40,7 @@ public class HeroEntity : MonoBehaviour
     public bool wasTouchingWall = false;
 
     [Header("Jump")] [SerializeField] private HeroJumpSettings[] _jumpSettings;
-    private int _jumpIndex = 0;
+    public int _jumpIndex = 0;
     [SerializeField] private HeroFallSettings _jumpFallSettings;
 
     [SerializeField] private HeroWallJumpSettings _wallJumpSettings;

@@ -1330,6 +1330,7 @@ MonoBehaviour:
     dashTransition: 0.5
   _orientVisualRoot: {fileID: 3024582456938629764}
   _orientX: 1
+  isPlayerVisible: 1
   _guiDebug: 1
 --- !u!114 &3950254860742165989
 MonoBehaviour:

@@ -24,36 +24,45 @@ public class EnemyEntity : MonoBehaviour
 
     [Header("Mouvements")]
     [SerializeField] private EnnemyMovementsSettings _movementsSettings;
+    [SerializeField] private EnemyFallSettings _fallSettings;
     private float _OrientDirX = 1f; // Direction du mouvement
+    private float _directionToPlayer = 0f; // Direction du joueur
     private float _horizontalSpeed = 0f; // Vitesse de déplacement
 
     [Header("Sauts")]
     private float _verticalSpeed = 0f; // Vitesse de saut
-    [Header("Attaques")]
-    private float attackForce = 5f;
-    [Header("Vie")]
-    private float health = 5f;
-    [Header("Patterns")]
-    private float pattern = 5f;
+    // [Header("Attaques")]
+    // private float attackForce = 5f;
+    // [Header("Vie")]
+    // private float health = 5f;
+    // [Header("Patterns")]
+    // private float pattern = 5f;
 
     void Awake()
     {
-        _ResetHorizontalSpeed();
-        _ResetVerticalSpeed();
+        _horizontalSpeed = _movementsSettings._Speed;
+        _verticalSpeed = 0f;
     }
 
     void FixedUpdate()
     {
+        _ApplyGroundDetection();
+        _ApplyWallDetection();
+        if (!IsEnemyTouchingGround)
+        {
+            _ApplyFallGravity(_fallSettings);
+        }
+        else
+        {
+            _ResetVerticalSpeed();
+        }
         _ApplyHorizontalSpeed();
         _ApplyVerticalSpeed();
-        
+
     }
     void Update()
     {
-        _ApplyGroundDetection();
-        _ApplyWallDetection();
         _ApplyOrientDirX();
-        _EnnemyJump();
     }
 
     
@@ -83,11 +92,20 @@ public class EnemyEntity : MonoBehaviour
     }
 
     private void _ApplyOrientDirX(){
-        if(IsEnemyTouchingWallLeft){
-            _OrientDirX = 1f;
+        if (IsPlayerDetected)
+        {
+            _OrientDirX = Mathf.Sign(_heroEntity.transform.position.x + 0.01f - transform.position.x);
         }
-        else if(IsEnemyTouchingWallRight){
-            _OrientDirX = -1f;
+        else
+        {
+            if (IsEnemyTouchingWallLeft)
+            {
+                _OrientDirX = 1f;
+            }
+            else if (IsEnemyTouchingWallRight)
+            {
+                _OrientDirX = -1f;
+            }
         }
     }
 
@@ -95,9 +113,8 @@ public class EnemyEntity : MonoBehaviour
     {
         if (other.CompareTag("Player") && _heroEntity.isPlayerVisible)
         {
-            float directionToPlayer = Mathf.Sign(other.transform.position.x - transform.position.x);
-            _OrientDirX = directionToPlayer;
             IsPlayerDetected = true;
+            _EnnemyJump();
         }
         else
         {
@@ -107,24 +124,32 @@ public class EnemyEntity : MonoBehaviour
     
     private void _ResetVerticalSpeed()
     {
-        _verticalSpeed = _movementsSettings._jumpSpeed;
+        _verticalSpeed = 0f;
     }
 
     private void _ResetHorizontalSpeed()
     {
-        _horizontalSpeed = _movementsSettings._Speed;
+        _horizontalSpeed = 0f;
     }
     private void _EnnemyJump(){
 
-        if(IsPlayerDetected){
-            Debug.Log("Player Detected");
-            if(IsEnemyTouchingWallLeft || IsEnemyTouchingWallRight){
-                Debug.Log("Jump");
-                _verticalSpeed = _movementsSettings._jumpSpeed;
-            }
+        if(IsPlayerDetected && IsEnemyTouchingGround && (IsEnemyTouchingWallLeft || IsEnemyTouchingWallRight))
+        {
+            Debug.Log("Jump");
+            Debug.Log(_verticalSpeed);
+            _verticalSpeed = _movementsSettings._jumpSpeed;
         }
         else{
             _verticalSpeed = 0f;
+        }
+    }
+
+    private void _ApplyFallGravity(EnemyFallSettings settings)
+    {
+        _verticalSpeed -= settings.fallGravity * Time.fixedDeltaTime;
+        if (_verticalSpeed < -settings.fallSpeedMax)
+        {
+            _verticalSpeed = -settings.fallSpeedMax;
         }
     }
 }

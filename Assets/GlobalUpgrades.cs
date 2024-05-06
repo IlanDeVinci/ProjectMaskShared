@@ -1,14 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
+[Serializable]
 public static class GlobalUpgrades
 {
     public static List<Upgrade> upgradeList;
     public class Upgrade
     {
-        public static int upgradeId;
-        public static bool isUpgradeAcquired;
-
+        public int upgradeId;
+        public bool isUpgradeAcquired;
+        public Upgrade? previousUpgrade;
+        public int upgradeCost;
+        public string upgradeName;
+        public string upgradeDescription;
     }
 }

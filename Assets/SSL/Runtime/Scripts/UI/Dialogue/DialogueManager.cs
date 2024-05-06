@@ -46,8 +46,6 @@ public class DialogueManager : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        GlobalManager.playerMoney += 2000;
-
         if (index < Dialogs.Length - 1)
         {
             if (teleType.isDone)

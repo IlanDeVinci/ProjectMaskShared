@@ -48,7 +48,6 @@ public class HeroController : MonoBehaviour
                 {
                     if (!IsCoyoteTimeActive() && !_entity.IsTouchingGround && !_entity.isSliding)
                     {
-                        Debug.Log("coyoto");
                         _entity._jumpIndex = 1;
                     }
 
@@ -87,14 +86,6 @@ public class HeroController : MonoBehaviour
             if (_GetInputShift())
             {
                 _entity.DashPressed();
-
-                /*
-                    if (_entity.isDashing)
-                    {
-                        Debug.Log("stopdash");
-                        _entity.DashEnd();
-                    }
-                    */
             }
 
             if (_isAttackDown())

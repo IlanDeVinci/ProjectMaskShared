@@ -78,7 +78,7 @@ public class ShopManager : MonoBehaviour
             if (obj.item[obj.currentLevel].price <= GlobalManager.playerMoney)
             {
                 GlobalManager.playerMoney -= obj.item[obj.currentLevel].price;
-                Debug.Log($"spent {obj.item[obj.currentLevel].price}");
+                //Debug.Log($"spent {obj.item[obj.currentLevel].price}");
                 switch (obj.name)
                 {
                     case "Lumière":

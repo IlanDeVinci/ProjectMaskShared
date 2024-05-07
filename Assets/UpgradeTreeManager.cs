@@ -43,7 +43,6 @@ public class UpgradeTreeManager : MonoBehaviour
         }
         foreach (UpgradeButton upgradeButton in buttonsList)
         {
-            Debug.Log("sentmessage");
             upgradeButton.SendMessage("LinkButtons");
         }
         

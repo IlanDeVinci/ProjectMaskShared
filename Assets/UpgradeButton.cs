@@ -19,7 +19,6 @@ public class UpgradeButton : MonoBehaviour
     public int columns;
     public void LinkButtons()
     {
-        Debug.Log("linked");
         if(upgrade.previousUpgradeId != -1)
         {
             /*
@@ -48,9 +47,12 @@ public class UpgradeButton : MonoBehaviour
             Points[0].y -= transform.localPosition.y;
             Points[1].y -= transform.localPosition.y;
 
-            List<Vector2> points = new List<Vector2>();
-            points.Add(Points[0]);
-            points.Add(Points[1]);
+            List<Vector2> points = new List<Vector2>
+            {
+                Points[0],
+                Points[1]
+            };
+
             /*
             if(upgradeTreeManager.buttonsList[upgrade.previousUpgradeId].upgrade.column != 0)
             {
@@ -84,6 +86,14 @@ public class UpgradeButton : MonoBehaviour
             lineRenderer.points = points;
             lineRenderer.transform.SetSiblingIndex(0);
             transform.SetSiblingIndex(1);
+            float smoothness = 20f;
+            List<Vector2> smoothpoints = new();
+            for (float i = 0f; i < smoothness; i++)
+            {
+                smoothpoints.Add(Bezier(points[0], points[1], i/smoothness));
+            }
+            lineRenderer.points = smoothpoints;
+            Debug.Log(lineRenderer.points);
         }
 
     }
@@ -104,8 +114,6 @@ public class UpgradeButton : MonoBehaviour
 
         transform.localPosition = new Vector2(transform.localPosition.x + (upgrade.column * columnsIncrement), transform.localPosition.y - (upgrade.row * rowsIncrement));
         upgradeTreeManager = GetComponentInParent<UpgradeTreeManager>();
-        Debug.Log($"{upgrade.upgradeName} {transform.position} {transform.localPosition}");
-
         /*
         switch(upgrade.column)
         {
@@ -144,5 +152,25 @@ public class UpgradeButton : MonoBehaviour
 
         transform.position = new Vector2(transform.position.x + 960, transform.position.y + 540);
         */
+    }
+
+    Vector2 Bezier(Vector2 a, Vector2 b, float t)
+    {
+        return Vector2.Lerp(a, b, t);
+    }
+
+    Vector2 Bezier(Vector2 a, Vector2 b, Vector2 c, float t)
+    {
+        return Vector2.Lerp(Bezier(a, b, t), Bezier(b, c, t), t);
+    }
+
+    Vector2 Bezier(Vector2 a, Vector2 b, Vector2 c, Vector2 d, float t)
+    {
+        return Vector2.Lerp(Bezier(a, b, c, t), Bezier(b, c, d, t), t);
+    }
+
+    private void ButtonClicked()
+    {
+
     }
 }

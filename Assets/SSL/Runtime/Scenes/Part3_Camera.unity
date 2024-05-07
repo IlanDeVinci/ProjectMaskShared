@@ -1714,77 +1714,95 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Upgrades:
   - upgradeId: 0
-    isUpgradeAcquired: 0
-    previousUpgradeId: -1
-    upgradeCost: 3
+    isUpgradeAcquiredFull: 0
     upgradeName: First
     upgradeDescription: Omg !!!!!
     column: 0
     row: 2
+    upgradeType: 0
+    thresholdToUnlockNext: 0
+    previousUpgradeId: -1
+    upgradesList: []
   - upgradeId: 1
-    isUpgradeAcquired: 0
-    previousUpgradeId: 0
-    upgradeCost: 4
+    isUpgradeAcquiredFull: 0
     upgradeName: Second
     upgradeDescription: Omg !!!!!
     column: 1
     row: 0
-  - upgradeId: 2
-    isUpgradeAcquired: 0
+    upgradeType: 0
+    thresholdToUnlockNext: 0
     previousUpgradeId: 0
-    upgradeCost: 4
+    upgradesList: []
+  - upgradeId: 2
+    isUpgradeAcquiredFull: 0
     upgradeName: Second bis
     upgradeDescription: Omg !!!!!
     column: 1
     row: 2
-  - upgradeId: 3
-    isUpgradeAcquired: 0
+    upgradeType: 0
+    thresholdToUnlockNext: 0
     previousUpgradeId: 0
-    upgradeCost: 5
+    upgradesList: []
+  - upgradeId: 3
+    isUpgradeAcquiredFull: 0
     upgradeName: Second bisbis
     upgradeDescription: Omg !!!!!
     column: 1
     row: 4
+    upgradeType: 0
+    thresholdToUnlockNext: 0
+    previousUpgradeId: 0
+    upgradesList: []
   - upgradeId: 4
-    isUpgradeAcquired: 0
-    previousUpgradeId: 1
-    upgradeCost: 5
+    isUpgradeAcquiredFull: 0
     upgradeName: 'Third !! '
     upgradeDescription: Omg !!!!!
     column: 2
     row: 0
+    upgradeType: 0
+    thresholdToUnlockNext: 0
+    previousUpgradeId: 1
+    upgradesList: []
   - upgradeId: 5
-    isUpgradeAcquired: 0
-    previousUpgradeId: 2
-    upgradeCost: 5
+    isUpgradeAcquiredFull: 0
     upgradeName: Third !! TWO
     upgradeDescription: Omg !!!!!
     column: 2
     row: 1
+    upgradeType: 0
+    thresholdToUnlockNext: 0
+    previousUpgradeId: 2
+    upgradesList: []
   - upgradeId: 6
-    isUpgradeAcquired: 0
-    previousUpgradeId: 3
-    upgradeCost: 10
+    isUpgradeAcquiredFull: 0
     upgradeName: Third !! THREE
     upgradeDescription: Omg !!!!!
     column: 2
     row: 2
+    upgradeType: 0
+    thresholdToUnlockNext: 0
+    previousUpgradeId: 3
+    upgradesList: []
   - upgradeId: 6
-    isUpgradeAcquired: 0
-    previousUpgradeId: 6
-    upgradeCost: 10
+    isUpgradeAcquiredFull: 0
     upgradeName: Third !! THREE
     upgradeDescription: Omg !!!!!
     column: 3
     row: 3
-  - upgradeId: 6
-    isUpgradeAcquired: 0
+    upgradeType: 0
+    thresholdToUnlockNext: 0
     previousUpgradeId: 5
-    upgradeCost: 10
+    upgradesList: []
+  - upgradeId: 6
+    isUpgradeAcquiredFull: 0
     upgradeName: Third !! THREE
     upgradeDescription: Omg !!!!!
     column: 3
     row: 5
+    upgradeType: 0
+    thresholdToUnlockNext: 0
+    previousUpgradeId: 6
+    upgradesList: []
   rowNumber: 0
   columnNumber: 0
 --- !u!4 &1299432083

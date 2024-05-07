@@ -23,19 +23,19 @@ public class TextFollowMouse : MonoBehaviour
         textm.text = "";
         textm.alpha = 1;
 
-        if (value != 0)
+        if (value != -1)
         {
             textm.text = $"-{value}x";
             x.gameObject.SetActive(false);
         }
         else
         {
-            Tween.Alpha(x, 0, 2);
+            Tween.Alpha(x, 0, 1.5f);
             image.gameObject.SetActive(false);
         }
 
-        Tween.Alpha(textm, 0, 2);
-        Tween.Alpha(image, 0, 2);
+        Tween.Alpha(textm, 0, 1.5f);
+        Tween.Alpha(image, 0, 1.5f);
         Vector3 mouse = Input.mousePosition;
         transform.position = new Vector3(mouse.x, mouse.y, 0);
         startPos = transform.position;
@@ -46,7 +46,7 @@ public class TextFollowMouse : MonoBehaviour
     private void Update()
     {
         textm.text = "";
-        if (value != 0)
+        if (value != -1)
         {
             textm.text = $"-{value}x";
             x.gameObject.SetActive(false);
@@ -57,7 +57,7 @@ public class TextFollowMouse : MonoBehaviour
             x.gameObject.SetActive(true);
         }
 
-        offset += Time.deltaTime * 100;
+        offset += Time.deltaTime * 200;
         transform.position = new Vector3(startPos.x, startPos.y + offset, 0);
     }
 }

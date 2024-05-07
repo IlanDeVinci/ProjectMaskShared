@@ -27,7 +27,7 @@ public class UpgradeButton : MonoBehaviour
 
     public void SetColors()
     {
-        if (upgrade.upgradesList[upgrade.upgradeLevel].upgradeCost <= GlobalManager.playerMoney)
+        if (upgrade.upgradesList[upgrade.upgradeLevel].upgradeCost <= GlobalManager.playerMoney && upgrade.upgradeLevel < upgrade.upgradesList.Count -1)
         {
             tweenButton.canTween = true;
             button.interactable = true;

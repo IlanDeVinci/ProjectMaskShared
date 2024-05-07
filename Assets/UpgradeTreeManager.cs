@@ -32,8 +32,10 @@ public class UpgradeTreeManager : MonoBehaviour
         xPos = 0;
         yPos = 0;
         InitTree();
+        /*
         Tween tween = Tween.Custom(0, 1800, 2, onValueChange: newVal => xPos = newVal);
         Tween.Custom(0, -200, 2, onValueChange: newVal => yPos = newVal);
+        */
     }
 
     private IEnumerator ShowTree()
@@ -81,14 +83,11 @@ public class UpgradeTreeManager : MonoBehaviour
     private IEnumerator OpenTree()
     {
         yield return new WaitForEndOfFrame();
-        /*
-        xPos = -1000;
-        yPos = -300;
+        xPos = 0; yPos = -200;
         Tween tween = Tween.Custom(0, 1800, 2, onValueChange: newVal => xPos = newVal);
-        Tween.Custom(0, -200, 2, onValueChange: newVal => yPos = newVal);
+        Tween.Custom(0, -201, 2, onValueChange: newVal => yPos = newVal);
 
         yield return tween.ToYieldInstruction();
-        */
         canMove = true;
 
     }

@@ -62,7 +62,7 @@ public class GlobalUpgrades : MonoBehaviour
         [SerializeField] public int thresholdToUnlockNext;
         [SerializeField] public int previousUpgradeId;
         [SerializeField] public List<SingleUpgrade> upgradesList;
-
+        [HideInInspector] public int upgradeLevel = 0;
         [Serializable]
         public class SingleUpgrade
         {

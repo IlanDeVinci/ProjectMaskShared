@@ -1,9 +1,7 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using System;
-using UnityEngine.UI;
 
 [Serializable]
 public class UpgradeButton : MonoBehaviour
@@ -17,89 +15,59 @@ public class UpgradeButton : MonoBehaviour
     public int rowsIncrement;
     public int rows;
     public int columns;
+    private GlobalUpgrades.Upgrade previousUpgrade;
+
+    public void SetLineColor()
+    {
+        if (upgradeTreeManager.buttonsList[upgrade.previousUpgradeId].upgrade.thresholdToUnlockNext <= previousUpgrade.upgradeLevel)
+        {
+            lineRenderer.color = Color.white;
+        }
+        else
+        {
+            lineRenderer.color = Color.gray;
+        }
+    }
     public void LinkButtons()
     {
-        if(upgrade.previousUpgradeId != -1)
+        if (upgrade.previousUpgradeId != -1)
         {
-            /*
-            lineRenderer.positionCount = 2;
-            lineRenderer.alignment = LineAlignment.TransformZ;
-            Vector3[] positions = new Vector3[lineRenderer.positionCount];
-            positions[0] = upgradeTreeManager.buttonsList[upgrade.previousUpgradeId].transform.position;
-            positions[1] = transform.position;
-            lineRenderer.SetPositions(positions);
-            */
-            Vector2[] Points = new Vector2[2];
-            Points[0] = new Vector2(upgradeTreeManager.buttonsList[upgrade.previousUpgradeId].transform.localPosition.x
-                //+ (upgrade.column * columnsIncrement)
+            previousUpgrade = upgradeTreeManager.buttonsList[upgrade.previousUpgradeId].upgrade;
+            Vector2 start = new Vector2(upgradeTreeManager.buttonsList[upgrade.previousUpgradeId].transform.localPosition.x
                 , upgradeTreeManager.buttonsList[upgrade.previousUpgradeId].transform.localPosition.y
-                //- (upgrade.row*rowsIncrement)
                 );
 
-            Points[1] = new Vector2(transform.localPosition.x 
-                //+ (upgrade.column * columnsIncrement)
-                ,transform.localPosition.y
-                //-(upgrade.row *rowsIncrement)
-                );
+            Vector2 end = Vector2.zero;
 
-            Points[0].x -= transform.localPosition.x;
-            Points[1].x -= transform.localPosition.x;
-            Points[0].y -= transform.localPosition.y;
-            Points[1].y -= transform.localPosition.y;
+            start.x -= transform.localPosition.x;
+            start.y -= transform.localPosition.y;
 
             List<Vector2> points = new List<Vector2>
             {
-                Points[0],
-                Points[1]
+            start,end
             };
 
-            /*
-            if(upgradeTreeManager.buttonsList[upgrade.previousUpgradeId].upgrade.column != 0)
-            {
-                if (upgradeTreeManager.buttonsList[upgrade.previousUpgradeId].upgrade.column > (float)columns / 2f)
-                {
-                    Points[0].x += columnsIncrement * upgrade.column;
-                    Points[1].x += columnsIncrement * upgrade.column;
-
-                }
-                if (upgradeTreeManager.buttonsList[upgrade.previousUpgradeId].upgrade.row > (float)rows / 2f)
-                {
-                    Points[0].y += rowsIncrement * upgrade.row;
-                    Points[1].y += rowsIncrement * upgrade.row;
-                }
-                if (upgradeTreeManager.buttonsList[upgrade.previousUpgradeId].upgrade.column < (float)columns / 2f)
-                {
-                    Points[0].x -= columnsIncrement * upgrade.column;
-                    Points[1].x -= columnsIncrement * upgrade.column;
-                }
-                if (upgradeTreeManager.buttonsList[upgrade.previousUpgradeId].upgrade.row > (float)rows / 2f)
-                {
-                    Points[0].y -= rowsIncrement * upgrade.row;
-                    Points[1].y -= rowsIncrement * upgrade.row;
-                }
-            }
-            */
-
-            /*
-            lineRenderer.Points = Points;
-            */
             lineRenderer.points = points;
             lineRenderer.transform.SetSiblingIndex(0);
             transform.SetSiblingIndex(1);
-            float smoothness = 20f;
+            float smoothness = 50f;
             List<Vector2> smoothpoints = new();
-            for (float i = 0f; i < smoothness; i++)
+            if (points[0].y != points[1].y)
             {
-                smoothpoints.Add(Bezier(points[0], points[1], i/smoothness));
+                for (float i = 0f; i < smoothness; i++)
+                {
+
+                    smoothpoints.Add(Bezier(points[0], new Vector2(points[0].x + 1000, points[0].y), new Vector2(points[1].x - 1000, points[1].y), points[1], i / smoothness));
+                }
+                lineRenderer.points = smoothpoints;
             }
-            lineRenderer.points = smoothpoints;
-            Debug.Log(lineRenderer.points);
+            SetLineColor();
         }
 
     }
     public void Initiate()
     {
-        
+
         upgradeNameText.text = upgrade.upgradeName;
         transform.position = new Vector2(-1300, +2100);
         //transform.position = new Vector2(2900, -1000);
@@ -114,44 +82,6 @@ public class UpgradeButton : MonoBehaviour
 
         transform.localPosition = new Vector2(transform.localPosition.x + (upgrade.column * columnsIncrement), transform.localPosition.y - (upgrade.row * rowsIncrement));
         upgradeTreeManager = GetComponentInParent<UpgradeTreeManager>();
-        /*
-        switch(upgrade.column)
-        {
-            case 0:
-                transform.position = new Vector2(-1000, 0);
-                break;
-            case 1:
-                transform.position = new Vector2(-500, 0);
-                break;
-            case 2:
-                transform.position = new Vector2(0, 0);
-                break;
-            case 3:
-                transform.position = new Vector2(500, 0);
-
-                break;
-        }
-        switch (upgrade.row)
-        {
-            case 0:
-                transform.position = new Vector2(transform.position.x, -1000);
-                break;
-            case 1:
-                transform.position = new Vector2(transform.position.x, -500);
-                break;
-            case 2:
-                transform.position = new Vector2(transform.position.x, 0);
-                break;
-            case 3:
-                transform.position = new Vector2(transform.position.x, 500);
-                break;
-            case 4:
-                transform.position = new Vector2(transform.position.x, 1000);
-                break;
-        }
-
-        transform.position = new Vector2(transform.position.x + 960, transform.position.y + 540);
-        */
     }
 
     Vector2 Bezier(Vector2 a, Vector2 b, float t)

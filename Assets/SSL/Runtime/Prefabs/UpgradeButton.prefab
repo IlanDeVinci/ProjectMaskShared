@@ -63,8 +63,7 @@ MonoBehaviour:
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   points:
   - {x: 0, y: 0}
-  - {x: 50, y: 50}
-  thickness: 20
+  thickness: 30
   center: 0
 --- !u!1 &4415847970771201964
 GameObject:
@@ -160,13 +159,15 @@ MonoBehaviour:
   upgradeNameText: {fileID: 4600129479508467709}
   upgrade:
     upgradeId: 0
-    isUpgradeAcquired: 0
-    previousUpgradeId: 0
-    upgradeCost: 0
+    isUpgradeAcquiredFull: 0
     upgradeName: 
     upgradeDescription: 
     column: 0
     row: 0
+    upgradeType: 0
+    thresholdToUnlockNext: 0
+    previousUpgradeId: 0
+    upgradesList: []
   lineRenderer: {fileID: 6685979424442786994}
   columnsIncrement: 0
   rowsIncrement: 0

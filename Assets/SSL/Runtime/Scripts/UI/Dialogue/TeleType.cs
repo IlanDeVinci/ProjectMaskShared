@@ -47,7 +47,7 @@ public class TeleType : MonoBehaviour
         }
         textMeshPro.maxVisibleCharacters = counter;
         int audioCounter = 0;
-        tween = Tween.TextMaxVisibleCharacters(textMeshPro, totalVisibleChars, totalVisibleChars/10, ease:Ease.Linear);
+        tween = Tween.TextMaxVisibleCharacters(textMeshPro, totalVisibleChars, totalVisibleChars/30, ease:Ease.Linear);
         textMeshPro.alpha = 1;
 
         while (tween.isAlive)

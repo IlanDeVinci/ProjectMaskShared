@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CameraTriggerTarget
   - Coin
+  - UpgradeMenuImage
   layers:
   - Default
   - TransparentFX

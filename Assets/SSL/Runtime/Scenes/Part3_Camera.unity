@@ -1764,10 +1764,10 @@ MonoBehaviour:
     previousUpgradeId: 0
     upgradesList:
     - isUpgradeAcquired: 0
-      upgradeCost: 0
+      upgradeCost: 10
       upgradeValue: 0
     - isUpgradeAcquired: 0
-      upgradeCost: 0
+      upgradeCost: 10
       upgradeValue: 0
     upgradeLevel: 0
   - upgradeId: 3

@@ -29,6 +29,8 @@ public class KnifePrefab : MonoBehaviour
 
     private void Start()
     {
+        var upgrade = GlobalUpgrades.Instance.Upgrades.Find(x => x.upgradeType == GlobalUpgrades.UpgradeType.KnifeDamage);
+        degats = upgrade.upgradesList[upgrade.upgradeLevel].upgradeValue;
         speedTween = Tween.Custom(rb.velocity.x, rb.velocity.x / 2, 2,
             onValueChange: newVal => rb.velocity = new Vector2(newVal, rb.velocity.y));
     }

@@ -20,7 +20,10 @@ public class UpgradeButton : MonoBehaviour
     public int rows;
     public int columns;
     private GlobalUpgrades.Upgrade previousUpgrade;
-    
+    [SerializeField] private ToolTip toolTip;
+    [SerializeField] private GameObject fadingText;
+
+
 
     public void SetColors()
     {
@@ -130,12 +133,28 @@ public class UpgradeButton : MonoBehaviour
             Debug.Log(GlobalManager.playerMoney);
             GlobalManager.playerMoney -= upgrade.upgradesList[upgrade.upgradeLevel].upgradeCost;
             Debug.Log(GlobalManager.playerMoney);
+            var savedText = Instantiate(fadingText, GameObject.FindGameObjectWithTag("UpgradeMenuImage").transform);
+            savedText.GetComponent<TextFollowMouse>().value = upgrade.upgradesList[upgrade.upgradeLevel].upgradeCost;
             upgrade.upgradeLevel++;
             GlobalUpgrades.Instance.Upgrades[upgrade.upgradeId].upgradeLevel = upgrade.upgradeLevel;
             upgradeTreeManager.SetAllColors();
+            ShowToolTip();
         }
     }
 
+    public void ShowToolTip()
+    {
+        string text = "Max level !";
+        if (upgrade.upgradeLevel < upgrade.upgradesList.Count -1)
+        {
+            text = upgrade.upgradeDescription.Replace("valeur", upgrade.upgradesList[upgrade.upgradeLevel + 1].upgradeValue.ToString());
+        }
+        toolTip.ShowTooltip(text);
+    }
+    public void HideToolTip()
+    {
+        toolTip.HideTooltip();
+    }
     public void GetInfo()
     {
         Debug.Log(upgrade);

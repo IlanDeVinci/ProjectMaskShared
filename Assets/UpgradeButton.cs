@@ -1,3 +1,4 @@
+using PrimeTween;
 using System;
 using System.Collections.Generic;
 using TMPro;
@@ -23,14 +24,6 @@ public class UpgradeButton : MonoBehaviour
 
     public void SetColors()
     {
-        if (upgradeTreeManager.buttonsList[upgrade.previousUpgradeId].upgrade.thresholdToUnlockNext <= previousUpgrade.upgradeLevel)
-        {
-            lineRenderer.color = Color.green;
-        }
-        else
-        {
-            lineRenderer.color = Color.red;
-        }
         if (upgrade.upgradesList[upgrade.upgradeLevel].upgradeCost <= GlobalManager.playerMoney)
         {
             tweenButton.canTween = true;
@@ -38,9 +31,27 @@ public class UpgradeButton : MonoBehaviour
         }
         else
         {
-            tweenButton.canTween= false;
-            button.interactable = true;
+            tweenButton.canTween = false;
+            button.interactable = false;
         }
+
+        if (upgrade.previousUpgradeId != -1)
+        {
+            if (upgradeTreeManager.buttonsList[upgrade.previousUpgradeId].upgrade.thresholdToUnlockNext <= previousUpgrade.upgradeLevel)
+            {
+                Tween.Color(lineRenderer, Color.green, 1);                
+            }
+            else
+            {
+                lineRenderer.color = Color.red;
+                tweenButton.canTween = false;
+                button.interactable = false;
+            }
+
+
+        }
+
+
     }
     public void LinkButtons()
     {
@@ -113,8 +124,23 @@ public class UpgradeButton : MonoBehaviour
         return Vector2.Lerp(Bezier(a, b, c, t), Bezier(b, c, d, t), t);
     }
 
-    private void ButtonClicked()
+    public void ButtonClicked()
     {
+        if(GlobalManager.playerMoney >= upgrade.upgradesList[upgrade.upgradeLevel].upgradeCost && upgrade.upgradeLevel < upgrade.upgradesList.Count - 1) {
+            Debug.Log(GlobalManager.playerMoney);
+            GlobalManager.playerMoney -= upgrade.upgradesList[upgrade.upgradeLevel].upgradeCost;
+            Debug.Log(GlobalManager.playerMoney);
+            upgrade.upgradeLevel++;
+            GlobalUpgrades.Instance.Upgrades[upgrade.upgradeId].upgradeLevel = upgrade.upgradeLevel;
+            upgradeTreeManager.SetAllColors();
+        }
+    }
+
+    public void GetInfo()
+    {
+        Debug.Log(upgrade);
+        Debug.Log(upgrade.upgradesList[upgrade.upgradeLevel].upgradeCost);
+        Debug.Log(tweenButton.canTween);
 
     }
 }

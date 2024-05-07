@@ -23,7 +23,8 @@ public class UpgradeTreeManager : MonoBehaviour
     private bool isGoingRight = false;
     private bool isGoingUp = false;
     [SerializeField] public List<UpgradeButton> buttonsList;
-    [SerializeField] private CanvasGroup canvasGroup;
+    [SerializeField] private CanvasGroup canvasGroup;   
+
     private void Start()
     {
         canvasGroup.alpha = 0;
@@ -31,18 +32,65 @@ public class UpgradeTreeManager : MonoBehaviour
         xPos = 0;
         yPos = 0;
         InitTree();
+        Tween tween = Tween.Custom(0, 1800, 2, onValueChange: newVal => xPos = newVal);
+        Tween.Custom(0, -200, 2, onValueChange: newVal => yPos = newVal);
     }
 
+    private IEnumerator ShowTree()
+    {
+        yield return new WaitForSeconds(1);
+        backgroundImage.transform.localPosition = new Vector2(xPos, yPos);
+        canvasGroup.alpha = 1;
+        StartCoroutine(OpenTree());
+        SetAllColors();
+    }
     public void ShowUpgradeTree()
     {
         canMove = false;
         canvasGroup.alpha = 0;
         gameObject.SetActive(true);
+        /*
         xPos = 0;
         yPos = 0;
-        backgroundImage.transform.localPosition = new Vector2(xPos, yPos);
-        Tween.Alpha(canvasGroup, 1, 1);
-        tweenX = Tween.Custom(0, 1500, settings, onValueChange: newVal => xPos = newVal);
+            */
+        StartCoroutine(ShowTree());
+    }
+
+    public void SetAllColors()
+    {
+        foreach (UpgradeButton upgradeButton in buttonsList)
+        {
+            upgradeButton.SetColors();
+        }
+    }
+
+    public void HideUpgradeTree()
+    {
+        gameObject.GetComponentInParent<PauseManager>().Fade();
+        StartCoroutine(HideTree());
+
+    }
+
+    private IEnumerator HideTree()
+    {
+        yield return new WaitForSeconds(1);
+        canMove = false;
+        gameObject.SetActive(false);
+    }
+
+    private IEnumerator OpenTree()
+    {
+        yield return new WaitForEndOfFrame();
+        /*
+        xPos = -1000;
+        yPos = -300;
+        Tween tween = Tween.Custom(0, 1800, 2, onValueChange: newVal => xPos = newVal);
+        Tween.Custom(0, -200, 2, onValueChange: newVal => yPos = newVal);
+
+        yield return tween.ToYieldInstruction();
+        */
+        canMove = true;
+
     }
 
 
@@ -60,8 +108,9 @@ public class UpgradeTreeManager : MonoBehaviour
         foreach (UpgradeButton upgradeButton in buttonsList)
         {
             upgradeButton.SendMessage("LinkButtons");
+            upgradeButton.SendMessage("SetColors");
         }
-        backgroundImage.transform.localPosition= new Vector2(1800, 0);
+        //backgroundImage.transform.localPosition= new Vector2(1800, 0);
     }
 
     private void DoMovement()
@@ -137,7 +186,6 @@ public class UpgradeTreeManager : MonoBehaviour
             xPos = -maxXPos;
         }
 
-        backgroundImage.transform.localPosition = new Vector2(xPos , yPos);
     
 }
     private void Update()
@@ -149,16 +197,7 @@ public class UpgradeTreeManager : MonoBehaviour
                 DoMovement();
             }
         }
-
-        if(canvasGroup.alpha == 1)
-        {
-            canMove = true;
-
-        }
-        else
-        {
-            canMove = false;
-        }
+        backgroundImage.transform.localPosition = new Vector2(xPos, yPos);
 
     }
 

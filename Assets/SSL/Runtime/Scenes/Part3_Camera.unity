@@ -1740,7 +1740,7 @@ MonoBehaviour:
     column: 1
     row: 0
     upgradeType: 0
-    thresholdToUnlockNext: 3
+    thresholdToUnlockNext: 2
     previousUpgradeId: 0
     upgradesList:
     - isUpgradeAcquired: 0
@@ -1760,7 +1760,7 @@ MonoBehaviour:
     column: 1
     row: 2
     upgradeType: 0
-    thresholdToUnlockNext: 2
+    thresholdToUnlockNext: 1
     previousUpgradeId: 0
     upgradesList:
     - isUpgradeAcquired: 0
@@ -1780,6 +1780,15 @@ MonoBehaviour:
     thresholdToUnlockNext: 3
     previousUpgradeId: 0
     upgradesList:
+    - isUpgradeAcquired: 0
+      upgradeCost: 0
+      upgradeValue: 0
+    - isUpgradeAcquired: 0
+      upgradeCost: 0
+      upgradeValue: 0
+    - isUpgradeAcquired: 0
+      upgradeCost: 0
+      upgradeValue: 0
     - isUpgradeAcquired: 0
       upgradeCost: 0
       upgradeValue: 0
@@ -2147,7 +2156,7 @@ MonoBehaviour:
     x: 80
     y: 95
     width: 48
-    height: 15
+    height: 20
 --- !u!1 &1641381205
 GameObject:
   m_ObjectHideFlags: 0

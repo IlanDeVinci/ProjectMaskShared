@@ -8,6 +8,19 @@ public class GlobalUpgrades : MonoBehaviour
     private static GlobalUpgrades instance;
     public static GlobalUpgrades Instance => instance;
 
+    public enum UpgradeType
+    {
+        KnifeDamage,
+        Hp,
+        InvisibilityTime,
+        JumpHeight,
+        InvisibilityCooldown,
+        Resistance,
+        KnifeRange,
+        DoubleKnife,
+        DoubleDamage,
+        KnifePiercing
+    }
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -40,12 +53,22 @@ public class GlobalUpgrades : MonoBehaviour
     public class Upgrade
     {
         [HideInInspector] public int upgradeId;
-        [HideInInspector] public bool isUpgradeAcquired;
-        [SerializeField] public int previousUpgradeId;
-        [SerializeField] public int upgradeCost;
+        [HideInInspector] public bool isUpgradeAcquiredFull;
         [SerializeField] public string upgradeName;
         [SerializeField] public string upgradeDescription;
         [SerializeField] public int column;
         [SerializeField] public int row;
+        [SerializeField] public UpgradeType upgradeType;
+        [SerializeField] public int thresholdToUnlockNext;
+        [SerializeField] public int previousUpgradeId;
+        [SerializeField] public List<SingleUpgrade> upgradesList;
+
+        [Serializable]
+        public class SingleUpgrade
+        {
+            [SerializeField] public int isUpgradeAcquired;
+            [SerializeField] public int upgradeCost;
+        }
     }
+
 }

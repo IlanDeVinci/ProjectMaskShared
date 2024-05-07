@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using System;
-using UnityEngine.UI.Extensions;
 using UnityEngine.UI;
 
 [Serializable]

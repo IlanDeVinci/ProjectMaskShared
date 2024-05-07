@@ -21,24 +21,26 @@ public class GlobalUpgrades : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
 
-
+        int i = 0;
         foreach(Upgrade upgrade in Upgrades)
         {
+            upgrade.upgradeId = i;
             if(upgrade.column > columnNumber) columnNumber = upgrade.column;
             if(upgrade.row > rowNumber) rowNumber = upgrade.row;
+            i++;
         }
     }
 
-    [SerializeField] public List<Upgrade>? Upgrades;
-    [SerializeField] public int rowNumber = 0;
-    [SerializeField] public int columnNumber = 0;
+    [SerializeField] public List<Upgrade> Upgrades;
+    [HideInInspector] public int rowNumber = 0;
+    [HideInInspector] public int columnNumber = 0;
 
 
     [Serializable]
     public class Upgrade
     {
-        [SerializeField] public int upgradeId;
-        [SerializeField] public bool isUpgradeAcquired;
+        [HideInInspector] public int upgradeId;
+        [HideInInspector] public bool isUpgradeAcquired;
         [SerializeField] public int previousUpgradeId;
         [SerializeField] public int upgradeCost;
         [SerializeField] public string upgradeName;

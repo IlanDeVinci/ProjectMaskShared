@@ -1769,6 +1769,22 @@ MonoBehaviour:
     upgradeDescription: Omg !!!!!
     column: 2
     row: 2
+  - upgradeId: 6
+    isUpgradeAcquired: 0
+    previousUpgradeId: 6
+    upgradeCost: 10
+    upgradeName: Third !! THREE
+    upgradeDescription: Omg !!!!!
+    column: 3
+    row: 3
+  - upgradeId: 6
+    isUpgradeAcquired: 0
+    previousUpgradeId: 5
+    upgradeCost: 10
+    upgradeName: Third !! THREE
+    upgradeDescription: Omg !!!!!
+    column: 3
+    row: 5
   rowNumber: 0
   columnNumber: 0
 --- !u!4 &1299432083
@@ -2800,7 +2816,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4349867477077567182, guid: 85d676030caaef646839f261f054a070, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
-      value: 17
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 4926531827027368170, guid: 85d676030caaef646839f261f054a070, type: 3}
       propertyPath: m_AnchorMax.x

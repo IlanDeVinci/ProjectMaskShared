@@ -66,8 +66,9 @@ public class GlobalUpgrades : MonoBehaviour
         [Serializable]
         public class SingleUpgrade
         {
-            [SerializeField] public int isUpgradeAcquired;
+            [HideInInspector] public bool isUpgradeAcquired;
             [SerializeField] public int upgradeCost;
+            [SerializeField] public int upgradeValue;
         }
     }
 

@@ -23,12 +23,28 @@ public class UpgradeTreeManager : MonoBehaviour
     private bool isGoingRight = false;
     private bool isGoingUp = false;
     [SerializeField] public List<UpgradeButton> buttonsList;
+    [SerializeField] private CanvasGroup canvasGroup;
     private void Start()
     {
-        xPos = 1000;
+        canvasGroup.alpha = 0;
+        canMove = false;
+        xPos = 0;
         yPos = 0;
         InitTree();
     }
+
+    public void ShowUpgradeTree()
+    {
+        canMove = false;
+        canvasGroup.alpha = 0;
+        gameObject.SetActive(true);
+        xPos = 0;
+        yPos = 0;
+        backgroundImage.transform.localPosition = new Vector2(xPos, yPos);
+        Tween.Alpha(canvasGroup, 1, 1);
+        tweenX = Tween.Custom(0, 1500, settings, onValueChange: newVal => xPos = newVal);
+    }
+
 
     private void InitTree()
     {
@@ -45,7 +61,7 @@ public class UpgradeTreeManager : MonoBehaviour
         {
             upgradeButton.SendMessage("LinkButtons");
         }
-        
+        backgroundImage.transform.localPosition= new Vector2(1800, 0);
     }
 
     private void DoMovement()
@@ -121,7 +137,7 @@ public class UpgradeTreeManager : MonoBehaviour
             xPos = -maxXPos;
         }
 
-        backgroundImage.transform.position = new Vector2(xPos + 960, yPos + 540);
+        backgroundImage.transform.localPosition = new Vector2(xPos , yPos);
     
 }
     private void Update()
@@ -132,6 +148,16 @@ public class UpgradeTreeManager : MonoBehaviour
             {
                 DoMovement();
             }
+        }
+
+        if(canvasGroup.alpha == 1)
+        {
+            canMove = true;
+
+        }
+        else
+        {
+            canMove = false;
         }
 
     }

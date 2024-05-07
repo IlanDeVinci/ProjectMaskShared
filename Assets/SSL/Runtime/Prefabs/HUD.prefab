@@ -422,6 +422,7 @@ MonoBehaviour:
       useFixedUpdate: 0
   soundEffect: {fileID: 8300000, guid: 0e7ec1741ffb0ce42926abc3da482e8a, type: 3}
   soundPlayer: {fileID: 1386321131426252701}
+  canTween: 1
 --- !u!1 &2603362006166038012
 GameObject:
   m_ObjectHideFlags: 0
@@ -486,7 +487,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.64705884}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.8235294}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1193,6 +1194,7 @@ MonoBehaviour:
       useFixedUpdate: 0
   soundEffect: {fileID: 8300000, guid: 0e7ec1741ffb0ce42926abc3da482e8a, type: 3}
   soundPlayer: {fileID: 1386321131426252701}
+  canTween: 1
 --- !u!1 &4702835318621982039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1804,7 +1806,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2194590274842512030}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8017208222632049549}
+        m_TargetAssemblyTypeName: UpgradeTreeManager, Assembly-CSharp
+        m_MethodName: ShowUpgradeTree
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6318497876290385670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1839,6 +1853,7 @@ MonoBehaviour:
       useFixedUpdate: 0
   soundEffect: {fileID: 8300000, guid: 0e7ec1741ffb0ce42926abc3da482e8a, type: 3}
   soundPlayer: {fileID: 1386321131426252701}
+  canTween: 1
 --- !u!1 &8583589292371387913
 GameObject:
   m_ObjectHideFlags: 0
@@ -1985,6 +2000,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Panel
       objectReference: {fileID: 0}
+    - target: {fileID: 707121666636600899, guid: e75a4fee66b33674fabebe41fc482527, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2767668053979696010, guid: e75a4fee66b33674fabebe41fc482527, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -2079,3 +2098,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7912357418192021976, guid: e75a4fee66b33674fabebe41fc482527, type: 3}
   m_PrefabInstance: {fileID: 4649709178755092298}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8017208222632049549 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3442383689693066439, guid: e75a4fee66b33674fabebe41fc482527, type: 3}
+  m_PrefabInstance: {fileID: 4649709178755092298}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35e969c513a29224f8e13f98b4cc77a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

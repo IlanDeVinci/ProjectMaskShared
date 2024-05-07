@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 [Serializable]
 public class UpgradeButton : MonoBehaviour
@@ -11,21 +12,34 @@ public class UpgradeButton : MonoBehaviour
     public GlobalUpgrades.Upgrade upgrade;
     private UpgradeTreeManager upgradeTreeManager;
     [SerializeField] UILineRenderer lineRenderer;
+    [SerializeField] Button button;
+    [SerializeField] TweenButton tweenButton;
     public int columnsIncrement;
     public int rowsIncrement;
     public int rows;
     public int columns;
     private GlobalUpgrades.Upgrade previousUpgrade;
+    
 
-    public void SetLineColor()
+    public void SetColors()
     {
         if (upgradeTreeManager.buttonsList[upgrade.previousUpgradeId].upgrade.thresholdToUnlockNext <= previousUpgrade.upgradeLevel)
         {
-            lineRenderer.color = Color.white;
+            lineRenderer.color = Color.green;
         }
         else
         {
-            lineRenderer.color = Color.gray;
+            lineRenderer.color = Color.red;
+        }
+        if (upgrade.upgradesList[upgrade.upgradeLevel].upgradeCost <= GlobalManager.playerMoney)
+        {
+            tweenButton.canTween = true;
+            button.interactable = true;
+        }
+        else
+        {
+            tweenButton.canTween= false;
+            button.interactable = true;
         }
     }
     public void LinkButtons()
@@ -61,7 +75,7 @@ public class UpgradeButton : MonoBehaviour
                 }
                 lineRenderer.points = smoothpoints;
             }
-            SetLineColor();
+            SetColors();
         }
 
     }

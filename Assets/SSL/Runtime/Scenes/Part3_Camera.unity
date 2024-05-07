@@ -1720,9 +1720,19 @@ MonoBehaviour:
     column: 0
     row: 2
     upgradeType: 0
-    thresholdToUnlockNext: 0
+    thresholdToUnlockNext: 1
     previousUpgradeId: -1
-    upgradesList: []
+    upgradesList:
+    - isUpgradeAcquired: 0
+      upgradeCost: 10
+      upgradeValue: 0
+    - isUpgradeAcquired: 0
+      upgradeCost: 10
+      upgradeValue: 0
+    - isUpgradeAcquired: 0
+      upgradeCost: 10
+      upgradeValue: 0
+    upgradeLevel: 0
   - upgradeId: 1
     isUpgradeAcquiredFull: 0
     upgradeName: Second
@@ -1730,9 +1740,19 @@ MonoBehaviour:
     column: 1
     row: 0
     upgradeType: 0
-    thresholdToUnlockNext: 0
+    thresholdToUnlockNext: 3
     previousUpgradeId: 0
-    upgradesList: []
+    upgradesList:
+    - isUpgradeAcquired: 0
+      upgradeCost: 10
+      upgradeValue: 0
+    - isUpgradeAcquired: 0
+      upgradeCost: 10
+      upgradeValue: 0
+    - isUpgradeAcquired: 0
+      upgradeCost: 10
+      upgradeValue: 0
+    upgradeLevel: 0
   - upgradeId: 2
     isUpgradeAcquiredFull: 0
     upgradeName: Second bis
@@ -1740,9 +1760,16 @@ MonoBehaviour:
     column: 1
     row: 2
     upgradeType: 0
-    thresholdToUnlockNext: 0
+    thresholdToUnlockNext: 2
     previousUpgradeId: 0
-    upgradesList: []
+    upgradesList:
+    - isUpgradeAcquired: 0
+      upgradeCost: 0
+      upgradeValue: 0
+    - isUpgradeAcquired: 0
+      upgradeCost: 0
+      upgradeValue: 0
+    upgradeLevel: 0
   - upgradeId: 3
     isUpgradeAcquiredFull: 0
     upgradeName: Second bisbis
@@ -1750,9 +1777,16 @@ MonoBehaviour:
     column: 1
     row: 4
     upgradeType: 0
-    thresholdToUnlockNext: 0
+    thresholdToUnlockNext: 3
     previousUpgradeId: 0
-    upgradesList: []
+    upgradesList:
+    - isUpgradeAcquired: 0
+      upgradeCost: 0
+      upgradeValue: 0
+    - isUpgradeAcquired: 0
+      upgradeCost: 0
+      upgradeValue: 0
+    upgradeLevel: 0
   - upgradeId: 4
     isUpgradeAcquiredFull: 0
     upgradeName: 'Third !! '
@@ -1760,9 +1794,16 @@ MonoBehaviour:
     column: 2
     row: 0
     upgradeType: 0
-    thresholdToUnlockNext: 0
+    thresholdToUnlockNext: 2
     previousUpgradeId: 1
-    upgradesList: []
+    upgradesList:
+    - isUpgradeAcquired: 0
+      upgradeCost: 0
+      upgradeValue: 0
+    - isUpgradeAcquired: 0
+      upgradeCost: 0
+      upgradeValue: 0
+    upgradeLevel: 0
   - upgradeId: 5
     isUpgradeAcquiredFull: 0
     upgradeName: Third !! TWO
@@ -1770,9 +1811,16 @@ MonoBehaviour:
     column: 2
     row: 1
     upgradeType: 0
-    thresholdToUnlockNext: 0
+    thresholdToUnlockNext: 4
     previousUpgradeId: 2
-    upgradesList: []
+    upgradesList:
+    - isUpgradeAcquired: 0
+      upgradeCost: 0
+      upgradeValue: 0
+    - isUpgradeAcquired: 0
+      upgradeCost: 0
+      upgradeValue: 0
+    upgradeLevel: 0
   - upgradeId: 6
     isUpgradeAcquiredFull: 0
     upgradeName: Third !! THREE
@@ -1780,9 +1828,16 @@ MonoBehaviour:
     column: 2
     row: 2
     upgradeType: 0
-    thresholdToUnlockNext: 0
+    thresholdToUnlockNext: 2
     previousUpgradeId: 3
-    upgradesList: []
+    upgradesList:
+    - isUpgradeAcquired: 0
+      upgradeCost: 0
+      upgradeValue: 0
+    - isUpgradeAcquired: 0
+      upgradeCost: 0
+      upgradeValue: 0
+    upgradeLevel: 0
   - upgradeId: 6
     isUpgradeAcquiredFull: 0
     upgradeName: Third !! THREE
@@ -1790,9 +1845,16 @@ MonoBehaviour:
     column: 3
     row: 3
     upgradeType: 0
-    thresholdToUnlockNext: 0
+    thresholdToUnlockNext: 1
     previousUpgradeId: 5
-    upgradesList: []
+    upgradesList:
+    - isUpgradeAcquired: 0
+      upgradeCost: 0
+      upgradeValue: 0
+    - isUpgradeAcquired: 0
+      upgradeCost: 0
+      upgradeValue: 0
+    upgradeLevel: 0
   - upgradeId: 6
     isUpgradeAcquiredFull: 0
     upgradeName: Third !! THREE
@@ -1800,9 +1862,16 @@ MonoBehaviour:
     column: 3
     row: 5
     upgradeType: 0
-    thresholdToUnlockNext: 0
+    thresholdToUnlockNext: 3
     previousUpgradeId: 6
-    upgradesList: []
+    upgradesList:
+    - isUpgradeAcquired: 0
+      upgradeCost: 0
+      upgradeValue: 0
+    - isUpgradeAcquired: 0
+      upgradeCost: 0
+      upgradeValue: 0
+    upgradeLevel: 0
   rowNumber: 0
   columnNumber: 0
 --- !u!4 &1299432083
@@ -2490,6 +2559,10 @@ PrefabInstance:
     - target: {fileID: 4844179866240665098, guid: 848780e1ebad08a41ab77af2f988bf89, type: 3}
       propertyPath: m_Name
       value: Coin (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8860552730374521980, guid: 848780e1ebad08a41ab77af2f988bf89, type: 3}
+      propertyPath: coinValue
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -14,16 +14,20 @@ public class TweenButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     [SerializeField] TweenSettings<Vector3> settings;
     [SerializeField] private AudioClip soundEffect;
     [SerializeField] private AudioSource soundPlayer;
-
+    public bool canTween = true;
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        soundPlayer.Stop();
-        soundPlayer.clip = soundEffect;
-        soundPlayer.Play();
-        tween.Stop();
-        tweenScale = Tween.Scale(transform, settings);
-        tween = Tween.Color(image, color, duration: 0.5f);
+        if(canTween)
+        {
+            soundPlayer.Stop();
+            soundPlayer.clip = soundEffect;
+            soundPlayer.Play();
+            tween.Stop();
+            tweenScale = Tween.Scale(transform, settings);
+            tween = Tween.Color(image, color, duration: 0.5f);
+        }
+
     }
 
     public void OnPointerExit(PointerEventData eventData)

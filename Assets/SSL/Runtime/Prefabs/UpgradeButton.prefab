@@ -168,7 +168,10 @@ MonoBehaviour:
     thresholdToUnlockNext: 0
     previousUpgradeId: 0
     upgradesList: []
+    upgradeLevel: 0
   lineRenderer: {fileID: 6685979424442786994}
+  button: {fileID: 4695579648902724397}
+  tweenButton: {fileID: 1404206434193359847}
   columnsIncrement: 0
   rowsIncrement: 0
   rows: 0
@@ -329,6 +332,7 @@ MonoBehaviour:
       useFixedUpdate: 0
   soundEffect: {fileID: 8300000, guid: 0e7ec1741ffb0ce42926abc3da482e8a, type: 3}
   soundPlayer: {fileID: 7152848737619233596}
+  canTween: 0
 --- !u!1 &5244859205178270647
 GameObject:
   m_ObjectHideFlags: 0

@@ -41,6 +41,8 @@ public class HeroEntity : MonoBehaviour
 
     [Header("Jump")] [SerializeField] private HeroJumpSettings[] _jumpSettings;
     public int _jumpIndex = 0;
+
+
     [SerializeField] private HeroFallSettings _jumpFallSettings;
 
     [SerializeField] private HeroWallJumpSettings _wallJumpSettings;
@@ -50,12 +52,13 @@ public class HeroEntity : MonoBehaviour
         NotJumping,
         JumpImpulsion,
         WallJump,
+        TremplinJump,
         Falling
     }
 
     private JumpState _jumpState = JumpState.NotJumping;
     private float _jumpTimer = 0f;
-    public bool isJumpImpulsing => (_jumpState == JumpState.JumpImpulsion) || (_jumpState == JumpState.WallJump);
+    public bool isJumpImpulsing => (_jumpState == JumpState.JumpImpulsion) || (_jumpState == JumpState.WallJump || _jumpState == JumpState.TremplinJump);
     public bool isJumpMinDurationReached => JumpMinDurationReached();
 
     public bool isJumping => _jumpState != JumpState.NotJumping;
@@ -89,6 +92,10 @@ public class HeroEntity : MonoBehaviour
         NotDashing
     }
 
+    [Header("Tremplin")] [SerializeField] private HeroJumpSettings tremplinSettings;
+    private bool isTouchingTremplin => _groundDetector.DetectTremplin();
+
+
     [Header("Orientation")] [SerializeField]
     private Transform _orientVisualRoot;
 
@@ -105,6 +112,7 @@ public class HeroEntity : MonoBehaviour
     private Vector2 velocityBeforePause;
     private bool isPaused = false;
 
+
     private void Awake()
     {
         _cameraFollowable = GetComponent<CameraFollowable>();
@@ -116,7 +124,7 @@ public class HeroEntity : MonoBehaviour
     {
         _cameraFollowable.FollowDirection = _orientX;
         _cameraFollowable.FollowPositionX = _rigidbody.position.x;
-        if ((IsTouchingGround && !isJumping) || isSliding)
+        if ((IsTouchingGround && !isJumping) || isSliding || _jumpState == JumpState.TremplinJump)
         {
             _cameraFollowable.FollowPositionY = _rigidbody.position.y;
         }
@@ -124,12 +132,18 @@ public class HeroEntity : MonoBehaviour
 
     private bool JumpMinDurationReached()
     {
-        if (_jumpState != JumpState.WallJump)
+        switch (_jumpState)
         {
-            return _jumpTimer >= _jumpSettings[_jumpIndex - 1].jumpMinDuration;
+            case JumpState.TremplinJump:
+                return _jumpTimer >= tremplinSettings.jumpMinDuration;
+            case JumpState.WallJump:
+                return _jumpTimer >= _wallJumpSettings.wallJumpMinDuration;
+            case JumpState.JumpImpulsion:
+                return _jumpTimer >= _jumpSettings[_jumpIndex - 1].jumpMinDuration;
+
         }
 
-        return _jumpTimer >= _wallJumpSettings.wallJumpMinDuration;
+        return true;
     }
 
     private bool isSlidingLeft()
@@ -372,24 +386,33 @@ public class HeroEntity : MonoBehaviour
 
     public void JumpStart()
     {
-        if (!IsTouchingCeiling)
+        if(!isTouchingTremplin)
         {
-            if (!isSliding)
+            if (!IsTouchingCeiling)
             {
-                _jumpState = JumpState.JumpImpulsion;
-                _jumpTimer = 0f;
-                if (_jumpIndex < _jumpSettings.Length)
+                if (!isSliding)
                 {
-                    _jumpIndex += 1;
+                    _jumpState = JumpState.JumpImpulsion;
+                    _jumpTimer = 0f;
+                    if (_jumpIndex < _jumpSettings.Length)
+                    {
+                        _jumpIndex += 1;
+                    }
+                }
+                else
+                {
+                    _jumpState = JumpState.WallJump;
+                    _jumpTimer = 0f;
+                    _timeSinceDash = _dashSettings.cooldown / 2;
                 }
             }
-            else
-            {
-                _jumpState = JumpState.WallJump;
-                _jumpTimer = 0f;
-                _timeSinceDash = _dashSettings.cooldown / 2;
-            }
         }
+        else
+        {
+            _jumpState = JumpState.TremplinJump;
+            _jumpTimer = 0f;
+        }
+
 
         _slideTimer = slidingCooldown;
     }
@@ -412,6 +435,18 @@ public class HeroEntity : MonoBehaviour
         }
     }
 
+    private void _UpdateJumpStateTremplin()
+    {
+        _jumpTimer += Time.fixedDeltaTime;
+        if (_jumpTimer < tremplinSettings.jumpMaxDuration && !IsTouchingCeiling)
+        {
+            _verticalSpeed = tremplinSettings.jumpSpeed;
+        }
+        else
+        {
+            _jumpState = JumpState.Falling;
+        }
+    }
     private void _UpdateJumpStateFalling()
     {
         if (!IsTouchingGround)
@@ -451,6 +486,9 @@ public class HeroEntity : MonoBehaviour
                 break;
             case JumpState.WallJump:
                 _UpdateJumpStateWalljump();
+                break;
+            case JumpState.TremplinJump:
+                _UpdateJumpStateTremplin();
                 break;
         }
     }
@@ -796,6 +834,9 @@ public class HeroEntity : MonoBehaviour
         {
             GUILayout.Label($"In Air");
         }
+        // GUILayout.Label($"jumpmin duration reached = {isJumpMinDurationReached}");
+        GUILayout.Label($"jumpyimer = {_jumpTimer}");
+        GUILayout.Label($"tremplinminduration = {tremplinSettings.jumpMinDuration}");
 
         GUILayout.Label($"dashtime = {_dashTimer}");
 

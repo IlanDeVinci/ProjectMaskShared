@@ -26,4 +26,22 @@ public class GroundDetector : MonoBehaviour
         return false;
     }
 
+    public bool DetectTremplin()
+    {
+        foreach (Transform detectionPoint in _detectionPoints)
+        {
+            RaycastHit2D hitResult = Physics2D.Raycast(
+                detectionPoint.position,
+                Vector2.down,
+                _detectionLength,
+                _groundLayerMask
+                );
+            if (hitResult.collider != null)
+            {
+                if (hitResult.collider.CompareTag("Tremplin")) return true;
+            }
+        }
+        return false;
+    }
+
 }

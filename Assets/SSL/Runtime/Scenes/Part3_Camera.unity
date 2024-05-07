@@ -2051,9 +2051,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1491539049}
   - component: {fileID: 1491539050}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GameObject
-  m_TagString: Untagged
+  m_TagString: Tremplin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2067,8 +2067,8 @@ Transform:
   m_GameObject: {fileID: 1491539048}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 91.03, y: 100, z: 10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 91.03, y: 100, z: 10.537}
+  m_LocalScale: {x: 1.9758, y: 1.9758, z: 1.9758}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1697929885}
@@ -2106,7 +2106,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.22561309}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2117,7 +2117,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 0.5487738}
   m_EdgeRadius: 0
 --- !u!1 &1612629484
 GameObject:
@@ -2854,7 +2854,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3950254860742165989, guid: 58ffc10b51f5a6a4996c22f63f520b49, type: 3}
       propertyPath: _isBounceEnabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4058431812407989966, guid: 58ffc10b51f5a6a4996c22f63f520b49, type: 3}
       propertyPath: m_Layer
@@ -2899,6 +2899,10 @@ PrefabInstance:
     - target: {fileID: 6480041685457909243, guid: 58ffc10b51f5a6a4996c22f63f520b49, type: 3}
       propertyPath: _guiDebug
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6480041685457909243, guid: 58ffc10b51f5a6a4996c22f63f520b49, type: 3}
+      propertyPath: tremplinSettings.jumpMinDuration
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 6568833761574857079, guid: 58ffc10b51f5a6a4996c22f63f520b49, type: 3}
       propertyPath: m_Layer
@@ -3082,15 +3086,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4926531827027368170, guid: 85d676030caaef646839f261f054a070, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4926531827027368170, guid: 85d676030caaef646839f261f054a070, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4926531827027368170, guid: 85d676030caaef646839f261f054a070, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6091082633005900707, guid: 85d676030caaef646839f261f054a070, type: 3}
       propertyPath: m_AnchoredPosition.x

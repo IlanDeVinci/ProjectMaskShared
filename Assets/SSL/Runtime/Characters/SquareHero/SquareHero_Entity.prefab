@@ -1328,6 +1328,10 @@ MonoBehaviour:
       turnBackFrictions: 30
       speedMax: 11
     dashTransition: 0.5
+  tremplinSettings:
+    jumpSpeed: 20
+    jumpMinDuration: 0.15
+    jumpMaxDuration: 0.3
   _orientVisualRoot: {fileID: 3024582456938629764}
   _orientX: 1
   isPlayerVisible: 1

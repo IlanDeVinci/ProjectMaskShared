@@ -27,6 +27,7 @@ public class UpgradeButton : MonoBehaviour
 
     public void SetColors()
     {
+        HideToolTip();
         if (upgrade.upgradesList[upgrade.upgradeLevel].upgradeCost <= GlobalManager.playerMoney && upgrade.upgradeLevel < upgrade.upgradesList.Count -1)
         {
             tweenButton.canTween = true;

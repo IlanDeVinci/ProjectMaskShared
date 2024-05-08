@@ -10,9 +10,10 @@ public class HealthManager : MonoBehaviour
     [SerializeField] Slider healthSlider;
     [SerializeField] private int maxHealth;
     [SerializeField] private int totalLives;
+    [SerializeField] private HeroEntity hero;
 
-    private int currentHealth;
-    private int currentLives;
+    public int currentHealth;
+    public int currentLives;
 
     private void Awake()
     {
@@ -29,8 +30,8 @@ public class HealthManager : MonoBehaviour
         }
 
         if (currentHealth <= 0)
-        {
-            SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
+        { 
+            //SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
         }
     }
 

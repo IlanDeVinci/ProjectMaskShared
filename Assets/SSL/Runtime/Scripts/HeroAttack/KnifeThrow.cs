@@ -33,7 +33,7 @@ public class KnifeThrow : MonoBehaviour
                 launchPos = new Vector2(transform.position.x + offsetx, transform.position.y + offsety);
 
                 savedProjectile = Instantiate(projectile, launchPos, Quaternion.identity);
-                savedProjectile.GetComponent<Rigidbody2D>().velocity = new Vector2(launchSpeed, 0);
+                savedProjectile.GetComponent<Rigidbody2D>().velocity = new Vector2(launchSpeed, 1f);
                 savedProjectile.GetComponent<KnifePrefab>().knifeSpeed = 0.1f;
             }
             else
@@ -41,10 +41,10 @@ public class KnifeThrow : MonoBehaviour
                 launchPos = new Vector2(transform.position.x - offsetx, transform.position.y + offsety);
 
                 savedProjectile = Instantiate(projectile, launchPos, Quaternion.identity);
-                savedProjectile.GetComponent<Rigidbody2D>().velocity = new Vector2(-launchSpeed, 0);
+                savedProjectile.GetComponent<Rigidbody2D>().velocity = new Vector2(-launchSpeed, 1f);
                 savedProjectile.GetComponent<KnifePrefab>().knifeSpeed = -0.1f;
 
-                savedProjectile.GetComponent<SpriteRenderer>().flipX = true;
+                savedProjectile.transform.localScale = new Vector3 (-savedProjectile.transform.localScale.x, savedProjectile.transform.localScale.y, savedProjectile.transform.localScale.z);
             }
         }
         else

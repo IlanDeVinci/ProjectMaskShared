@@ -110,14 +110,20 @@ public class HeroEntity : MonoBehaviour
     public bool isHorizontalMoving => _moveDirX != 0f;
 
     private Vector2 velocityBeforePause;
-    private bool isPaused = false;
+    public bool isPaused = false;
+    [SerializeField] private HealthManager healthManager;
 
 
     private void Awake()
     {
+        if(GlobalManager.playerCheckpointPosition != Vector2.zero)
+        {
+            transform.position = GlobalManager.playerCheckpointPosition;
+        }
         _cameraFollowable = GetComponent<CameraFollowable>();
         _cameraFollowable.FollowPositionX = _rigidbody.position.x;
         _cameraFollowable.FollowPositionY = _rigidbody.position.y;
+        
     }
 
     private void _UpdateCameraFollowPosition()
@@ -675,7 +681,8 @@ public class HeroEntity : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!GlobalManager.isGamePaused)
+
+        if (!GlobalManager.isGamePaused && healthManager.currentHealth >= 0)
         {
             isPaused = false;
             _ApplyGroundDetection();
@@ -769,6 +776,10 @@ public class HeroEntity : MonoBehaviour
             {
                 StartCoroutine(Pause());
             }
+        }
+        if (healthManager.currentHealth <= 0)
+        {
+            gameObject.SetActive(false);
         }
     }
 

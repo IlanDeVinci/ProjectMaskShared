@@ -8,6 +8,9 @@ TagManager:
   - Coin
   - UpgradeMenuImage
   - Tremplin
+  - EnemyBullet
+  - CameraTrigger
+  - PlayerTrigger
   layers:
   - Default
   - TransparentFX
@@ -19,7 +22,7 @@ TagManager:
   - Wall
   - Player
   - Knife
-  - 
+  - PlayerTrigger
   - 
   - 
   - 

@@ -19,7 +19,7 @@ public class KnifePrefab : MonoBehaviour
     private bool isPaused = false;
     private Vector2 velocityBeforePause;
     private float gravityBeforePause;
-
+    private bool isGone = false;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -49,13 +49,17 @@ public class KnifePrefab : MonoBehaviour
             }
         }
 
-
-        if (lifeTimer > lifetime && !hasHitTarget)
+        if(!isGone)
         {
-            Tween.Alpha(sprite, 0, 1, Ease.OutSine);
-            speedTween.Stop();
-            Destroy(gameObject, 1);
+            if (lifeTimer > lifetime && !hasHitTarget)
+            {
+                isGone = true;
+                Tween.Alpha(sprite, 0, 0.5f, Ease.OutSine);
+                speedTween.Stop();
+                Destroy(gameObject, 1);
+            }
         }
+
     }
 
     private IEnumerator Pause()
@@ -82,10 +86,15 @@ public class KnifePrefab : MonoBehaviour
         rb.gravityScale = 0;
         //rb.velocity = new Vector2(knifeSpeed / 10, 0);
         Tween.PositionX(rb.transform, rb.position.x + knifeSpeed, 0.2f);
-        Destroy(boxCollider);
-        rb.velocity = Vector2.zero;
-        Tween.Alpha(sprite, 0, 1, Ease.OutSine);
-        Destroy(gameObject, 1);
+        if (!isGone)
+        {
+            isGone = true;
+            Destroy(boxCollider);
+            rb.velocity = Vector2.zero;
+            Tween.Alpha(sprite, 0, 0.5f, Ease.OutSine);
+            Destroy(gameObject, 1);
+        }
+
     }
 
     // Update is called once per frame

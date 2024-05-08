@@ -1,0 +1,217 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1484206817821964992
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5181730291083805939}
+  - component: {fileID: 4185153453576138972}
+  m_Layer: 0
+  m_Name: SingletonUpgrades
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5181730291083805939
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484206817821964992}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 95.54281, y: 112.3213, z: -0.05289507}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4185153453576138972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484206817821964992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9d887a01bd2002418e4a3b9d926b93f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrades:
+  - upgradeId: 0
+    isUpgradeAcquiredFull: 0
+    upgradeName: First
+    upgradeDescription: Omg !!!!!
+    column: 0
+    row: 2
+    upgradeType: 0
+    thresholdToUnlockNext: 1
+    previousUpgradeId: -1
+    upgradesList:
+    - isUpgradeAcquired: 0
+      upgradeCost: 10
+      upgradeValue: 0
+    - isUpgradeAcquired: 0
+      upgradeCost: 10
+      upgradeValue: 0
+    - isUpgradeAcquired: 0
+      upgradeCost: 10
+      upgradeValue: 0
+    upgradeLevel: 0
+  - upgradeId: 1
+    isUpgradeAcquiredFull: 0
+    upgradeName: Second
+    upgradeDescription: Omg !!!!!
+    column: 1
+    row: 0
+    upgradeType: 0
+    thresholdToUnlockNext: 2
+    previousUpgradeId: 0
+    upgradesList:
+    - isUpgradeAcquired: 0
+      upgradeCost: 10
+      upgradeValue: 0
+    - isUpgradeAcquired: 0
+      upgradeCost: 10
+      upgradeValue: 0
+    - isUpgradeAcquired: 0
+      upgradeCost: 10
+      upgradeValue: 0
+    upgradeLevel: 0
+  - upgradeId: 2
+    isUpgradeAcquiredFull: 0
+    upgradeName: Second bis
+    upgradeDescription: Omg !!!!!
+    column: 1
+    row: 2
+    upgradeType: 0
+    thresholdToUnlockNext: 1
+    previousUpgradeId: 0
+    upgradesList:
+    - isUpgradeAcquired: 0
+      upgradeCost: 10
+      upgradeValue: 0
+    - isUpgradeAcquired: 0
+      upgradeCost: 10
+      upgradeValue: 0
+    upgradeLevel: 0
+  - upgradeId: 3
+    isUpgradeAcquiredFull: 0
+    upgradeName: Second bisbis
+    upgradeDescription: Omg !!!!!
+    column: 1
+    row: 4
+    upgradeType: 0
+    thresholdToUnlockNext: 3
+    previousUpgradeId: 0
+    upgradesList:
+    - isUpgradeAcquired: 0
+      upgradeCost: 0
+      upgradeValue: 0
+    - isUpgradeAcquired: 0
+      upgradeCost: 0
+      upgradeValue: 0
+    - isUpgradeAcquired: 0
+      upgradeCost: 0
+      upgradeValue: 0
+    - isUpgradeAcquired: 0
+      upgradeCost: 0
+      upgradeValue: 0
+    - isUpgradeAcquired: 0
+      upgradeCost: 0
+      upgradeValue: 0
+    upgradeLevel: 0
+  - upgradeId: 4
+    isUpgradeAcquiredFull: 0
+    upgradeName: 'Third !! '
+    upgradeDescription: Omg !!!!!
+    column: 2
+    row: 0
+    upgradeType: 0
+    thresholdToUnlockNext: 2
+    previousUpgradeId: 1
+    upgradesList:
+    - isUpgradeAcquired: 0
+      upgradeCost: 0
+      upgradeValue: 0
+    - isUpgradeAcquired: 0
+      upgradeCost: 0
+      upgradeValue: 0
+    upgradeLevel: 0
+  - upgradeId: 5
+    isUpgradeAcquiredFull: 0
+    upgradeName: Third !! TWO
+    upgradeDescription: Omg !!!!!
+    column: 2
+    row: 1
+    upgradeType: 0
+    thresholdToUnlockNext: 4
+    previousUpgradeId: 2
+    upgradesList:
+    - isUpgradeAcquired: 0
+      upgradeCost: 0
+      upgradeValue: 0
+    - isUpgradeAcquired: 0
+      upgradeCost: 0
+      upgradeValue: 0
+    upgradeLevel: 0
+  - upgradeId: 6
+    isUpgradeAcquiredFull: 0
+    upgradeName: Third !! THREE
+    upgradeDescription: Omg !!!!!
+    column: 2
+    row: 2
+    upgradeType: 0
+    thresholdToUnlockNext: 2
+    previousUpgradeId: 3
+    upgradesList:
+    - isUpgradeAcquired: 0
+      upgradeCost: 0
+      upgradeValue: 0
+    - isUpgradeAcquired: 0
+      upgradeCost: 0
+      upgradeValue: 0
+    upgradeLevel: 0
+  - upgradeId: 6
+    isUpgradeAcquiredFull: 0
+    upgradeName: Third !! THREE
+    upgradeDescription: Omg !!!!!
+    column: 3
+    row: 3
+    upgradeType: 0
+    thresholdToUnlockNext: 1
+    previousUpgradeId: 5
+    upgradesList:
+    - isUpgradeAcquired: 0
+      upgradeCost: 0
+      upgradeValue: 0
+    - isUpgradeAcquired: 0
+      upgradeCost: 0
+      upgradeValue: 0
+    upgradeLevel: 0
+  - upgradeId: 6
+    isUpgradeAcquiredFull: 0
+    upgradeName: Third !! THREE
+    upgradeDescription: Omg !!!!!
+    column: 3
+    row: 5
+    upgradeType: 0
+    thresholdToUnlockNext: 3
+    previousUpgradeId: 6
+    upgradesList:
+    - isUpgradeAcquired: 0
+      upgradeCost: 0
+      upgradeValue: 0
+    - isUpgradeAcquired: 0
+      upgradeCost: 0
+      upgradeValue: 0
+    upgradeLevel: 0
+  rowNumber: 0
+  columnNumber: 0

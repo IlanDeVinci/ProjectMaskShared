@@ -122,10 +122,10 @@ public class EnemyEntity : MonoBehaviour
         {
             IsPlayerDetected = true;
         }
-        if (transform.position.y > _heroEntity.transform.position.y)
-        {
-            _ResetVerticalSpeed();
-        }
+        // if (transform.position.y > _heroEntity.transform.position.y)
+        // {
+        //     _ResetVerticalSpeed();
+        // }
 
     }
     

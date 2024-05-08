@@ -7,6 +7,4 @@ public class EnnemyMovementsSettings
     public float _Speed = 5f; // Vitesse de déplacement
     public float _jumpSpeed = 10f;
 
-    public float jumpCheckDistance = 0.5f;
-
 }

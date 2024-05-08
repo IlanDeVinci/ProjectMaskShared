@@ -42,6 +42,7 @@ public class HealthManager : MonoBehaviour
         if (GlobalManager.isPlayerClairvoyant)
         {
             damage = maxHealth / 2;
+            damageMultiplier = 1;
         }
         else
         {

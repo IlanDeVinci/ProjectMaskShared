@@ -51,6 +51,7 @@ public class MaskManager : MonoBehaviour
             switch(_currentMask)
             {
                 case Mask.Invisibility:
+                    GlobalManager.isPlayerClairvoyant = true;
                     _currentMask = Mask.Clairvoyance;
                     maskImage.sprite = spriteList[0];
                     break;

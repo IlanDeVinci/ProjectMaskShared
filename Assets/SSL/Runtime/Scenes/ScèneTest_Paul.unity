@@ -340,6 +340,7 @@ MonoBehaviour:
       useFixedUpdate: 0
   soundEffect: {fileID: 8300000, guid: 0e7ec1741ffb0ce42926abc3da482e8a, type: 3}
   soundPlayer: {fileID: 490834679}
+  canTween: 1
 --- !u!114 &195108545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -598,13 +599,16 @@ MonoBehaviour:
   - {fileID: 1266781337}
   - {fileID: 1287682260}
   - {fileID: 988567439}
-  _detectionLength: 1
+  _detectionLength: 0.5
   _groundLayerMask:
     serializedVersion: 2
     m_Bits: 64
   _wallLayerMask:
     serializedVersion: 2
     m_Bits: 128
+  combinedLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &324590395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -625,7 +629,12 @@ MonoBehaviour:
   _movementsSettings:
     IsEnemyDumb: 1
     _Speed: 5
-    _jumpSpeed: 10
+    _jumpSpeed: 20
+    jumpCheckDistance: 0.5
+  _fallSettings:
+    fallGravity: 20
+    fallSpeedMax: 10
+  _stopDistance: 3
 --- !u!50 &324590396
 Rigidbody2D:
   serializedVersion: 4
@@ -642,7 +651,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 6200000, guid: 3aa90e189c58491468a67afb3329e400, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -714,7 +723,7 @@ Transform:
   m_GameObject: {fileID: 324590392}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 115, y: 101, z: 0}
+  m_LocalPosition: {x: 115, y: 100.5, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -777,7 +786,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 15
+  m_Radius: 20
 --- !u!1 &397789211
 GameObject:
   m_ObjectHideFlags: 0
@@ -1335,6 +1344,7 @@ MonoBehaviour:
       useFixedUpdate: 0
   soundEffect: {fileID: 8300000, guid: 0e7ec1741ffb0ce42926abc3da482e8a, type: 3}
   soundPlayer: {fileID: 490834679}
+  canTween: 1
 --- !u!114 &609950584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2554,7 +2564,7 @@ PrefabInstance:
     - target: {fileID: -6790622949921503499, guid: 58ffc10b51f5a6a4996c22f63f520b49, type: 3}
       propertyPath: healthSlider
       value: 
-      objectReference: {fileID: 1940005577}
+      objectReference: {fileID: 0}
     - target: {fileID: 10491247350919046, guid: 58ffc10b51f5a6a4996c22f63f520b49, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -4279,17 +4289,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1940005580}
   m_SourcePrefab: {fileID: 100100000, guid: 85d676030caaef646839f261f054a070, type: 3}
---- !u!114 &1940005577 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4106476696852023747, guid: 85d676030caaef646839f261f054a070, type: 3}
-  m_PrefabInstance: {fileID: 1940005576}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &1940005578 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1978364652943630010, guid: 85d676030caaef646839f261f054a070, type: 3}
@@ -4314,6 +4313,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvasGroup: {fileID: 1829835737}
   panel: {fileID: 1829835735}
+  upgradeTree: {fileID: 0}
+  fade: {fileID: 0}
 --- !u!1 &2060654043
 GameObject:
   m_ObjectHideFlags: 0
@@ -4388,6 +4389,7 @@ MonoBehaviour:
       useFixedUpdate: 0
   soundEffect: {fileID: 8300000, guid: 0e7ec1741ffb0ce42926abc3da482e8a, type: 3}
   soundPlayer: {fileID: 490834679}
+  canTween: 1
 --- !u!114 &2060654046
 MonoBehaviour:
   m_ObjectHideFlags: 0

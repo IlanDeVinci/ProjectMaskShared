@@ -8,7 +8,7 @@ public class EnemyRaycast : MonoBehaviour
     [SerializeField] private LayerMask _groundLayerMask;
     [SerializeField] private LayerMask _wallLayerMask;
 
-    private LayerMask combinedLayerMask;
+    public LayerMask combinedLayerMask;
 
     void Awake()
     {
@@ -49,6 +49,7 @@ public class EnemyRaycast : MonoBehaviour
 
     public bool DetectWallNearByLeft()
     {
+        Debug.DrawLine(_detectionPointsLeft[1].position, _detectionPointsLeft[1].position + Vector3.left * _detectionLength, Color.red, 50f);
         foreach (Transform detectionPoint in _detectionPointsLeft)
         {
             RaycastHit2D hitResult = Physics2D.Raycast(

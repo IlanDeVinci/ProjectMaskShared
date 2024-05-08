@@ -161,10 +161,11 @@ public class EnemyEntity : MonoBehaviour
             _OrientDirX = -1f;
         }
        
-        if (IsEnemyTouchingWallLeft || IsEnemyTouchingWallRight)
+        if (IsEnemyTouchingGround && (IsEnemyTouchingWallLeft || IsEnemyTouchingWallRight))
         {
             _verticalSpeed = _movementsSettings._jumpSpeed;
         }
+
 
         if (Mathf.Abs(_directionToPlayer) > _stopDistance)
         {
@@ -174,6 +175,14 @@ public class EnemyEntity : MonoBehaviour
         {
             _ResetHorizontalSpeed();
         }
-
+  
     }
+    private void OnGUI(){
+            GUILayout.Label($"IsEnemyTouchingGround: {IsEnemyTouchingGround}");
+            GUILayout.Label($"IsEnemyTouchingWallRight: {IsEnemyTouchingWallRight}");
+            GUILayout.Label($"IsEnemyTouchingWallLeft: {IsEnemyTouchingWallLeft}");
+            GUILayout.Label($"Vertical Speed: {_verticalSpeed}");
+            GUILayout.Label($"Horizontal Speed: {_horizontalSpeed}");
+            GUILayout.Label($"DirectionToPlayer: {_directionToPlayer}");
+        }
 }

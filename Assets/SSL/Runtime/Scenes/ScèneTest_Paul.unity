@@ -599,7 +599,7 @@ MonoBehaviour:
   - {fileID: 1266781337}
   - {fileID: 1287682260}
   - {fileID: 988567439}
-  _detectionLength: 0.5
+  _detectionLength: 0.01
   _groundLayerMask:
     serializedVersion: 2
     m_Bits: 64
@@ -630,11 +630,10 @@ MonoBehaviour:
     IsEnemyDumb: 1
     _Speed: 5
     _jumpSpeed: 20
-    jumpCheckDistance: 0.5
   _fallSettings:
     fallGravity: 20
     fallSpeedMax: 10
-  _stopDistance: 3
+  _stopDistance: 2.5
 --- !u!50 &324590396
 Rigidbody2D:
   serializedVersion: 4
@@ -2687,7 +2686,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6480041685457909243, guid: 58ffc10b51f5a6a4996c22f63f520b49, type: 3}
       propertyPath: _guiDebug
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6568833761574857079, guid: 58ffc10b51f5a6a4996c22f63f520b49, type: 3}
       propertyPath: m_Layer

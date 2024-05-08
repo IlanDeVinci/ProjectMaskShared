@@ -237,24 +237,28 @@ public class CameraManager : MonoBehaviour
 
     private void Update()
     {
-        Vector3 nextPosition = _FindNextCameraPosition();
-        nextPosition = _AutoScrollCamera(nextPosition);
-        nextPosition = _OffsetCameraPosition(nextPosition);
-        nextPosition = _ClampPositionIntoBounds(nextPosition);
-        nextPosition = _ApplyDamping(nextPosition);
-        if (_IsPlayingProfileTransition())
+        if(!GlobalManager.isGamePaused)
         {
-            _profileTransitionTimer += Time.deltaTime;
-            Vector3 transitionPosition = _CalculateProfileTransitionPosition(nextPosition);
-            _SetCameraPosition(transitionPosition);
-            float transitionSize = _CalculateProfileTransitionCameraSize(_currentCameraProfile.CameraSize);
-            _SetCameraSize(transitionSize);
+            Vector3 nextPosition = _FindNextCameraPosition();
+            nextPosition = _AutoScrollCamera(nextPosition);
+            nextPosition = _OffsetCameraPosition(nextPosition);
+            nextPosition = _ClampPositionIntoBounds(nextPosition);
+            nextPosition = _ApplyDamping(nextPosition);
+            if (_IsPlayingProfileTransition())
+            {
+                _profileTransitionTimer += Time.deltaTime;
+                Vector3 transitionPosition = _CalculateProfileTransitionPosition(nextPosition);
+                _SetCameraPosition(transitionPosition);
+                float transitionSize = _CalculateProfileTransitionCameraSize(_currentCameraProfile.CameraSize);
+                _SetCameraSize(transitionSize);
+            }
+            else
+            {
+                _SetCameraPosition(nextPosition);
+                _SetCameraSize(_currentCameraProfile.CameraSize);
+            }
         }
-        else
-        {
-            _SetCameraPosition(nextPosition);
-            _SetCameraSize(_currentCameraProfile.CameraSize);
-        }
+
     }
 
     public void EnterProfile(CameraProfile cameraProfile, CameraProfileTransition transition = null)

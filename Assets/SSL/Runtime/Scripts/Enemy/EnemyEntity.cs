@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Serialization;
 using System;
-
+using System.Collections.Generic;
 
 public class EnemyEntity : MonoBehaviour
 {
@@ -34,6 +34,8 @@ public class EnemyEntity : MonoBehaviour
 
     [Header("Sauts")]
     private float _verticalSpeed = 0f; // Vitesse de saut
+    public bool isJumping = false;
+
     // [Header("Attaques")]
     // private float attackForce = 5f;
     // [Header("Vie")]
@@ -55,7 +57,7 @@ public class EnemyEntity : MonoBehaviour
         {
             _ApplyFallGravity(_fallSettings);
         }
-        else
+        else if(!isJumping)
         {
             _ResetVerticalSpeed();
         }
@@ -149,6 +151,17 @@ public class EnemyEntity : MonoBehaviour
         }
     }
 
+    private IEnumerator Jump()
+    {
+        isJumping = true;
+        for(float i = 0; i < _movementsSettings._jumpDuration; i+=Time.deltaTime)
+        {
+            _verticalSpeed = _movementsSettings._jumpSpeed;
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        isJumping = false;
+        yield return null;
+    }
     private void _FollowPlayer()
     {
         _directionToPlayer = _heroEntity.transform.position.x - transform.position.x;
@@ -163,7 +176,7 @@ public class EnemyEntity : MonoBehaviour
        
         if (IsEnemyTouchingGround && (IsEnemyTouchingWallLeft || IsEnemyTouchingWallRight))
         {
-            _verticalSpeed = _movementsSettings._jumpSpeed;
+            StartCoroutine(Jump());
         }
 
 

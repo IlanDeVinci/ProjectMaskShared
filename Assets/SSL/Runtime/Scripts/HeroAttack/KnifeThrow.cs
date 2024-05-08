@@ -22,8 +22,6 @@ public class KnifeThrow : MonoBehaviour
     {
         if (isReloading == false)
         {
-            Debug.Log("shooted");
-
             shootTime = 0f;
             isReloading = true;
             var random = new Random();
@@ -47,10 +45,7 @@ public class KnifeThrow : MonoBehaviour
                 savedProjectile.transform.localScale = new Vector3 (-savedProjectile.transform.localScale.x, savedProjectile.transform.localScale.y, savedProjectile.transform.localScale.z);
             }
         }
-        else
-        {
-            Debug.Log("cant shoot");
-        }
+
     }
 
     // Start is called before the first frame update

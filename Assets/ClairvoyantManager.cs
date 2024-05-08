@@ -51,6 +51,5 @@ public class ClairvoyantManager : MonoBehaviour
         {
             obj.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, alpha);
         }
-        Debug.Log(alpha);
     }
 }

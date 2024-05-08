@@ -30,48 +30,51 @@ public class TurretScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 targetPos = target.position;
-        direction = targetPos - (Vector2)transform.position;
-        direction.Normalize();
-        raycastHit2D = Physics2D.Raycast(transform.position, direction, detectionRange, player);
-        if (raycastHit2D.collider != null)
+        if(!GlobalManager.isGamePaused)
         {
-            Debug.DrawRay(transform.position, raycastHit2D.collider.transform.position, Color.red);
-            Debug.Log(raycastHit2D.collider.transform.position);
-            if (raycastHit2D.collider.gameObject.CompareTag("PlayerTrigger"))
+            Vector2 targetPos = target.position;
+            direction = targetPos - (Vector2)transform.position;
+            direction.Normalize();
+            raycastHit2D = Physics2D.Raycast(transform.position, direction, detectionRange, player);
+            if (raycastHit2D.collider != null)
             {
-                if(!isPlayerDetected)
+                Debug.DrawRay(transform.position, raycastHit2D.collider.transform.position, Color.red);
+                if (raycastHit2D.collider.gameObject.CompareTag("PlayerTrigger"))
                 {
-                    isPlayerDetected = true;
-                    alarmlight.GetComponent<SpriteRenderer>().color = Color.red;
+                    if (!isPlayerDetected)
+                    {
+                        isPlayerDetected = true;
+                        alarmlight.GetComponent<SpriteRenderer>().color = Color.red;
+                    }
+                }
+                else
+                {
+                    if (isPlayerDetected)
+                    {
+                        isPlayerDetected = false;
+                        alarmlight.GetComponent<SpriteRenderer>().color = Color.green;
+                    }
                 }
             }
             else
             {
-                if(isPlayerDetected)
+                if (isPlayerDetected)
                 {
-                    isPlayerDetected= false;
+                    isPlayerDetected = false;
                     alarmlight.GetComponent<SpriteRenderer>().color = Color.green;
                 }
             }
-        }
-        else
-        {
             if (isPlayerDetected)
             {
-                isPlayerDetected = false;
-                alarmlight.GetComponent<SpriteRenderer>().color = Color.green;
+                gun.transform.up = direction;
+                if (Time.time > shootTime)
+                {
+                    shootTime = Time.time + 1f / fireRate;
+                    Shoot();
+                }
             }
         }
-        if (isPlayerDetected)
-        {
-            gun.transform.up = direction;
-            if(Time.time > shootTime)
-            {
-                shootTime = Time.time + 1f/fireRate;
-                Shoot();
-            }
-        }
+       
     }
 
     private void Shoot()

@@ -6,5 +6,6 @@ public class EnnemyMovementsSettings
     public bool IsEnemyDumb  = false;
     public float _Speed = 5f; // Vitesse de déplacement
     public float _jumpSpeed = 10f;
+    public float _jumpDuration = 0.5f;
 
 }

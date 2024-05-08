@@ -503,7 +503,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9035373134184767084}
   - component: {fileID: 3477639040912545515}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Collider
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1147,6 +1147,7 @@ MonoBehaviour:
   maxHealth: 200
   totalLives: 3
   hero: {fileID: 6480041685457909243}
+  damageMultiplier: 1
   currentHealth: 200
   currentLives: 3
 --- !u!1 &6690839856867164257
@@ -1529,6 +1530,8 @@ MonoBehaviour:
   visuals: {fileID: 3058921478872825897}
   hero: {fileID: 6570170768439718791}
   cooldownSlider: {fileID: 0}
+  maskImage: {fileID: 0}
+  spriteList: []
 --- !u!1 &8032715401077901592
 GameObject:
   m_ObjectHideFlags: 0

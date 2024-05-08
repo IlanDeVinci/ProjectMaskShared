@@ -7,12 +7,16 @@ public class CoinEntity : MonoBehaviour
 {
     [SerializeField] private CircleCollider2D circleCollider;
     [SerializeField] private int coinValue;
-
+    private bool canGive = true;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("PlayerTrigger"))
         {
-            GlobalManager.playerMoney += coinValue;
+            if (canGive)
+            {
+                GlobalManager.playerMoney += coinValue;
+            }
+            canGive = false;
             Destroy(gameObject);
         }
     }

@@ -17,7 +17,7 @@ public class CheckPointScript : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("PlayerTrigger"))
+        if (collision.CompareTag("PlayerTrigger") || collision.CompareTag("Player"))
         {
             GlobalManager.playerCheckpointPosition = transform.position;
             image.color = Color.green;

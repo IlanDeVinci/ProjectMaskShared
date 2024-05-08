@@ -11,6 +11,7 @@ public class HealthManager : MonoBehaviour
     [SerializeField] private int maxHealth;
     [SerializeField] private int totalLives;
     [SerializeField] private HeroEntity hero;
+    [SerializeField] private int damageMultiplier = 1;
 
     public int currentHealth;
     public int currentLives;
@@ -19,6 +20,7 @@ public class HealthManager : MonoBehaviour
     {
         currentHealth = maxHealth;
         currentLives = totalLives;
+        healthSlider = GameObject.FindGameObjectWithTag("HPSlider").GetComponent<Slider>();
         healthSlider.value = currentHealth / maxHealth;
     }
 
@@ -37,9 +39,18 @@ public class HealthManager : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        Tween.Custom(startValue: currentHealth, endValue: currentHealth - damage, duration: 1, ease: Ease.OutSine,
+        if (GlobalManager.isPlayerClairvoyant)
+        {
+            damage = maxHealth / 2;
+        }
+        else
+        {
+            damageMultiplier = 1;
+        }
+
+        Tween.Custom(startValue: currentHealth, endValue: currentHealth - (damage*damageMultiplier), duration: 1, ease: Ease.OutSine,
             onValueChange: newVal => healthSlider.value = newVal / maxHealth);
 
-        currentHealth -= damage;
+        currentHealth -= damage * damageMultiplier;
     }
 }

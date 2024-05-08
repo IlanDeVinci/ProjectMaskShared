@@ -80,20 +80,24 @@ public class KnifePrefab : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        speedTween.Stop();
-
-        hasHitTarget = true;
-        rb.gravityScale = 0;
-        //rb.velocity = new Vector2(knifeSpeed / 10, 0);
-        Tween.PositionX(rb.transform, rb.position.x + knifeSpeed, 0.2f);
-        if (!isGone)
+        if (!collision.collider.CompareTag("Player") && !collision.collider.CompareTag("PlayerTrigger") && !collision.collider.CompareTag("Player"))
         {
-            isGone = true;
-            Destroy(boxCollider);
-            rb.velocity = Vector2.zero;
-            Tween.Alpha(sprite, 0, 0.5f, Ease.OutSine);
-            Destroy(gameObject, 1);
+            speedTween.Stop();
+
+            hasHitTarget = true;
+            rb.gravityScale = 0;
+            //rb.velocity = new Vector2(knifeSpeed / 10, 0);
+            Tween.PositionX(rb.transform, rb.position.x + knifeSpeed, 0.2f);
+            if (!isGone)
+            {
+                isGone = true;
+                Destroy(boxCollider);
+                rb.velocity = Vector2.zero;
+                Tween.Alpha(sprite, 0, 0.5f, Ease.OutSine);
+                Destroy(gameObject, 1);
+            }
         }
+      
 
     }
 

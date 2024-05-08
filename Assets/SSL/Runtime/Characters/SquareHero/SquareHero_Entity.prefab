@@ -1053,6 +1053,102 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6136577610204515477}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6570170768439718791
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3299704471641658454}
+  - component: {fileID: 520926627305205705}
+  - component: {fileID: 4306333400840394705}
+  m_Layer: 8
+  m_Name: Trigger
+  m_TagString: PlayerTrigger
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3299704471641658454
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6570170768439718791}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 182482925853841835}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &520926627305205705
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6570170768439718791}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &4306333400840394705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6570170768439718791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f65b01bc707549c4e8bd67533c57beee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSlider: {fileID: 0}
+  maxHealth: 200
+  totalLives: 3
+  hero: {fileID: 6480041685457909243}
+  currentHealth: 200
+  currentLives: 3
 --- !u!1 &6690839856867164257
 GameObject:
   m_ObjectHideFlags: 0
@@ -1102,11 +1198,11 @@ GameObject:
   - component: {fileID: 6480041685457909243}
   - component: {fileID: 3950254860742165989}
   - component: {fileID: 7858150932034380112}
-  - component: {fileID: -6790622949921503499}
   - component: {fileID: 2806336499299617774}
+  - component: {fileID: 3037540308149665565}
   m_Layer: 8
   m_Name: SquareHero_Entity
-  m_TagString: PlayerTrigger
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1132,6 +1228,7 @@ Transform:
   - {fileID: 1284743360166003301}
   - {fileID: 178220796219243274}
   - {fileID: 8457247328848889780}
+  - {fileID: 3299704471641658454}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &7212136366118121974
@@ -1339,7 +1436,7 @@ MonoBehaviour:
   isPlayerVisible: 1
   _guiDebug: 1
   isPaused: 0
-  healthManager: {fileID: -6790622949921503499}
+  healthManager: {fileID: 4306333400840394705}
 --- !u!114 &3950254860742165989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1369,24 +1466,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adb9ab15fab31964d84d4ff0d0d1a3af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-6790622949921503499
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6771865885331362632}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f65b01bc707549c4e8bd67533c57beee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthSlider: {fileID: 0}
-  maxHealth: 200
-  totalLives: 3
-  hero: {fileID: 6480041685457909243}
-  currentHealth: 0
-  currentLives: 0
 --- !u!61 &2806336499299617774
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1394,7 +1473,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6771865885331362632}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -1432,6 +1511,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &3037540308149665565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6771865885331362632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4715c1c3acc3a744b0dc74e2a30b083, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentMask: 0
+  invisibilityCooldown: 4
+  invisibilityDuration: 2
+  visuals: {fileID: 3058921478872825897}
+  hero: {fileID: 6570170768439718791}
+  cooldownSlider: {fileID: 0}
 --- !u!1 &8032715401077901592
 GameObject:
   m_ObjectHideFlags: 0

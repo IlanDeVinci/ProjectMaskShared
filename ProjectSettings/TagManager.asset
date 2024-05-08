@@ -11,6 +11,9 @@ TagManager:
   - EnemyBullet
   - CameraTrigger
   - PlayerTrigger
+  - MaskSlider
+  - MaskImage
+  - HPSlider
   layers:
   - Default
   - TransparentFX

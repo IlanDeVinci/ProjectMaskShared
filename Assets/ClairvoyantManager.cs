@@ -50,6 +50,16 @@ public class ClairvoyantManager : MonoBehaviour
         foreach (GameObject obj in clairvoyantObjects)
         {
             obj.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, alpha);
+            if(obj.GetComponent<Collider2D>() != null)
+            {
+                if (GlobalManager.isPlayerClairvoyant)
+                {
+                    obj.GetComponent<Collider2D>().enabled = true;
+                } else
+                {
+                    obj.GetComponent<Collider2D>().enabled = false;
+                }
+            }
         }
     }
 }

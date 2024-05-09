@@ -10,7 +10,7 @@ public class CoinEntity : MonoBehaviour
     private bool canGive = true;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("PlayerTrigger"))
+        if (collision.CompareTag("PlayerTrigger") ||collision.CompareTag("Player"))
         {
             if (canGive)
             {

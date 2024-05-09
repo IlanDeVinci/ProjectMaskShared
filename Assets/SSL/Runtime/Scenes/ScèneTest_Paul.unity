@@ -338,7 +338,7 @@ MonoBehaviour:
   _movementsSettings:
     IsEnemyDumb: 1
     _Speed: 5
-    _jumpSpeed: 10
+    _jumpSpeed: 7
     _jumpDuration: 0.2
   _fallSettings:
     fallGravity: 20

@@ -53,19 +53,26 @@ public class EnemyEntity : MonoBehaviour
         _ApplyGroundDetection();
         _ApplyWallLeftDetection();
         _ApplyWallRightDetection();
-        if (!IsEnemyTouchingGround)
+        if (!_movementsSettings.IsEnemyDumb)
         {
-            _ApplyFallGravity(_fallSettings);
+            if (!IsEnemyTouchingGround)
+            {
+                _ApplyFallGravity(_fallSettings);
+            }
+            else if(!isJumping)
+            {
+                _ResetVerticalSpeed();
+            }
+            if (IsPlayerDetected)
+            {
+                _FollowPlayer();
+            }
+            else{
+                _ApplyOrientDirX();
+            }
         }
-        else if(!isJumping)
+        else
         {
-            _ResetVerticalSpeed();
-        }
-        if (IsPlayerDetected)
-        {
-            _FollowPlayer();
-        }
-        else{
             _ApplyOrientDirX();
         }
         _ApplyHorizontalSpeed();

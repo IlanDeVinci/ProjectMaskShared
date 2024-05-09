@@ -12,7 +12,7 @@ public class FlyingEnemyRaycasts : MonoBehaviour
     {
 
         RaycastHit2D hitResult = Physics2D.Raycast(
-            detectionPoint.position,
+            pos.position,
             Vector2.down,
             10,
             _groundLayerMask

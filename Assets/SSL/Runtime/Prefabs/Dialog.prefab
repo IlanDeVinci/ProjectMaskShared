@@ -174,7 +174,7 @@ GameObject:
   - component: {fileID: 1815661282916013815}
   - component: {fileID: 7637299896026569348}
   - component: {fileID: 2073774461481889699}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Dialog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -350,7 +350,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6363927190516724755}
   - component: {fileID: 4862014750779280165}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: DialogAudio
   m_TagString: Untagged
   m_Icon: {fileID: 0}

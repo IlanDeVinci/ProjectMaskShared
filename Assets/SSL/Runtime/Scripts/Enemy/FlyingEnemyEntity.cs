@@ -1,13 +1,12 @@
 using PrimeTween;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class FlyingEnemyEntity : MonoBehaviour
 {
     [SerializeField] private FlyingEnemyMovementSettings movementSettings;
     [SerializeField] private FlyingEnemyRaycasts raycasts;
+    [SerializeField] protected FlyingEnemyLaser flyingLaser;
     [SerializeField] private float detectionRange;
 
     private bool canMove = true;
@@ -18,98 +17,223 @@ public class FlyingEnemyEntity : MonoBehaviour
     private Tween oscillationTween;
     [SerializeField] private TweenSettings settingsTween;
     private float oscillation = 0;
-    private float maxOscillation = 2;
+    [SerializeField] private float maxOscillation = 2;
     private Vector2 posWithoutOscillation;
-    private Transform posWithoutOscillationTransform;
+    [SerializeField] private Transform posWithoutOscillationTransform;
     private Transform target;
     private bool canOscillate = false;
     private Vector2 direction;
     private RaycastHit2D raycastHit2D;
+    private float shootTime = 0;
+    private bool hasPutAwayGun = false;
+    Tween putGunAwayx;
+    Tween putGunAwayy;
+    private Vector2 velocity;
+    public bool isShooting = false;
+    [SerializeField] private float fireRate = 0.5f;
     [SerializeField] private Transform gun;
     [SerializeField] private LayerMask player;
 
     // Start is called before the first frame update
     void Start()
     {
-        posWithoutOscillationTransform = transform;
         posWithoutOscillation = transform.position;
         target = GameObject.FindGameObjectWithTag("PlayerTrigger").transform;
-        oscillationTween = Tween.Custom(startValue: oscillation, endValue: maxOscillation, settings: settingsTween, onValueChange: val => oscillation = val);
+        oscillationTween = Tween.Custom(startValue: 0, endValue: maxOscillation, settings: settingsTween, onValueChange: val => oscillation = val);
 
     }
 
+    private void ResetOscillation()
+    {
+        if (oscillationTween.isAlive)
+        {
+            oscillationTween.Stop();
+        }
+        oscillation = 0;
+        oscillationTween = Tween.Custom(startValue: 0, endValue: maxOscillation, settings: settingsTween, onValueChange: val => oscillation = val);
+    }
     private void DoIdle()
     {
-        Vector2 newPos = posWithoutOscillation;
-        
-        if(distanceToGround < movementSettings.minHeight || distanceToGround > movementSettings.maxHeight)
+
+        float newPos = posWithoutOscillation.y;
+
+        if (distanceToGround < movementSettings.minHeight || distanceToGround > movementSettings.maxHeight)
         {
-            canOscillate = false;
             oscillationTween.isPaused = true;
             if (distanceToGround < movementSettings.minHeight)
             {
-                newPos.y += movementSettings.moveSpeed * Time.deltaTime;
+                newPos += movementSettings.moveSpeedy * Time.deltaTime;
             }
             if (distanceToGround > movementSettings.maxHeight)
             {
-                newPos.y -= movementSettings.moveSpeed * Time.deltaTime;
+                newPos -= movementSettings.moveSpeedy * Time.deltaTime;
             }
         }
         else
         {
-            canOscillate = true;    
+
             oscillationTween.isPaused = false;
         }
 
-        
-        posWithoutOscillation = newPos;
-        if(canOscillate)
+        posWithoutOscillation = new Vector2(transform.position.x, newPos);
+        //if (canOscillate)
+
+        //if(canOscillate)
         {
-            newPos.y += oscillation;
+            newPos += oscillation;
         }
-        transform.position = newPos;
-        
+
+        transform.position = new Vector2(transform.position.x, newPos);
     }
     private void LocatePlayer()
     {
 
         Vector2 targetPos = target.position;
-        direction = targetPos - (Vector2)transform.position;
+        direction = targetPos - (Vector2)posWithoutOscillation;
         direction.Normalize();
-        raycastHit2D = Physics2D.Raycast(transform.position, direction, detectionRange, player);
+        raycastHit2D = Physics2D.Raycast(posWithoutOscillation, direction, detectionRange, player);
         if (raycastHit2D.collider != null)
         {
+            if (raycastHit2D.collider.gameObject.CompareTag("PlayerTrigger"))
+            {
+                if (!isPlayerDetected)
+                {
+                    shootTime = Time.time + 1f/fireRate;
+                    velocity = Vector2.zero;
+                    posWithoutOscillation = transform.position;
+                    isPlayerDetected = true;
+                    oscillationTween.isPaused = false;
+
+                }
+            }
+            else
+            {
+                if (isPlayerDetected)
+                {
+                    isPlayerDetected = false;
+                    ResetOscillation();
+                }
+            }
+        }
+        else
+        {
+            if (isPlayerDetected)
+            {
+                ResetOscillation();
+                isPlayerDetected = false;
+            }
+        }
+        if (isPlayerDetected)
+        {
+
+            hasPutAwayGun = false;
+            if (putGunAwayx.isAlive)
+            {
+                putGunAwayx.Stop();
+            }
+            if (putGunAwayy.isAlive)
+            {
+                putGunAwayy.Stop();
+            }
+            if(!isShooting) gun.transform.up = -direction;
+            if (Time.time > shootTime)
+            {
+                shootTime = Time.time + 1f / fireRate;
+                Shoot();
+            }
+        }
+        else
+        {
+            if (!isShooting)
+            {
+                flyingLaser.HideLaser();
+            }
+        }
+    }
+
+    private void Shoot()
+    {
+        isShooting = true;
+        flyingLaser.ShootLaser(transform.position,target.position);
+    }
+
+    private void FollowPlayer()
+    {
+        Debug.Log($"right {distanceToRight}");
+        Debug.Log($"left {distanceToLeft}");
+
+        Vector2 posToFollowAt = target.position;
+        if (!isShooting)
+        {
+            if (direction.x > 0)
+            {
+                posToFollowAt.y += 3.5f + oscillation;
+                posToFollowAt.x -= 5f;
+                if (distanceToLeft < 2.5f)
+                {
+                    posToFollowAt.x = transform.position.x;
+                }
+                transform.position = Vector2.SmoothDamp(transform.position, posToFollowAt, ref velocity, 0.4f, movementSettings.moveSpeedx * Time.deltaTime);
+            }
+            else
+            {
+                posToFollowAt.y += 3.5f + oscillation;
+                posToFollowAt.x += 5f;
+                if (distanceToRight < 2.5f)
+                {
+                    posToFollowAt.x = transform.position.x;
+                }
+
+                transform.position = Vector2.SmoothDamp(transform.position, posToFollowAt, ref velocity, 0.4f, movementSettings.moveSpeedx * Time.deltaTime);
+            }
+            posWithoutOscillation = transform.position;
+
+            flyingLaser.LaserPointer(target.position);
         }
     }
     // Update is called once per frame
     void FixedUpdate()
     {
         LocatePlayer();
-        posWithoutOscillationTransform.position = posWithoutOscillation;
-        /*
-        if (oscillationUp)
+        if (!isPlayerDetected)
         {
-            oscillation += Time.deltaTime;
-            if (oscillation >= maxOscillation) 
-            {
-            oscillationUp = false;
-            }
+            DoIdle();
         }
-        else
-        {
-            oscillation -= Time.deltaTime;
-            if (oscillation <= -maxOscillation)
-            {
-                oscillationUp = true;
-            }
-        }
-        */
         if (canMove)
         {
-            if(!isPlayerDetected)
+            if (isPlayerDetected)
             {
-                DoIdle();
+                FollowPlayer();
             }
+            else if (!hasPutAwayGun)
+            {
+                ResetOscillation();
+
+                if (!isShooting)
+                {
+                    StartCoroutine(PutAwayGun());
+                    hasPutAwayGun = true;
+                }
+
+            }
+        }
+        posWithoutOscillationTransform.position = posWithoutOscillation;
+
+
+
+
+    }
+
+    private IEnumerator PutAwayGun()
+    {
+        float x = gun.transform.up.x;
+        float y = gun.transform.up.y;
+        putGunAwayx = Tween.Custom(startValue: gun.transform.up.x, endValue: 0, duration: 1, ease: Ease.OutSine, onValueChange: val => x = val);
+        putGunAwayy = Tween.Custom(startValue: gun.transform.up.y, endValue: 1, duration: 1, ease: Ease.OutSine, onValueChange: val => y = val);
+        while (putGunAwayx.isAlive && putGunAwayy.isAlive)
+        {
+            gun.transform.up = new Vector3(x, y, 0);
+            yield return new WaitForEndOfFrame();
         }
     }
 
@@ -119,6 +243,7 @@ public class FlyingEnemyEntity : MonoBehaviour
         GUILayout.Label($"NO OSCILL {posWithoutOscillation.y}");
         GUILayout.Label($"WITH OSCILL {transform.position.y}");
         GUILayout.Label($"CAN OSCILL {canOscillate}");
+        GUILayout.Label($"oscillation {oscillation}");
 
         GUILayout.EndHorizontal();
 

@@ -90,7 +90,7 @@ public class TurretScript : MonoBehaviour
         //Gizmos.DrawLine(transform.position, target.position);
     }
 
-    
+    /*
     private void OnGUI()
     {
         GUILayout.BeginVertical(GUI.skin.box);
@@ -103,4 +103,5 @@ public class TurretScript : MonoBehaviour
         GUILayout.EndVertical();
 
     }
+    */
 }

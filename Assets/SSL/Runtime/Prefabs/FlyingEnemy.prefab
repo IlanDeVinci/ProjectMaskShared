@@ -10098,6 +10098,8 @@ MonoBehaviour:
   player:
     serializedVersion: 2
     m_Bits: 448
+  followOffsetX: 3.5
+  followOffsetY: 2.5
 --- !u!114 &3106870018358494465
 MonoBehaviour:
   m_ObjectHideFlags: 0

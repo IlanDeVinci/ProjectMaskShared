@@ -26,7 +26,6 @@ public class LaserLightScript : MonoBehaviour
     {
         Sequence sequence = Sequence.Create().Group(Tween.Custom(color, Color.clear, duration, startDelay: delay, onValueChange: val => { 
             _light.color = val;
-            Debug.Log(val);
         })
             .Group(Tween.Custom(0, radius, duration, startDelay: delay, onValueChange: val => _light.pointLightOuterRadius = val)
             .Group(Tween.Custom(0, intensity, duration, startDelay: delay, onValueChange: val => _light.intensity = val).Chain(Tween.Custom(_light.intensity, 0, 0.5f, startDelay: delay, onValueChange: val => _light.intensity = val))))

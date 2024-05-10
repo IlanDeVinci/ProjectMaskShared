@@ -108,6 +108,7 @@ MonoBehaviour:
   boxCollider: {fileID: 2127123678290574466}
   angular: 10
   knifeSpeed: 0
+  isRight: 0
   rotationSettings:
     startFromCurrent: 0
     startValue: {x: 0, y: 0, z: 0, w: 0}
@@ -162,7 +163,7 @@ Rigidbody2D:
   m_LinearDrag: 0.2
   m_AngularDrag: 0
   m_GravityScale: 0.5
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 3aa90e189c58491468a67afb3329e400, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -188,7 +189,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 3328
+    m_Bits: 3840
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2

@@ -5,7 +5,6 @@ using PrimeTween;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using static GlobalUpgrades;
 
 public class HealthManager : MonoBehaviour
 {
@@ -19,21 +18,27 @@ public class HealthManager : MonoBehaviour
     public int currentHealth;
     public int currentLives;
 
-    private void Awake()
+    private void Start()
     {
         currentLives = totalLives;
         healthSlider = GameObject.FindGameObjectWithTag("HPSlider").GetComponent<Slider>();
         var upgrade = GlobalUpgrades.Instance.Upgrades.Find(x => x.upgradeType == GlobalUpgrades.UpgradeType.Hp);
-        maxHealth = upgrade.upgradesList[upgrade.upgradeLevel].upgradeValue;
+        maxHealth = (int)upgrade.upgradesList[upgrade.upgradeLevel].upgradeValue;
         currentHealth = maxHealth;
 
         healthSlider.value = currentHealth / maxHealth;
     }
 
+    public void Reload()
+    {
+        currentHealth = maxHealth;
+        healthSlider.value = 1;
+    }
+
     private void Update()
     {
         var upgrade = GlobalUpgrades.Instance.Upgrades.Find(x => x.upgradeType == GlobalUpgrades.UpgradeType.Hp);
-        int newHealth = upgrade.upgradesList[upgrade.upgradeLevel].upgradeValue;
+        int newHealth = (int)upgrade.upgradesList[upgrade.upgradeLevel].upgradeValue;
         if(newHealth != maxHealth)
         {
             Tween.Custom(startValue: currentHealth, endValue: currentHealth + newHealth - maxHealth, duration: 1, ease: Ease.OutSine,
@@ -64,7 +69,7 @@ onValueChange: newVal => healthSlider.value = newVal / maxHealth);
         if (GlobalManager.isPlayerClairvoyant)
         {
             var upgrade = GlobalUpgrades.Instance.Upgrades.Find(x => x.upgradeType == GlobalUpgrades.UpgradeType.Resistance);
-            int resistance = upgrade.upgradesList[upgrade.upgradeLevel].upgradeValue;
+            int resistance = (int)upgrade.upgradesList[upgrade.upgradeLevel].upgradeValue;
             damage = maxHealth / resistance;
             damageMultiplier = 1;
         }

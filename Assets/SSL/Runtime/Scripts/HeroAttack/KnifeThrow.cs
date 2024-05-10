@@ -11,6 +11,7 @@ public class KnifeThrow : MonoBehaviour
     [SerializeField] private float reloadtime = 0.5f;
     [SerializeField] private float offsetx = 0;
     [SerializeField] private float offsety = 0;
+    private int doubleDouble = 1;
 
     private bool isReloading = false;
     private float shootTime = 0f;
@@ -24,7 +25,7 @@ public class KnifeThrow : MonoBehaviour
         speed = upgrade.upgradesList[upgrade.upgradeLevel].upgradeValue;
         if (isReloading == false)
         {
-            for(int i = 0; i < 1; i++)
+            for(int i = 0; i < doubleDouble; i++)
             {
                 shootTime = 0f;
                 isReloading = true;
@@ -33,7 +34,7 @@ public class KnifeThrow : MonoBehaviour
                 float launchHeight = (float)random.NextDouble() + 1;
                 if (orientx > 0)
                 {
-                    launchPos = new Vector2(transform.position.x + offsetx, transform.position.y + offsety);
+                    launchPos = new Vector2(transform.position.x + offsetx, transform.position.y + offsety + (float)i / 2f);
 
                     savedProjectile = Instantiate(projectile, launchPos, Quaternion.identity);
                     savedProjectile.GetComponent<Rigidbody2D>().velocity = new Vector2(launchSpeed, launchHeight);
@@ -42,7 +43,7 @@ public class KnifeThrow : MonoBehaviour
                 }
                 else
                 {
-                    launchPos = new Vector2(transform.position.x - offsetx, transform.position.y + offsety);
+                    launchPos = new Vector2(transform.position.x - offsetx, transform.position.y + offsety + (float)i/2f);
 
                     savedProjectile = Instantiate(projectile, launchPos, Quaternion.identity);
                     savedProjectile.GetComponent<Rigidbody2D>().velocity = new Vector2(-launchSpeed, launchHeight);
@@ -63,6 +64,8 @@ public class KnifeThrow : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        var upgrade = GlobalUpgrades.Instance.Upgrades.Find(x => x.upgradeType == GlobalUpgrades.UpgradeType.DoubleKnife);
+        doubleDouble = (int)upgrade.upgradesList[upgrade.upgradeLevel].upgradeValue;
         shootTime += Time.deltaTime;
         if (shootTime > reloadtime)
         {

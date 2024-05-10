@@ -6,7 +6,8 @@ public class FlyingEnemyEntity : MonoBehaviour
 {
     [SerializeField] private FlyingEnemyMovementSettings movementSettings;
     [SerializeField] private FlyingEnemyRaycasts raycasts;
-    [SerializeField] protected FlyingEnemyLaser flyingLaser;
+    [SerializeField] private FlyingEnemyLaser flyingLaser;
+    [SerializeField] private EnemyHealthManager healthManager;
     [SerializeField] private float detectionRange;
 
     private bool canMove = true;
@@ -199,7 +200,11 @@ public class FlyingEnemyEntity : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (!GlobalManager.isGamePaused)
+        if(healthManager.currentHealth <= 0)
+        {
+            Destroy(flyingLaser);
+        }
+        if (!GlobalManager.isGamePaused && healthManager.currentHealth >= 0)
         {
             LocatePlayer();
             if (!isPlayerDetected)

@@ -895,7 +895,7 @@ GameObject:
   - component: {fileID: 178220796219243274}
   - component: {fileID: 7882692256784899649}
   - component: {fileID: 3440845983714276190}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CameraTriggerTarget
   m_TagString: CameraTriggerTarget
   m_Icon: {fileID: 0}
@@ -1533,7 +1533,11 @@ MonoBehaviour:
   hero: {fileID: 6570170768439718791}
   cooldownSlider: {fileID: 0}
   maskImage: {fileID: 0}
-  spriteList: []
+  spriteList:
+  - {fileID: 21300000, guid: e5e99f7e3279a5c47985cc1e6f3eb76a, type: 3}
+  - {fileID: 21300000, guid: 0e83bfb56894445488729078b654c37f, type: 3}
+  - {fileID: 21300000, guid: 0c28a1fd5e29fe044bb09760e753f0a5, type: 3}
+  doubleDouble: 0
 --- !u!1 &7665817120985935036
 GameObject:
   m_ObjectHideFlags: 0
@@ -1626,13 +1630,13 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.29126242
-        value: 0.7949164
-        inSlope: -2.6040595
-        outSlope: -2.6040595
+        time: 0.7531423
+        value: 0.5151621
+        inSlope: -2.0592241
+        outSlope: -2.0592241
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.29020792
+        inWeight: 0.16911279
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1

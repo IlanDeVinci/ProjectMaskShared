@@ -104,7 +104,8 @@ public class FlyingEnemyLaser : MonoBehaviour
         tween = Tween.Custom(m_Laser.widthMultiplier, 15, 0.2f, ease: Ease.InSine, onValueChange: val => m_Laser.widthMultiplier = val);
         yield return tween.ToYieldInstruction();
         RaycastHit2D raycastHit = Physics2D.CircleCast(origin.position, 0.5f, direction, 1000, player);
-        particle.transform.position = new Vector2(final.point.x, final.point.y + 0.3f);
+        particle.transform.position = new Vector2(final.point.x, final.point.y);
+        particle.transform.up = -direction;
         particle.Play();
         if (raycastHit.collider != null)
         {

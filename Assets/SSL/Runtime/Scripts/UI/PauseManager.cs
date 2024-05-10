@@ -12,6 +12,7 @@ public class PauseManager : MonoBehaviour
     [SerializeField] private GameObject panel;
     [SerializeField] private GameObject upgradeTree;
     [SerializeField] private Image fade;
+    [SerializeField] private GameObject player;
 
     private Tween tween;
 
@@ -46,7 +47,10 @@ public class PauseManager : MonoBehaviour
     {
         FadeIn();
         yield return new WaitForSeconds(1);
-        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
+        player.SetActive(true);
+        player.GetComponent<HeroEntity>().Reload();
+        FadeOut();
+        panel.SetActive(false);
     }
     private IEnumerator Pause()
     {

@@ -47,8 +47,8 @@ MonoBehaviour:
   Upgrades:
   - upgradeId: 0
     isUpgradeAcquiredFull: 0
-    upgradeName: First
-    upgradeDescription: Omg !!!!!
+    upgradeName: Masque
+    upgradeDescription: "Permet d'\xE9quiper les masques."
     column: 0
     row: 2
     upgradeType: 0
@@ -60,158 +60,217 @@ MonoBehaviour:
       upgradeValue: 0
     - isUpgradeAcquired: 0
       upgradeCost: 10
-      upgradeValue: 0
-    - isUpgradeAcquired: 0
-      upgradeCost: 10
-      upgradeValue: 0
+      upgradeValue: 1
     upgradeLevel: 0
   - upgradeId: 1
     isUpgradeAcquiredFull: 0
-    upgradeName: Second
-    upgradeDescription: Omg !!!!!
+    upgradeName: "D\xE9gats"
+    upgradeDescription: "Augmente les d\xE9g\xE2ts de couteaux \xE0 value !"
     column: 1
     row: 0
-    upgradeType: 0
+    upgradeType: 1
     thresholdToUnlockNext: 2
     previousUpgradeId: 0
     upgradesList:
     - isUpgradeAcquired: 0
       upgradeCost: 10
-      upgradeValue: 0
+      upgradeValue: 5
     - isUpgradeAcquired: 0
       upgradeCost: 10
-      upgradeValue: 0
+      upgradeValue: 7
     - isUpgradeAcquired: 0
-      upgradeCost: 10
-      upgradeValue: 0
+      upgradeCost: 20
+      upgradeValue: 9
+    - isUpgradeAcquired: 0
+      upgradeCost: 30
+      upgradeValue: 12
     upgradeLevel: 0
   - upgradeId: 2
     isUpgradeAcquiredFull: 0
-    upgradeName: Second bis
-    upgradeDescription: Omg !!!!!
+    upgradeName: Points de Vie
+    upgradeDescription: Augmente les points de vie de increase !
     column: 1
     row: 2
-    upgradeType: 0
-    thresholdToUnlockNext: 1
+    upgradeType: 2
+    thresholdToUnlockNext: 2
     previousUpgradeId: 0
     upgradesList:
     - isUpgradeAcquired: 0
       upgradeCost: 10
-      upgradeValue: 0
+      upgradeValue: 100
     - isUpgradeAcquired: 0
       upgradeCost: 10
-      upgradeValue: 0
+      upgradeValue: 130
+    - isUpgradeAcquired: 0
+      upgradeCost: 20
+      upgradeValue: 160
+    - isUpgradeAcquired: 0
+      upgradeCost: 35
+      upgradeValue: 200
     upgradeLevel: 0
   - upgradeId: 3
     isUpgradeAcquiredFull: 0
-    upgradeName: Second bisbis
-    upgradeDescription: Omg !!!!!
+    upgradeName: "Dur\xE9e d'invisibilit\xE9"
+    upgradeDescription: "Augmente la dur\xE9e d'invisibilit\xE9 de increase ! "
     column: 1
     row: 4
-    upgradeType: 0
-    thresholdToUnlockNext: 3
+    upgradeType: 3
+    thresholdToUnlockNext: 2
     previousUpgradeId: 0
     upgradesList:
     - isUpgradeAcquired: 0
       upgradeCost: 0
-      upgradeValue: 0
+      upgradeValue: 2
     - isUpgradeAcquired: 0
-      upgradeCost: 0
-      upgradeValue: 0
+      upgradeCost: 10
+      upgradeValue: 4
     - isUpgradeAcquired: 0
-      upgradeCost: 0
-      upgradeValue: 0
+      upgradeCost: 15
+      upgradeValue: 6
     - isUpgradeAcquired: 0
-      upgradeCost: 0
-      upgradeValue: 0
-    - isUpgradeAcquired: 0
-      upgradeCost: 0
-      upgradeValue: 0
+      upgradeCost: 20
+      upgradeValue: 8
     upgradeLevel: 0
   - upgradeId: 4
     isUpgradeAcquiredFull: 0
-    upgradeName: 'Third !! '
-    upgradeDescription: Omg !!!!!
+    upgradeName: "Port\xE9e couteau"
+    upgradeDescription: "Augmente la port\xE9e du couteau de increase !"
     column: 2
     row: 0
-    upgradeType: 0
-    thresholdToUnlockNext: 2
+    upgradeType: 7
+    thresholdToUnlockNext: 3
     previousUpgradeId: 1
     upgradesList:
     - isUpgradeAcquired: 0
       upgradeCost: 0
-      upgradeValue: 0
+      upgradeValue: 11
     - isUpgradeAcquired: 0
-      upgradeCost: 0
-      upgradeValue: 0
+      upgradeCost: 20
+      upgradeValue: 14
+    - isUpgradeAcquired: 0
+      upgradeCost: 30
+      upgradeValue: 17
+    - isUpgradeAcquired: 0
+      upgradeCost: 35
+      upgradeValue: 20
     upgradeLevel: 0
   - upgradeId: 5
     isUpgradeAcquiredFull: 0
-    upgradeName: Third !! TWO
-    upgradeDescription: Omg !!!!!
+    upgradeName: Hauteur de Saut
+    upgradeDescription: Augmente la hauteur du saut !
     column: 2
     row: 1
-    upgradeType: 0
-    thresholdToUnlockNext: 4
+    upgradeType: 4
+    thresholdToUnlockNext: 2
     previousUpgradeId: 2
     upgradesList:
     - isUpgradeAcquired: 0
       upgradeCost: 0
-      upgradeValue: 0
+      upgradeValue: 0.7
     - isUpgradeAcquired: 0
-      upgradeCost: 0
-      upgradeValue: 0
+      upgradeCost: 20
+      upgradeValue: 1
+    - isUpgradeAcquired: 0
+      upgradeCost: 40
+      upgradeValue: 1.2
+    - isUpgradeAcquired: 0
+      upgradeCost: 60
+      upgradeValue: 1.4
     upgradeLevel: 0
   - upgradeId: 6
     isUpgradeAcquiredFull: 0
-    upgradeName: Third !! THREE
-    upgradeDescription: Omg !!!!!
+    upgradeName: Invisibility Cooldown
+    upgradeDescription: "R\xE9duit le cooldown d'invisibilit\xE9 de decrease secondes!"
     column: 2
     row: 2
-    upgradeType: 0
+    upgradeType: 5
     thresholdToUnlockNext: 2
     previousUpgradeId: 3
     upgradesList:
     - isUpgradeAcquired: 0
       upgradeCost: 0
-      upgradeValue: 0
+      upgradeValue: 8
     - isUpgradeAcquired: 0
-      upgradeCost: 0
-      upgradeValue: 0
+      upgradeCost: 30
+      upgradeValue: 7
+    - isUpgradeAcquired: 0
+      upgradeCost: 50
+      upgradeValue: 6
+    - isUpgradeAcquired: 0
+      upgradeCost: 70
+      upgradeValue: 5
     upgradeLevel: 0
   - upgradeId: 6
     isUpgradeAcquiredFull: 0
-    upgradeName: Third !! THREE
-    upgradeDescription: Omg !!!!!
+    upgradeName: "Couteaux per\xE7ants"
+    upgradeDescription: Permet aux couteaux de transpercer les ennemis !
     column: 3
-    row: 3
-    upgradeType: 0
+    row: 0
+    upgradeType: 10
     thresholdToUnlockNext: 1
-    previousUpgradeId: 5
+    previousUpgradeId: 4
     upgradesList:
     - isUpgradeAcquired: 0
       upgradeCost: 0
       upgradeValue: 0
     - isUpgradeAcquired: 0
-      upgradeCost: 0
-      upgradeValue: 0
+      upgradeCost: 80
+      upgradeValue: 1
     upgradeLevel: 0
   - upgradeId: 6
     isUpgradeAcquiredFull: 0
-    upgradeName: Third !! THREE
-    upgradeDescription: Omg !!!!!
+    upgradeName: Double Couteaux
+    upgradeDescription: "Permet de lancer deux couteaux \xE0 la fois !"
+    column: 3
+    row: 1
+    upgradeType: 8
+    thresholdToUnlockNext: 3
+    previousUpgradeId: 4
+    upgradesList:
+    - isUpgradeAcquired: 0
+      upgradeCost: 0
+      upgradeValue: 1
+    - isUpgradeAcquired: 0
+      upgradeCost: 100
+      upgradeValue: 2
+    upgradeLevel: 0
+  - upgradeId: 6
+    isUpgradeAcquiredFull: 0
+    upgradeName: "R\xE9sistance"
+    upgradeDescription: "Am\xE9liore la r\xE9sistance en portant le masque de clairvoyance."
+    column: 3
+    row: 4
+    upgradeType: 6
+    thresholdToUnlockNext: 2
+    previousUpgradeId: 6
+    upgradesList:
+    - isUpgradeAcquired: 0
+      upgradeCost: 0
+      upgradeValue: 2
+    - isUpgradeAcquired: 0
+      upgradeCost: 50
+      upgradeValue: 4
+    - isUpgradeAcquired: 0
+      upgradeCost: 100
+      upgradeValue: 6
+    upgradeLevel: 0
+  - upgradeId: 6
+    isUpgradeAcquiredFull: 0
+    upgradeName: "Double D\xE9gats"
+    upgradeDescription: "Double \xE0 nouveau les d\xE9g\xE2ts d'une attaque furtive
+      !"
     column: 3
     row: 5
-    upgradeType: 0
-    thresholdToUnlockNext: 3
+    upgradeType: 9
+    thresholdToUnlockNext: 1
     previousUpgradeId: 6
     upgradesList:
     - isUpgradeAcquired: 0
       upgradeCost: 0
       upgradeValue: 0
     - isUpgradeAcquired: 0
-      upgradeCost: 0
-      upgradeValue: 0
+      upgradeCost: 50
+      upgradeValue: 1
     upgradeLevel: 0
   rowNumber: 0
   columnNumber: 0

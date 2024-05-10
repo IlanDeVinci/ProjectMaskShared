@@ -14,6 +14,7 @@ public class EnemyHealthManager : MonoBehaviour
     [SerializeField] private GameObject entity;
     [SerializeField] private GameObject dmgText;
     [SerializeField] private SpriteRenderer[] spriteRenderers;
+    [SerializeField] private ParticleSystem particle;
     private bool hasDied = false;
 
     public int currentHealth;
@@ -31,6 +32,7 @@ public class EnemyHealthManager : MonoBehaviour
         hasDied = true;
         float alpha = 1.0f;
         Tween die = Tween.Custom(1, 0f, 1f, onValueChange: val => alpha = val);
+        particle.Play();
         while (die.isAlive)
         {
             foreach (SpriteRenderer spriteRenderer in spriteRenderers)
@@ -64,18 +66,11 @@ public class EnemyHealthManager : MonoBehaviour
     {
         var random = new System.Random();
         damage += random.Next((-damage / 5) - 1, (damage / 5) + 1);
-
-        if (GlobalManager.isNextHitDoubled)
-        {
-            GlobalManager.isNextHitDoubled = false;
-            damageMultiplier = 2;
-        }
-        else
+        damageMultiplier = 1 * GlobalManager.isNextHitDoubled;
+        if(damageMultiplier == 0)
         {
             damageMultiplier = 1;
         }
-        Debug.Log(damage);
-        Debug.Log(damageMultiplier);
 
         Tween.Custom(startValue: currentHealth, endValue: currentHealth - (damage * damageMultiplier), duration: 1, ease: Ease.OutSine,
             onValueChange: newVal => healthSlider.value = newVal / maxHealth);

@@ -30,6 +30,11 @@ public class DeathManager : MonoBehaviour
                 Tween.Alpha(deathPanelcanvas, 1, 1);
             }
         }
+        else
+        {
+            deathPanel.SetActive(false);
+            isOut = false;
+        }
 
     }
 

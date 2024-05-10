@@ -6,11 +6,12 @@ using UnityEngine.U2D;
 
 public class BulletScript : MonoBehaviour
 {
-
+    [SerializeField] private GameObject circle;
+    [SerializeField] private CircleCollider2D circleCollider;
     private bool isPaused = false;
     private Vector2 velocityBeforePause;
     private float gravityBeforePause;
-
+    [SerializeField] ParticleSystem particle;
     private float lifetime = 2;
     private float lifeTimer;
     private bool hasHitTarget = false;
@@ -68,7 +69,23 @@ public class BulletScript : MonoBehaviour
                     hasHitTarget = true;
                 }
             }
-            Destroy(this.gameObject, 0.01f);
+            /*
+            ContactPoint2D[] points = new ContactPoint2D[1];
+            collision.GetContacts(points);
+            foreach (ContactPoint2D contactPoint in points)
+            {
+                Debug.Log(contactPoint.ToString());
+            }
+            Vector3 normal = points[0].normal;
+            Vector3 vel = rb.velocity;
+            float angle = Vector3.Angle(vel,-normal);
+            */
+            particle.transform.up = -transform.up;
+            particle.Play();
+            Destroy(circle);
+            Destroy(circleCollider);
+            Destroy(rb);
+            Destroy(this.gameObject, 1);
 
         }
 

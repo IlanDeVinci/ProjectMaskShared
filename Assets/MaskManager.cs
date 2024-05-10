@@ -10,6 +10,7 @@ public class MaskManager : MonoBehaviour
     public Mask CurrentMask => _currentMask;
     public enum Mask
     {
+        None,
         Invisibility,
         Clairvoyance
     }
@@ -22,6 +23,8 @@ public class MaskManager : MonoBehaviour
     [SerializeField] private Slider cooldownSlider;
     [SerializeField] private Image maskImage;
     [SerializeField] private List<Sprite> spriteList;
+    [SerializeField] private bool doubleDouble = false;
+    private bool maskUnlocked = false;
 
     // Start is called before the first frame update
     private void Awake()
@@ -49,53 +52,88 @@ public class MaskManager : MonoBehaviour
         invisibilityCooldown = upgrade.upgradesList[upgrade.upgradeLevel].upgradeValue;
         var upgrade1 = GlobalUpgrades.Instance.Upgrades.Find(x => x.upgradeType == GlobalUpgrades.UpgradeType.InvisibilityTime);
         invisibilityDuration = upgrade1.upgradesList[upgrade1.upgradeLevel].upgradeValue;
+        var upgrade2 = GlobalUpgrades.Instance.Upgrades.Find(x => x.upgradeType == GlobalUpgrades.UpgradeType.DoubleDamage);
+        if(upgrade2.upgradesList[upgrade2.upgradeLevel].upgradeValue == 1)
+        {
+            doubleDouble = true;
+        }
+        else
+        {
+            doubleDouble = false;
+        }
+        var upgrade3 = GlobalUpgrades.Instance.Upgrades.Find(x => x.upgradeType == GlobalUpgrades.UpgradeType.CanEquipMask);
+        if (upgrade3.upgradesList[upgrade3.upgradeLevel].upgradeValue == 1)
+        {
+            maskUnlocked = true;
+        }
+        else
+        {
+            maskUnlocked = false;
+            maskImage.sprite = spriteList[0];
+            _currentMask = Mask.None;
+        }
+
 
         cooldownSlider.value = currentInvisibilityTime/invisibilityCooldown;
-        if (Input.GetKeyDown(KeyCode.H))
+        if(maskUnlocked)
         {
-            switch(_currentMask)
+            if (Input.GetKeyDown(KeyCode.H))
             {
-                case Mask.Invisibility:
-                    GlobalManager.isPlayerClairvoyant = true;
-                    _currentMask = Mask.Clairvoyance;
-                    maskImage.sprite = spriteList[0];
-                    break;
-                case Mask.Clairvoyance:
-                    GlobalManager.isPlayerClairvoyant = false;
-                    _currentMask = Mask.Invisibility;
-                    maskImage.sprite = spriteList[1];
-                    break;
+                switch (_currentMask)
+                {
+                    case Mask.None:
+                        _currentMask = Mask.Invisibility;
+                        maskImage.sprite = spriteList[2];
+
+                        break;
+                    case Mask.Invisibility:
+                        _currentMask = Mask.Clairvoyance;
+                        maskImage.sprite = spriteList[1];
+                        break;
+                    case Mask.Clairvoyance:
+                        _currentMask = Mask.None;
+                        maskImage.sprite = spriteList[0];
+                        break;
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.G))
+            {
+                switch (_currentMask)
+                {
+                    case Mask.Invisibility:
+                        if (currentInvisibilityTime > invisibilityCooldown)
+                        {
+                            GlobalManager.isNextHitDoubled = 2;
+                            if (doubleDouble) GlobalManager.isNextHitDoubled = 4;
+                            currentInvisibilityTime = 0;
+                            Debug.Log("a");
+                            SetAlpha(0.3f);
+                            hero.tag = "Player";
+
+                        }
+                        break;
+                    case Mask.Clairvoyance:
+                        break;
+                }
+            }
+            currentInvisibilityTime += Time.deltaTime;
+            if (currentInvisibilityTime > invisibilityDuration)
+            {
+                SetAlpha(1.0f);
+                hero.tag = "PlayerTrigger";
+                GlobalManager.isNextHitDoubled = 1;
+
+            }
+            if (_currentMask == Mask.Clairvoyance)
+            {
+                GlobalManager.isPlayerClairvoyant = true;
+            }
+            else
+            {
+                GlobalManager.isPlayerClairvoyant = false;
+
             }
         }
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            GlobalManager.isPlayerClairvoyant = false;
 
-            switch (_currentMask)
-            {
-                case Mask.Invisibility:
-                    if(currentInvisibilityTime > invisibilityCooldown)
-                    {
-                        GlobalManager.isNextHitDoubled = true;
-                        currentInvisibilityTime = 0;
-                        Debug.Log("a");
-                        SetAlpha(0.3f);
-                        hero.tag = "Player";
-
-                    }
-                    break;
-                case Mask.Clairvoyance:
-                    GlobalManager.isPlayerClairvoyant = true;
-                    break;
-            }
-        }
-        currentInvisibilityTime += Time.deltaTime;
-        if(currentInvisibilityTime > invisibilityDuration)
-        {
-            SetAlpha(1.0f);
-            hero.tag = "PlayerTrigger";
-            GlobalManager.isNextHitDoubled = false;
-
-        }
     }
 }

@@ -16,7 +16,6 @@ public class KnifePrefab : MonoBehaviour
     private bool hasHitTarget;
     public float knifeSpeed;
     private Tween speedTween;
-    private float rotationAmount;
     public bool isRight;
     [SerializeField] private TweenSettings<Quaternion> rotationSettings;
     [SerializeField] private TweenSettings<Quaternion> rotationSettingsBack;
@@ -30,10 +29,6 @@ public class KnifePrefab : MonoBehaviour
     {
         lifeTimer = 0f;
         hasHitTarget = false;
-        rotationAmount = 0f;
-
-        
-
     }
 
 
@@ -41,7 +36,12 @@ public class KnifePrefab : MonoBehaviour
     private void Start()
     {
         var upgrade = GlobalUpgrades.Instance.Upgrades.Find(x => x.upgradeType == GlobalUpgrades.UpgradeType.KnifeDamage);
-        degats = upgrade.upgradesList[upgrade.upgradeLevel].upgradeValue;
+        degats = (int)upgrade.upgradesList[upgrade.upgradeLevel].upgradeValue;
+        var upgrade1 = GlobalUpgrades.Instance.Upgrades.Find(x => x.upgradeType == GlobalUpgrades.UpgradeType.KnifePiercing);
+        if(upgrade.upgradesList[upgrade.upgradeLevel].upgradeValue == 1)
+        {
+            boxCollider.isTrigger = true;
+        }
         /*
         speedTween = Tween.Custom(rb.velocity.x, rb.velocity.x / 2, 2,
             onValueChange: newVal => rb.velocity = new Vector2(newVal, rb.velocity.y));
@@ -112,15 +112,16 @@ public class KnifePrefab : MonoBehaviour
         rb.gravityScale = gravityBeforePause;
     }
 
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void DoCollision(Collision2D collision)
     {
-        if (!collision.collider.CompareTag("Player") && !collision.collider.CompareTag("PlayerTrigger") && !collision.collider.CompareTag("Player"))
+        Debug.Log(collision.collider.name);
+        Debug.Log(collision.collider.tag);
+
+        if (!collision.collider.CompareTag("Player") && !collision.collider.CompareTag("PlayerTrigger") && !collision.collider.CompareTag("Player") && !collision.collider.CompareTag("CameraTriggerTarget"))
         {
             if (collision.collider.CompareTag("Enemy"))
             {
                 collision.gameObject.GetComponent<EnemyHealthManager>().TakeDamage(degats);
-                Debug.Log(collision.gameObject.GetComponent<EnemyHealthManager>().GetHP());
             }
             //speedTween.Stop();
 
@@ -138,8 +139,46 @@ public class KnifePrefab : MonoBehaviour
                 Destroy(gameObject, 1);
             }
         }
-      
 
+    }
+
+    private void DoCollisionTrigger(Collider2D collision)
+    {
+        Debug.Log(collision.name);
+        if (!collision.CompareTag("Player") && !collision.CompareTag("PlayerTrigger") && !collision.CompareTag("Player") && !collision.CompareTag("CameraTriggerTarget"))
+        {
+            if (collision.CompareTag("Enemy"))
+            {
+                collision.gameObject.GetComponent<EnemyHealthManager>().TakeDamage(degats);
+            }
+            //speedTween.Stop();
+
+            hasHitTarget = true;
+            rb.gravityScale = 0;
+            //rb.velocity = new Vector2(knifeSpeed / 10, 0);
+            if (!isGone)
+            {
+                Tween.PositionX(rb.transform, rb.position.x + knifeSpeed, 0.2f);
+                isGone = true;
+                Destroy(boxCollider);
+                rb.velocity = Vector2.zero;
+                rb.angularVelocity = 0;
+                Tween.Alpha(sprite, 0, 0.5f, Ease.OutSine);
+                Destroy(gameObject, 1);
+            }
+        }
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(boxCollider.isTrigger) DoCollisionTrigger(collision);
+
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+
+        DoCollision(collision);
     }
 
     // Update is called once per frame

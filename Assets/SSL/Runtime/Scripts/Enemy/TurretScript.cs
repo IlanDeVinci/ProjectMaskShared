@@ -79,7 +79,7 @@ public class TurretScript : MonoBehaviour
 
     private void Shoot()
     {
-        GameObject savedBullet = Instantiate(bullet,shootPoint.position, Quaternion.identity);
+        GameObject savedBullet = Instantiate(bullet,shootPoint.position, gun.rotation);
         savedBullet.GetComponent<Rigidbody2D>().AddForce(direction * bulletSpeed);
     }
 

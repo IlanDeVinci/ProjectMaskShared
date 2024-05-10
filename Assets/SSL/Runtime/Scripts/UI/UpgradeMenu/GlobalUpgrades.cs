@@ -10,6 +10,7 @@ public class GlobalUpgrades : MonoBehaviour
 
     public enum UpgradeType
     {
+        CanEquipMask,
         KnifeDamage,
         Hp,
         InvisibilityTime,
@@ -68,7 +69,7 @@ public class GlobalUpgrades : MonoBehaviour
         {
             [HideInInspector] public bool isUpgradeAcquired;
             [SerializeField] public int upgradeCost;
-            [SerializeField] public int upgradeValue;
+            [SerializeField] public float upgradeValue;
         }
     }
 

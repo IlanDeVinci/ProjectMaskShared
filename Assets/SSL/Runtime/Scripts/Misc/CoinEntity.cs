@@ -6,8 +6,12 @@ using UnityEngine;
 public class CoinEntity : MonoBehaviour
 {
     [SerializeField] private CircleCollider2D circleCollider;
+    [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private int coinValue;
+    [SerializeField] private ParticleSystem particleSystem;
+    [SerializeField] private GameObject coinText;
     private bool canGive = true;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("PlayerTrigger") ||collision.CompareTag("Player"))
@@ -15,9 +19,15 @@ public class CoinEntity : MonoBehaviour
             if (canGive)
             {
                 GlobalManager.playerMoney += coinValue;
+                particleSystem.Play();
+                spriteRenderer.color = Color.clear;
+                GameObject savedtext = Instantiate(coinText, transform.position, Quaternion.identity);
+                savedtext.GetComponent<CoinTextScript>().value = coinValue;
+                canGive = false;
             }
-            canGive = false;
-            Destroy(gameObject);
+         
+            Destroy(circleCollider);
+            Destroy(gameObject,0.5f);
         }
     }
 }

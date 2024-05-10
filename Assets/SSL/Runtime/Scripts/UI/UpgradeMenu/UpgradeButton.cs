@@ -182,12 +182,41 @@ public class UpgradeButton : MonoBehaviour
 
     public void ShowToolTip()
     {
-        string text = "Max level !";
+        string text = "";
+        if (upgrade.upgradesList.Count != 2)
+        {
+            text = $"Niveau : {upgrade.upgradeLevel}\n";
+            if (upgrade.upgradeLevel >= upgrade.upgradesList.Count - 1)
+            {
+                text = $"Niveau : Max !\n";
+
+            }
+
+        }
+        else
+        {
+            if (upgrade.upgradeLevel == 0) { text = $"Non activé.\n"; }
+            else { text = $"Activé.\n"; }
+        }
+        text += upgrade.upgradeDescription;
         if (upgrade.upgradeLevel < upgrade.upgradesList.Count - 1)
         {
-            text = upgrade.upgradeDescription.Replace("value", upgrade.upgradesList[upgrade.upgradeLevel + 1].upgradeValue.ToString());
+
+            text = text.Replace("value", upgrade.upgradesList[upgrade.upgradeLevel + 1].upgradeValue.ToString());
+            text = text.Replace("current", upgrade.upgradesList[upgrade.upgradeLevel].upgradeValue.ToString());
+            text = text.Replace("increase", (upgrade.upgradesList[upgrade.upgradeLevel + 1].upgradeValue - upgrade.upgradesList[upgrade.upgradeLevel].upgradeValue).ToString());
+            text = text.Replace("decrease", (upgrade.upgradesList[upgrade.upgradeLevel].upgradeValue - upgrade.upgradesList[upgrade.upgradeLevel + 1].upgradeValue).ToString());
             text = text.Replace("price", upgrade.upgradesList[upgrade.upgradeLevel + 1].upgradeCost.ToString());
             text = text.Replace("level", upgrade.upgradeLevel.ToString());
+            if (upgrade.upgradesList.Count != 2)
+            {
+                text += $"\nActuel : {upgrade.upgradesList[upgrade.upgradeLevel].upgradeValue}";
+            }
+            if (upgrade.upgradeType == GlobalUpgrades.UpgradeType.JumpHeight)
+            {
+                text += "x";
+            }
+            text += $"\nCoût : {upgrade.upgradesList[upgrade.upgradeLevel + 1].upgradeCost}";
 
         }
         toolTip.ShowTooltip(text);

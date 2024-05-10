@@ -66,7 +66,7 @@ public class HeroEntity : MonoBehaviour
 
     public bool canJump =>
         (hasJumpsLeft && ((_jumpState == JumpState.NotJumping) || (_jumpState == JumpState.Falling))) || isSliding;
-
+    private float jumpMultiplier = 1;
     public bool isSliding => isSlidingLeft() || isSlidingRight() || _slideTimer < slidingCooldown;
     public float _slideTimer = 0f;
     private float _timeSinceSlideStart = 0f;
@@ -112,14 +112,11 @@ public class HeroEntity : MonoBehaviour
     private Vector2 velocityBeforePause;
     public bool isPaused = false;
     [SerializeField] private HealthManager healthManager;
-
+    private Vector3 startPos;
 
     private void Awake()
     {
-        if(GlobalManager.playerCheckpointPosition != Vector2.zero)
-        {
-            transform.position = GlobalManager.playerCheckpointPosition;
-        }
+        startPos = transform.position;
         _cameraFollowable = GetComponent<CameraFollowable>();
         _cameraFollowable.FollowPositionX = _rigidbody.position.x;
         _cameraFollowable.FollowPositionY = _rigidbody.position.y;
@@ -433,7 +430,7 @@ public class HeroEntity : MonoBehaviour
         _jumpTimer += Time.fixedDeltaTime;
         if (_jumpTimer < _jumpSettings[index - 1].jumpMaxDuration && !IsTouchingCeiling)
         {
-            _verticalSpeed = _jumpSettings[index - 1].jumpSpeed;
+            _verticalSpeed = _jumpSettings[index - 1].jumpSpeed * jumpMultiplier;
         }
         else
         {
@@ -783,6 +780,19 @@ public class HeroEntity : MonoBehaviour
         }
     }
 
+    public void Reload()
+    {
+        healthManager.Reload();
+
+        if (GlobalManager.playerCheckpointPosition != Vector2.zero)
+        {
+            transform.position = GlobalManager.playerCheckpointPosition;
+        }
+        else
+        {
+            transform.position = startPos;
+        }
+    }
     private IEnumerator Pause()
     {
         isPaused = true;
@@ -812,6 +822,8 @@ public class HeroEntity : MonoBehaviour
     private void Update()
     {
         _UpdateOrientVisual();
+        var upgrade = GlobalUpgrades.Instance.Upgrades.Find(x => x.upgradeType == GlobalUpgrades.UpgradeType.JumpHeight);
+        jumpMultiplier = upgrade.upgradesList[upgrade.upgradeLevel].upgradeValue;
     }
 
     private void _UpdateOrientVisual()

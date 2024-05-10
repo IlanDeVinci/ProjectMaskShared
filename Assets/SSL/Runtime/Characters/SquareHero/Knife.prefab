@@ -102,11 +102,50 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 6872516659903509976}
-  degats: 1
+  degats: 10
   lifetime: 2
   sprite: {fileID: 9202674704567770671}
   boxCollider: {fileID: 2127123678290574466}
+  angular: 10
   knifeSpeed: 0
+  rotationSettings:
+    startFromCurrent: 0
+    startValue: {x: 0, y: 0, z: 0, w: 0}
+    endValue: {x: 0, y: 0, z: 0.42261827, w: 0.90630776}
+    settings:
+      duration: 2
+      ease: 2
+      customEase:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      cycles: 1
+      cycleMode: 0
+      startDelay: 0.5
+      endDelay: 0
+      useUnscaledTime: 0
+      useFixedUpdate: 0
+  rotationSettingsBack:
+    startFromCurrent: 0
+    startValue: {x: 0, y: 0, z: 0, w: 0}
+    endValue: {x: 0, y: 0, z: -0.42261827, w: 0.90630776}
+    settings:
+      duration: 2
+      ease: 2
+      customEase:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      cycles: 1
+      cycleMode: 0
+      startDelay: 0.5
+      endDelay: 0
+      useUnscaledTime: 0
+      useFixedUpdate: 0
 --- !u!50 &6872516659903509976
 Rigidbody2D:
   serializedVersion: 4
@@ -119,9 +158,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 1
-  m_AngularDrag: 1
+  m_Mass: 100
+  m_LinearDrag: 0.2
+  m_AngularDrag: 0
   m_GravityScale: 0.5
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -133,7 +172,7 @@ Rigidbody2D:
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 4
+  m_Constraints: 0
 --- !u!61 &2127123678290574466
 BoxCollider2D:
   m_ObjectHideFlags: 0

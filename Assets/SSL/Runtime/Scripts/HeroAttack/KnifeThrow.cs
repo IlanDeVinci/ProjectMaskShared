@@ -20,6 +20,8 @@ public class KnifeThrow : MonoBehaviour
 
     public void ThrowKnife(float orientx)
     {
+        var upgrade = GlobalUpgrades.Instance.Upgrades.Find(x => x.upgradeType == GlobalUpgrades.UpgradeType.KnifeRange);
+        speed = upgrade.upgradesList[upgrade.upgradeLevel].upgradeValue;
         if (isReloading == false)
         {
             for(int i = 0; i < 1; i++)
@@ -35,6 +37,7 @@ public class KnifeThrow : MonoBehaviour
 
                     savedProjectile = Instantiate(projectile, launchPos, Quaternion.identity);
                     savedProjectile.GetComponent<Rigidbody2D>().velocity = new Vector2(launchSpeed, launchHeight);
+                    savedProjectile.GetComponent<KnifePrefab>().isRight = true;
                     savedProjectile.GetComponent<KnifePrefab>().knifeSpeed = 0.1f;
                 }
                 else
@@ -43,6 +46,7 @@ public class KnifeThrow : MonoBehaviour
 
                     savedProjectile = Instantiate(projectile, launchPos, Quaternion.identity);
                     savedProjectile.GetComponent<Rigidbody2D>().velocity = new Vector2(-launchSpeed, launchHeight);
+                    savedProjectile.GetComponent<KnifePrefab>().isRight = false;
                     savedProjectile.GetComponent<KnifePrefab>().knifeSpeed = -0.1f;
 
                     savedProjectile.transform.localScale = new Vector3(-savedProjectile.transform.localScale.x, savedProjectile.transform.localScale.y, savedProjectile.transform.localScale.z);

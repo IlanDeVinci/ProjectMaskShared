@@ -22,19 +22,44 @@ public class UpgradeButton : MonoBehaviour
     private GlobalUpgrades.Upgrade previousUpgrade;
     [SerializeField] private ToolTip toolTip;
     [SerializeField] private GameObject fadingText;
-
+    [SerializeField] private Image buttonImage;
+    Tween tweenColor;
 
 
     public void SetColors()
     {
         HideToolTip();
-        if (upgrade.upgradesList[upgrade.upgradeLevel].upgradeCost <= GlobalManager.playerMoney && upgrade.upgradeLevel < upgrade.upgradesList.Count -1)
+        if (upgrade.upgradeLevel < upgrade.upgradesList.Count - 1 && upgrade.upgradesList[upgrade.upgradeLevel + 1].upgradeCost <= GlobalManager.playerMoney)
         {
             tweenButton.canTween = true;
             button.interactable = true;
+            if (tweenColor.isAlive)
+            {
+                tweenColor.Stop();
+
+            }
+            tweenColor = Tween.Color(buttonImage, Color.white, 1);
         }
         else
         {
+            if (upgrade.upgradeLevel == upgrade.upgradesList.Count - 1)
+            {
+                tweenButton.canTween = false;
+                tweenButton.StopTweens();
+                button.interactable = false;
+                if (tweenColor.isAlive)
+                {
+                    tweenColor.Stop();
+
+                }
+                tweenColor = Tween.Color(buttonImage, Color.green, 1);
+            }
+            if (tweenColor.isAlive)
+            {
+                tweenColor.Stop();
+
+            }
+            tweenColor = Tween.Color(buttonImage, Color.gray, 1);
             tweenButton.canTween = false;
             button.interactable = false;
         }
@@ -43,19 +68,30 @@ public class UpgradeButton : MonoBehaviour
         {
             if (upgradeTreeManager.buttonsList[upgrade.previousUpgradeId].upgrade.thresholdToUnlockNext <= previousUpgrade.upgradeLevel)
             {
-                Tween.Color(lineRenderer, Color.green, 1);                
+                Tween.Color(lineRenderer, Color.green, 1);
             }
             else
             {
                 lineRenderer.color = Color.red;
                 tweenButton.canTween = false;
                 button.interactable = false;
+                if (tweenColor.isAlive)
+                {
+                    tweenColor.Stop();
+
+                }
+                tweenColor = Tween.Color(buttonImage, Color.gray, 1);
+
             }
 
 
         }
 
 
+    }
+    private void Awake()
+    {
+        tweenButton.canTween = false;
     }
     public void LinkButtons()
     {
@@ -130,12 +166,13 @@ public class UpgradeButton : MonoBehaviour
 
     public void ButtonClicked()
     {
-        if(GlobalManager.playerMoney >= upgrade.upgradesList[upgrade.upgradeLevel].upgradeCost && upgrade.upgradeLevel < upgrade.upgradesList.Count - 1) {
+        if (GlobalManager.playerMoney >= upgrade.upgradesList[upgrade.upgradeLevel + 1].upgradeCost && upgrade.upgradeLevel < upgrade.upgradesList.Count - 1)
+        {
             Debug.Log(GlobalManager.playerMoney);
-            GlobalManager.playerMoney -= upgrade.upgradesList[upgrade.upgradeLevel].upgradeCost;
+            GlobalManager.playerMoney -= upgrade.upgradesList[upgrade.upgradeLevel + 1].upgradeCost;
             Debug.Log(GlobalManager.playerMoney);
             var savedText = Instantiate(fadingText, GameObject.FindGameObjectWithTag("UpgradeMenuImage").transform);
-            savedText.GetComponent<TextFollowMouse>().value = upgrade.upgradesList[upgrade.upgradeLevel].upgradeCost;
+            savedText.GetComponent<TextFollowMouse>().value = upgrade.upgradesList[upgrade.upgradeLevel + 1].upgradeCost;
             upgrade.upgradeLevel++;
             GlobalUpgrades.Instance.Upgrades[upgrade.upgradeId].upgradeLevel = upgrade.upgradeLevel;
             upgradeTreeManager.SetAllColors();
@@ -146,9 +183,12 @@ public class UpgradeButton : MonoBehaviour
     public void ShowToolTip()
     {
         string text = "Max level !";
-        if (upgrade.upgradeLevel < upgrade.upgradesList.Count -1)
+        if (upgrade.upgradeLevel < upgrade.upgradesList.Count - 1)
         {
-            text = upgrade.upgradeDescription.Replace("valeur", upgrade.upgradesList[upgrade.upgradeLevel + 1].upgradeValue.ToString());
+            text = upgrade.upgradeDescription.Replace("value", upgrade.upgradesList[upgrade.upgradeLevel + 1].upgradeValue.ToString());
+            text = text.Replace("price", upgrade.upgradesList[upgrade.upgradeLevel + 1].upgradeCost.ToString());
+            text = text.Replace("level", upgrade.upgradeLevel.ToString());
+
         }
         toolTip.ShowTooltip(text);
     }
@@ -158,8 +198,10 @@ public class UpgradeButton : MonoBehaviour
     }
     public void GetInfo()
     {
-        Debug.Log(upgrade);
-        Debug.Log(upgrade.upgradesList[upgrade.upgradeLevel].upgradeCost);
+        Debug.Log(upgrade.upgradeId);
+        Debug.Log(upgrade.upgradesList[upgrade.upgradeLevel + 1].upgradeCost);
+        Debug.Log(buttonImage.color);
+
         Debug.Log(tweenButton.canTween);
 
     }

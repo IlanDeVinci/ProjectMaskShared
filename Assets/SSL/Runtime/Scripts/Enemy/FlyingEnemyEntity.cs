@@ -21,7 +21,7 @@ public class FlyingEnemyEntity : MonoBehaviour
     private Vector2 posWithoutOscillation;
     [SerializeField] private Transform posWithoutOscillationTransform;
     private Transform target;
-    private bool canOscillate = false;
+    [SerializeField] private bool canOscillate = true;
     private Vector2 direction;
     private RaycastHit2D raycastHit2D;
     private float shootTime = 0;
@@ -78,7 +78,7 @@ public class FlyingEnemyEntity : MonoBehaviour
         posWithoutOscillation = new Vector2(transform.position.x, newPos);
         //if (canOscillate)
 
-        //if(canOscillate)
+        if(canOscillate)
         {
             newPos += oscillation;
         }
@@ -154,13 +154,11 @@ public class FlyingEnemyEntity : MonoBehaviour
     private void Shoot()
     {
         isShooting = true;
-        flyingLaser.ShootLaser(transform.position,target.position);
+        flyingLaser.ShootLaser(target.position);
     }
 
     private void FollowPlayer()
     {
-        Debug.Log($"right {distanceToRight}");
-        Debug.Log($"left {distanceToLeft}");
 
         Vector2 posToFollowAt = target.position;
         if (!isShooting)
@@ -171,20 +169,27 @@ public class FlyingEnemyEntity : MonoBehaviour
                 posToFollowAt.x -= 5f;
                 if (distanceToLeft < 2.5f)
                 {
-                    posToFollowAt.x = transform.position.x;
+                    posToFollowAt.x = transform.position.x + 10;
                 }
-                transform.position = Vector2.SmoothDamp(transform.position, posToFollowAt, ref velocity, 0.4f, movementSettings.moveSpeedx * Time.deltaTime);
+                if (distanceToRight < 2.5f)
+                {
+                    posToFollowAt.x = transform.position.x - 10;
+                }
+                transform.position = Vector2.SmoothDamp(transform.position, posToFollowAt, ref velocity, 1, movementSettings.moveSpeedx * Time.deltaTime);
             }
             else
             {
                 posToFollowAt.y += 3.5f + oscillation;
                 posToFollowAt.x += 5f;
+                if (distanceToLeft < 2.5f)
+                {
+                    posToFollowAt.x = transform.position.x + 10;
+                }
                 if (distanceToRight < 2.5f)
                 {
-                    posToFollowAt.x = transform.position.x;
+                    posToFollowAt.x = transform.position.x - 10;
                 }
-
-                transform.position = Vector2.SmoothDamp(transform.position, posToFollowAt, ref velocity, 0.4f, movementSettings.moveSpeedx * Time.deltaTime);
+                transform.position = Vector2.SmoothDamp(transform.position, posToFollowAt, ref velocity, 1, movementSettings.moveSpeedx * Time.deltaTime);
             }
             posWithoutOscillation = transform.position;
 
@@ -194,33 +199,34 @@ public class FlyingEnemyEntity : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        LocatePlayer();
-        if (!isPlayerDetected)
+        if (!GlobalManager.isGamePaused)
         {
-            DoIdle();
-        }
-        if (canMove)
-        {
-            if (isPlayerDetected)
+            LocatePlayer();
+            if (!isPlayerDetected)
             {
-                FollowPlayer();
+                DoIdle();
             }
-            else if (!hasPutAwayGun)
+            if (canMove)
             {
-                ResetOscillation();
-
-                if (!isShooting)
+                if (isPlayerDetected)
                 {
-                    StartCoroutine(PutAwayGun());
-                    hasPutAwayGun = true;
+                    FollowPlayer();
                 }
+                else if (!hasPutAwayGun)
+                {
+                    ResetOscillation();
 
+                    if (!isShooting)
+                    {
+                        StartCoroutine(PutAwayGun());
+                        hasPutAwayGun = true;
+                    }
+
+                }
             }
+            posWithoutOscillationTransform.position = posWithoutOscillation;
+
         }
-        posWithoutOscillationTransform.position = posWithoutOscillation;
-
-
-
 
     }
 
@@ -237,6 +243,7 @@ public class FlyingEnemyEntity : MonoBehaviour
         }
     }
 
+    /*
     private void OnGUI()
     {
         GUILayout.BeginHorizontal();
@@ -247,5 +254,11 @@ public class FlyingEnemyEntity : MonoBehaviour
 
         GUILayout.EndHorizontal();
 
+    }
+    */
+
+    private void OnDestroy()
+    {
+        oscillationTween.Stop();
     }
 }

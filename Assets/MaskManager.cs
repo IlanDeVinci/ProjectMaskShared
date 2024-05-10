@@ -45,6 +45,11 @@ public class MaskManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        var upgrade = GlobalUpgrades.Instance.Upgrades.Find(x => x.upgradeType == GlobalUpgrades.UpgradeType.InvisibilityCooldown);
+        invisibilityCooldown = upgrade.upgradesList[upgrade.upgradeLevel].upgradeValue;
+        var upgrade1 = GlobalUpgrades.Instance.Upgrades.Find(x => x.upgradeType == GlobalUpgrades.UpgradeType.InvisibilityTime);
+        invisibilityDuration = upgrade1.upgradesList[upgrade1.upgradeLevel].upgradeValue;
+
         cooldownSlider.value = currentInvisibilityTime/invisibilityCooldown;
         if (Input.GetKeyDown(KeyCode.H))
         {
@@ -71,6 +76,7 @@ public class MaskManager : MonoBehaviour
                 case Mask.Invisibility:
                     if(currentInvisibilityTime > invisibilityCooldown)
                     {
+                        GlobalManager.isNextHitDoubled = true;
                         currentInvisibilityTime = 0;
                         Debug.Log("a");
                         SetAlpha(0.3f);
@@ -88,6 +94,7 @@ public class MaskManager : MonoBehaviour
         {
             SetAlpha(1.0f);
             hero.tag = "PlayerTrigger";
+            GlobalManager.isNextHitDoubled = false;
 
         }
     }

@@ -1,6 +1,7 @@
 using PrimeTween;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,10 +24,12 @@ public class UpgradeTreeManager : MonoBehaviour
     private bool isGoingRight = false;
     private bool isGoingUp = false;
     [SerializeField] public List<UpgradeButton> buttonsList;
-    [SerializeField] private CanvasGroup canvasGroup;   
+    [SerializeField] private CanvasGroup canvasGroup;
+    [SerializeField] private TextMeshProUGUI coins;
 
     private void Start()
     {
+        GlobalManager.isFirstTimeOpeningTree = true;
         canvasGroup.alpha = 0;
         canMove = false;
         xPos = 0;
@@ -64,6 +67,7 @@ public class UpgradeTreeManager : MonoBehaviour
         {
             upgradeButton.SetColors();
         }
+        coins.text = GlobalManager.playerMoney.ToString();
     }
 
     public void HideUpgradeTree()
@@ -83,11 +87,16 @@ public class UpgradeTreeManager : MonoBehaviour
     private IEnumerator OpenTree()
     {
         yield return new WaitForEndOfFrame();
-        xPos = 0; yPos = -200;
-        Tween tween = Tween.Custom(0, 1800, 2, onValueChange: newVal => xPos = newVal);
-        Tween.Custom(0, -201, 2, onValueChange: newVal => yPos = newVal);
+        if(GlobalManager.isFirstTimeOpeningTree)
+        {
+            xPos = 0; yPos = -200;
+            Tween tween = Tween.Custom(0, 1800, 2, onValueChange: newVal => xPos = newVal);
+            Tween.Custom(0, -201, 2, onValueChange: newVal => yPos = newVal);
 
-        yield return tween.ToYieldInstruction();
+            yield return tween.ToYieldInstruction();
+            GlobalManager.isFirstTimeOpeningTree = false;
+        }
+
         canMove = true;
 
     }

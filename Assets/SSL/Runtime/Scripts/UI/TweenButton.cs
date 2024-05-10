@@ -30,11 +30,20 @@ public class TweenButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public void StopTweens()
     {
         tween.Stop();
-        tweenScale = Tween.Scale(transform, settings.WithDirection(toEndValue: false));
-        tween = Tween.Color(image, Color.white, duration: 0.5f);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if(canTween)
+        {
+            tween.Stop();
+            tweenScale = Tween.Scale(transform, settings.WithDirection(toEndValue: false));
+            tween = Tween.Color(image, Color.white, duration: 0.5f);
+        }
+
     }
 
     // Start is called before the first frame update

@@ -9,4 +9,6 @@ public static class GlobalManager
     public static string playerName;
     public static Vector2 playerCheckpointPosition;
     public static bool isPlayerClairvoyant;
+    public static bool isNextHitDoubled;
+    public static bool isFirstTimeOpeningTree;
 }

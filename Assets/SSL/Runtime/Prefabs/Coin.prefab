@@ -102,7 +102,7 @@ MonoBehaviour:
   circleCollider: {fileID: 2672213085910174628}
   spriteRenderer: {fileID: 3465622234242134672}
   coinValue: 1
-  particleSystem: {fileID: 8666920547274368118}
+  particle: {fileID: 8666920547274368118}
   coinText: {fileID: 7238166602704635420, guid: 10b144928ee50394fa307f184dea2f39, type: 3}
 --- !u!58 &2672213085910174628
 CircleCollider2D:

@@ -8,7 +8,7 @@ public class CoinEntity : MonoBehaviour
     [SerializeField] private CircleCollider2D circleCollider;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private int coinValue;
-    [SerializeField] private ParticleSystem particleSystem;
+    [SerializeField] private ParticleSystem particle;
     [SerializeField] private GameObject coinText;
     private bool canGive = true;
 
@@ -19,7 +19,7 @@ public class CoinEntity : MonoBehaviour
             if (canGive)
             {
                 GlobalManager.playerMoney += coinValue;
-                particleSystem.Play();
+                particle.Play();
                 spriteRenderer.color = Color.clear;
                 GameObject savedtext = Instantiate(coinText, transform.position, Quaternion.identity);
                 savedtext.GetComponent<CoinTextScript>().value = coinValue;

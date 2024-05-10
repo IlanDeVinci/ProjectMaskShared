@@ -8,6 +8,7 @@ public class FlyingEnemyLaser : MonoBehaviour
     [SerializeField] private LineRenderer m_Laser;
     [SerializeField] private Transform origin;
     [SerializeField] private FlyingEnemyEntity entity;
+    [SerializeField] private GameObject _light;
     private Vector2 target;
     private Vector2 savedPos;
     private float shootDelay;
@@ -107,6 +108,13 @@ public class FlyingEnemyLaser : MonoBehaviour
         particle.transform.position = new Vector2(final.point.x, final.point.y);
         particle.transform.up = -direction;
         particle.Play();
+        GameObject savedLight = Instantiate(_light, particle.transform.position, Quaternion.identity);
+        var lightValues = savedLight.GetComponent<LaserLightScript>();
+        lightValues.intensity = 10;
+        lightValues.radius = 5;
+        lightValues.color = Color.red;
+        lightValues.delay = 0;
+        lightValues.duration = 0.5f;
         if (raycastHit.collider != null)
         {
             if (raycastHit.collider.CompareTag("PlayerTrigger") || raycastHit.collider.CompareTag("Player"))

@@ -24,6 +24,8 @@ public class MaskManager : MonoBehaviour
     [SerializeField] private Image maskImage;
     [SerializeField] private List<Sprite> spriteList;
     [SerializeField] private bool doubleDouble = false;
+    [SerializeField] private TrailRenderer lineRenderer;
+
     private bool maskUnlocked = false;
 
     // Start is called before the first frame update
@@ -42,6 +44,14 @@ public class MaskManager : MonoBehaviour
             newColor = child.color;
             newColor.a = alpha;
             child.color = newColor;
+        }
+        if(alpha != 1)
+        {
+            lineRenderer.enabled = false;
+        }
+        else
+        {
+            lineRenderer.enabled = true;
         }
     }
 

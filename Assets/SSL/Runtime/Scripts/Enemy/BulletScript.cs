@@ -46,15 +46,19 @@ public class BulletScript : MonoBehaviour
 
     private IEnumerator Pause()
     {
-        isPaused = true;
-        gravityBeforePause = rb.gravityScale;
-        rb.gravityScale = 0;
-        velocityBeforePause = rb.velocity;
-        rb.velocity = Vector2.zero;
-        yield return new WaitUntil(() => GlobalManager.isGamePaused == false);
-        rb.velocity = velocityBeforePause;
-        isPaused = false;
-        rb.gravityScale = gravityBeforePause;
+        if(rb != null)
+        {
+            isPaused = true;
+            gravityBeforePause = rb.gravityScale;
+            rb.gravityScale = 0;
+            velocityBeforePause = rb.velocity;
+            rb.velocity = Vector2.zero;
+            yield return new WaitUntil(() => GlobalManager.isGamePaused == false);
+            rb.velocity = velocityBeforePause;
+            isPaused = false;
+            rb.gravityScale = gravityBeforePause;
+        }
+        yield return null;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

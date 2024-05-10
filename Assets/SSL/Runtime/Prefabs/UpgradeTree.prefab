@@ -99,7 +99,7 @@ MonoBehaviour:
   yPos: 0
   maxXPos: 1800
   maxYPos: 1400
-  mSpeed: 350
+  mSpeed: 550
   canMove: 1
   ease: 3
   settings:

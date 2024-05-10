@@ -34,7 +34,8 @@ public class FlyingEnemyEntity : MonoBehaviour
     [SerializeField] private float fireRate = 0.5f;
     [SerializeField] private Transform gun;
     [SerializeField] private LayerMask player;
-
+    [SerializeField] private float followOffsetX;
+    [SerializeField] private float followOffsetY;
     // Start is called before the first frame update
     void Start()
     {
@@ -166,8 +167,8 @@ public class FlyingEnemyEntity : MonoBehaviour
         {
             if (direction.x > 0)
             {
-                posToFollowAt.y += 3.5f + oscillation;
-                posToFollowAt.x -= 5f;
+                posToFollowAt.y += followOffsetY + oscillation;
+                posToFollowAt.x -= followOffsetX;
                 if (distanceToLeft < 2.5f)
                 {
                     posToFollowAt.x = transform.position.x + 10;
@@ -180,8 +181,8 @@ public class FlyingEnemyEntity : MonoBehaviour
             }
             else
             {
-                posToFollowAt.y += 3.5f + oscillation;
-                posToFollowAt.x += 5f;
+                posToFollowAt.y += followOffsetY + oscillation;
+                posToFollowAt.x += followOffsetX;
                 if (distanceToLeft < 2.5f)
                 {
                     posToFollowAt.x = transform.position.x + 10;

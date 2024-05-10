@@ -71,6 +71,7 @@ public class EnemyHealthManager : MonoBehaviour
         {
             damageMultiplier = 1;
         }
+        GlobalManager.isNextHitDoubled = 1;
 
         Tween.Custom(startValue: currentHealth, endValue: currentHealth - (damage * damageMultiplier), duration: 1, ease: Ease.OutSine,
             onValueChange: newVal => healthSlider.value = newVal / maxHealth);

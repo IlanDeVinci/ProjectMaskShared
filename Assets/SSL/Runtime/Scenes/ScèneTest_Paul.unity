@@ -335,16 +335,19 @@ MonoBehaviour:
   _eRaycast: {fileID: 324590394}
   _collider: {fileID: 324590400}
   _heroEntity: {fileID: 1201904985}
+  _healthManager: {fileID: 1613551707}
   _movementsSettings:
-    IsEnemyDumb: 1
+    IsEnemyDumb: 0
     _Speed: 5
-    _jumpSpeed: 7
+    _jumpSpeed: 6
     _jumpDuration: 0.2
   _fallSettings:
     fallGravity: 20
     fallSpeedMax: 10
   _stopDistance: 2.5
   isJumping: 0
+  _attackForce: 5
+  _attackCooldown: 2
 --- !u!50 &324590396
 Rigidbody2D:
   serializedVersion: 4
@@ -2231,6 +2234,17 @@ Transform:
   - {fileID: 886919902}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1613551707 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4306333400840394705, guid: 58ffc10b51f5a6a4996c22f63f520b49, type: 3}
+  m_PrefabInstance: {fileID: 1201904983}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f65b01bc707549c4e8bd67533c57beee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1630294670
 PrefabInstance:
   m_ObjectHideFlags: 0

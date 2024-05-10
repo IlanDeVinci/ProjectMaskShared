@@ -16,6 +16,7 @@ public class EnemyEntity : MonoBehaviour
     [SerializeField] private Collider2D _collider;
 
     [SerializeField] private HeroEntity _heroEntity;
+    [SerializeField] private HealthManager _healthManager;
 
     public bool IsEnemyTouchingGround { get; private set; } = false;
     public bool IsEnemyTouchingWallRight { get; private set; } = false;
@@ -27,7 +28,8 @@ public class EnemyEntity : MonoBehaviour
     [SerializeField] private EnnemyMovementsSettings _movementsSettings;
     [SerializeField] private EnemyFallSettings _fallSettings;
     private float _OrientDirX = 1f; // Direction du mouvement
-    private float _directionToPlayer = 0f; // Direction du joueur
+    private float _directionToPlayer = 0f; // Direction entre le joueur et l'ennemi
+    private float _heightToPlayer = 0f; // Hauteur entre le joueur et l'ennemi
     private float _horizontalSpeed = 0f; // Vitesse de déplacement
 
     [SerializeField] private float _stopDistance = 3f;
@@ -36,8 +38,13 @@ public class EnemyEntity : MonoBehaviour
     private float _verticalSpeed = 0f; // Vitesse de saut
     public bool isJumping = false;
 
-    // [Header("Attaques")]
-    // private float attackForce = 5f;
+    [Header("Attaques")]
+    [SerializeField]private int _attackForce = 5;
+    private bool isAttacking = false;
+
+    [SerializeField] private float _attackCooldown = 2f;
+
+
     // [Header("Vie")]
     // private float health = 5f;
     // [Header("Patterns")]
@@ -127,14 +134,10 @@ public class EnemyEntity : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && _heroEntity.isPlayerVisible)
+        if (other.CompareTag("PlayerTrigger"))
         {
             IsPlayerDetected = true;
         }
-        // if (transform.position.y > _heroEntity.transform.position.y)
-        // {
-        //     _ResetVerticalSpeed();
-        // }
 
     }
     
@@ -169,14 +172,26 @@ public class EnemyEntity : MonoBehaviour
         isJumping = false;
         yield return null;
     }
+
+    private IEnumerator Attack()
+    {
+        isAttacking = true;
+        while (Mathf.Abs(_directionToPlayer) <= _stopDistance && Mathf.Abs(_heightToPlayer) <= 3)
+        {
+            _AttackPlayer();
+            yield return new WaitForSeconds(_attackCooldown);
+        }
+        isAttacking = false;
+    }
     private void _FollowPlayer()
     {
         _directionToPlayer = _heroEntity.transform.position.x - transform.position.x;
+        _heightToPlayer = _heroEntity.transform.position.y - transform.position.y;
         if (_directionToPlayer > 0)
         {
             _OrientDirX = 1f;
         }
-        if (_directionToPlayer < 0)
+        else if (_directionToPlayer < 0)
         {
             _OrientDirX = -1f;
         }
@@ -195,8 +210,24 @@ public class EnemyEntity : MonoBehaviour
         {
             _ResetHorizontalSpeed();
         }
-  
+
+        if (Mathf.Abs(_directionToPlayer) <=_stopDistance && Mathf.Abs(_heightToPlayer) <= 3 && !isAttacking){
+            Debug.Log("Coroutine Attack");
+            StartCoroutine(Attack());
+        }
+        else
+        {
+            StopCoroutine(Attack());
+        }
     }
+
+    private void _AttackPlayer()
+    {
+        Debug.Log("Attack");
+        _healthManager.TakeDamage(_attackForce);
+        
+    }
+
     private void OnGUI(){
             GUILayout.Label($"IsEnemyTouchingGround: {IsEnemyTouchingGround}");
             GUILayout.Label($"IsEnemyTouchingWallRight: {IsEnemyTouchingWallRight}");
@@ -204,5 +235,6 @@ public class EnemyEntity : MonoBehaviour
             GUILayout.Label($"Vertical Speed: {_verticalSpeed}");
             GUILayout.Label($"Horizontal Speed: {_horizontalSpeed}");
             GUILayout.Label($"DirectionToPlayer: {_directionToPlayer}");
+            GUILayout.Label($"IsAttacking: {isAttacking}");
         }
 }

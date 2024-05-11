@@ -121,17 +121,17 @@ public class FlyingEnemyEntity : MonoBehaviour
     {
         Vector2 posToFollowAt = lastSeenPos;
 
-        if (distanceToLeft < 1f)
+        if (distanceToLeft < 2f)
         {
-            lastSeenPos.x = transform.position.x + 1f;
+            lastSeenPos.x = transform.position.x + 2f;
         }
-        if (distanceToRight < 1f)
+        if (distanceToRight < 2f)
         {
-            lastSeenPos.x = transform.position.x - 1f;
+            lastSeenPos.x = transform.position.x - 2f;
         }
-        if (distanceToCeiling < 1f)
+        if (distanceToCeiling < 2f)
         {
-            lastSeenPos.y = transform.position.y - 1f;
+            lastSeenPos.y = transform.position.y - 2f;
         }
         if(distanceToGround < 3.5f)
         {
@@ -142,7 +142,10 @@ public class FlyingEnemyEntity : MonoBehaviour
 
         posWithoutOscillation = transform.position;
 
-        flyingLaser.LaserPointer(lastSeenPosForLaser);
+        if(!isShooting) {
+            flyingLaser.LaserPointer(lastSeenPosForLaser);
+
+        }
 
         if (Mathf.Abs(transform.position.x - lastSeenPos.x) < 0.5f)
         {
@@ -270,7 +273,6 @@ public class FlyingEnemyEntity : MonoBehaviour
             bool goRight = false;
             if(direction.x > 0) goRight = true;
             RaycastHit2D raycastHit2D = Physics2D.CircleCast(transform.position, 1, direction, 1000, player);
-            Debug.Log(raycastHit2D.collider.tag);
 
             if (raycastHit2D.collider.CompareTag("Ground") || raycastHit2D.collider.CompareTag("Tremplin"))
             {
@@ -335,7 +337,6 @@ public class FlyingEnemyEntity : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Debug.Log(isPlayerDetected);
         if (healthManager.currentHealth <= 0)
         {
             Destroy(flyingLaser);

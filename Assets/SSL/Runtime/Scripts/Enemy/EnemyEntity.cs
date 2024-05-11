@@ -140,7 +140,14 @@ public class EnemyEntity : MonoBehaviour
         }
 
     }
-    
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("PlayerTrigger"))
+        {
+            IsPlayerDetected = false;
+        }
+    }
+
     private void _ResetVerticalSpeed()
     {
         _verticalSpeed = 0f;

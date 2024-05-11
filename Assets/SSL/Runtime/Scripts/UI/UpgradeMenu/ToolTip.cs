@@ -33,5 +33,16 @@ public class ToolTip : MonoBehaviour
     {
         Vector3 mouse = Input.mousePosition;
         transform.position = new Vector3(mouse.x + 250, mouse.y + 110, 0);
+
+        if (mouse.x > Screen.width / 1.3f)
+        {
+            transform.position = new Vector3(mouse.x - 250, mouse.y + 110, 0);
+
+        }
+
+        if(mouse.y > Screen.height / 1.3f)
+        {
+            transform.position = new Vector3(transform.position.x, mouse.y - 110, 0);
+        }
     }
 }

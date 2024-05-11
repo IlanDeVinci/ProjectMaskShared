@@ -86,9 +86,14 @@ public class FlyingEnemyLaser : MonoBehaviour
 
     private IEnumerator Laser(Vector2 end)
     {
-        Vector2 direction = end - (Vector2)transform.position;
+        Vector2 direction = end - (Vector2)origin.position;
 
         RaycastHit2D final = Physics2D.CircleCast(origin.position, 0.5f, direction, 1000, world);
+        if(final.collider == null)
+        {
+            final = Physics2D.CircleCast(origin.position, 0.5f, direction, 1000, player);
+
+        }
         /*
         for (int i = 0; i < lightning.Length; i++)
         {
@@ -110,7 +115,7 @@ public class FlyingEnemyLaser : MonoBehaviour
         particle.Play();
         GameObject savedLight = Instantiate(_light, particle.transform.position, Quaternion.identity);
         var lightValues = savedLight.GetComponent<LaserLightScript>();
-        lightValues.intensity = 10;
+        lightValues.intensity = 20;
         lightValues.radius = 5;
         lightValues.color = Color.red;
         lightValues.delay = 0;
@@ -120,7 +125,6 @@ public class FlyingEnemyLaser : MonoBehaviour
             if (raycastHit.collider.CompareTag("PlayerTrigger") || raycastHit.collider.CompareTag("Player"))
             {
                 raycastHit.collider.GetComponent<HealthManager>().TakeDamage(20);
-                Debug.Log(raycastHit.collider.GetComponent<HealthManager>().GetHP());
 
             }
         }

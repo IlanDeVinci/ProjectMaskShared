@@ -1041,6 +1041,7 @@ MonoBehaviour:
   panel: {fileID: 2603362006166038012}
   upgradeTree: {fileID: 5284735243021539593}
   fade: {fileID: 8981176559436950548}
+  player: {fileID: 0}
 --- !u!114 &7041943559951044687
 MonoBehaviour:
   m_ObjectHideFlags: 0

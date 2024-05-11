@@ -13,6 +13,8 @@ public class FlyingEnemyEntity : MonoBehaviour
     private bool canMove = true;
     private bool isPlayerDetected = false;
     private float distanceToGround => raycasts.DistanceFromGround(posWithoutOscillationTransform);
+    private float distanceToCeiling => raycasts.DistanceFromCeiling(posWithoutOscillationTransform);
+
     private float distanceToLeft => raycasts.DistanceFromLeft();
     private float distanceToRight => raycasts.DistanceFromRight();
     private Tween oscillationTween;
@@ -30,6 +32,9 @@ public class FlyingEnemyEntity : MonoBehaviour
     Tween putGunAwayx;
     Tween putGunAwayy;
     private Vector2 velocity;
+    private bool isPatrolling = true;
+    private bool isPatrollingRight = true;
+
     public bool isShooting = false;
     [SerializeField] private float fireRate = 0.5f;
     [SerializeField] private Transform gun;
@@ -86,6 +91,25 @@ public class FlyingEnemyEntity : MonoBehaviour
         }
 
         transform.position = new Vector2(transform.position.x, newPos);
+        if (isPatrollingRight)
+        {
+            transform.position = Vector2.SmoothDamp(transform.position, new Vector3(transform.position.x + 2, transform.position.y), ref velocity, 1, 500);
+            if (distanceToRight < 2)
+            {
+                isPatrollingRight = false;
+            }
+        }
+        else
+        {
+            {
+                transform.position = Vector2.SmoothDamp(transform.position, new Vector3(transform.position.x - 2, transform.position.y), ref velocity, 1, 500);
+                if (distanceToLeft < 2)
+                {
+                    isPatrollingRight = true;
+                }
+            }
+        }
+        
     }
     private void LocatePlayer()
     {
@@ -177,6 +201,11 @@ public class FlyingEnemyEntity : MonoBehaviour
                 {
                     posToFollowAt.x = transform.position.x - 10;
                 }
+                if(distanceToCeiling < 1.5f)
+                {
+                    posToFollowAt.y = transform.position.y - 10;
+                }
+                
                 transform.position = Vector2.SmoothDamp(transform.position, posToFollowAt, ref velocity, 1, movementSettings.moveSpeedx * Time.deltaTime);
             }
             else
@@ -190,6 +219,10 @@ public class FlyingEnemyEntity : MonoBehaviour
                 if (distanceToRight < 2.5f)
                 {
                     posToFollowAt.x = transform.position.x - 10;
+                }
+                if (distanceToCeiling < 1.5f)
+                {
+                    posToFollowAt.y = transform.position.y - 10;
                 }
                 transform.position = Vector2.SmoothDamp(transform.position, posToFollowAt, ref velocity, 1, movementSettings.moveSpeedx * Time.deltaTime);
             }
@@ -210,7 +243,24 @@ public class FlyingEnemyEntity : MonoBehaviour
             LocatePlayer();
             if (!isPlayerDetected)
             {
+                if(!isPatrolling)
+                {
+                    isPatrolling = true;
+                    if(direction.x < 0)
+                    {
+                        isPatrollingRight = true;
+
+                    }
+                    else
+                    {
+                        isPatrollingRight = false;
+                    }
+                }
                 DoIdle();
+            }
+            else
+            {
+                isPatrolling = false;
             }
             if (canMove)
             {

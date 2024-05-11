@@ -106,6 +106,7 @@ MonoBehaviour:
   lifetime: 2
   sprite: {fileID: 9202674704567770671}
   boxCollider: {fileID: 2127123678290574466}
+  light2d: {fileID: 4991056342079279547}
   angular: 10
   knifeSpeed: 0
   isRight: 0

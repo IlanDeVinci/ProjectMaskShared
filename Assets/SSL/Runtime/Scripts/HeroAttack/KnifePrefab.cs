@@ -1,6 +1,7 @@
 using PrimeTween;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class KnifePrefab : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class KnifePrefab : MonoBehaviour
     [SerializeField] private float lifetime = 2f;
     [SerializeField] private SpriteRenderer sprite;
     [SerializeField] private BoxCollider2D boxCollider;
+    [SerializeField] private Light2D light2d;
+
     [SerializeField] private float angular;
 
     private float lifeTimer;
@@ -30,6 +33,7 @@ public class KnifePrefab : MonoBehaviour
     {
         lifeTimer = 0f;
         hasHitTarget = false;
+        PrimeTweenConfig.warnEndValueEqualsCurrent = false;
     }
 
 
@@ -39,8 +43,6 @@ public class KnifePrefab : MonoBehaviour
         var upgrade = GlobalUpgrades.Instance.Upgrades.Find(x => x.upgradeType == GlobalUpgrades.UpgradeType.KnifeDamage);
         degats = (int)upgrade.upgradesList[upgrade.upgradeLevel].upgradeValue;
         var upgrade1 = GlobalUpgrades.Instance.Upgrades.Find(x => x.upgradeType == GlobalUpgrades.UpgradeType.KnifePiercing);
-        Debug.Log(upgrade1.upgradeLevel);
-        Debug.Log(upgrade1.upgradesList[upgrade1.upgradeLevel].upgradeValue);
         if (upgrade1.upgradesList[upgrade1.upgradeLevel].upgradeValue == 1)
         {
             boxCollider.isTrigger = true;
@@ -140,6 +142,7 @@ public class KnifePrefab : MonoBehaviour
                 rb.velocity = Vector2.zero;
                 rb.angularVelocity = 0;
                 Tween.Alpha(sprite, 0, 0.5f, Ease.OutSine);
+                Tween.Custom(light2d.color.a,0,0.7f, onValueChange: val => light2d.color = new Color(light2d.color.r, light2d.color.g, light2d.color.b,val));
                 Destroy(gameObject, 1);
             }
             else
@@ -152,6 +155,8 @@ public class KnifePrefab : MonoBehaviour
                     rb.velocity = Vector2.zero;
                     rb.angularVelocity = 0;
                     Tween.Alpha(sprite, 0, 0.5f, Ease.OutSine);
+                    Tween.Custom(light2d.color.a, 0, 0.7f, onValueChange: val => light2d.color = new Color(light2d.color.r, light2d.color.g, light2d.color.b, val));
+
                     Destroy(gameObject, 1);
                 }
             }
@@ -182,6 +187,7 @@ public class KnifePrefab : MonoBehaviour
                     rb.velocity = Vector2.zero;
                     rb.angularVelocity = 0;
                     Tween.Alpha(sprite, 0, 0.5f, Ease.OutSine);
+                    Tween.Custom(light2d.color.a, 0, 0.7f, onValueChange: val => light2d.color = new Color(light2d.color.r, light2d.color.g, light2d.color.b, val));
                     Destroy(gameObject, 1);
                 }
                 else
@@ -194,6 +200,7 @@ public class KnifePrefab : MonoBehaviour
                         rb.velocity = Vector2.zero;
                         rb.angularVelocity = 0;
                         Tween.Alpha(sprite, 0, 0.5f, Ease.OutSine);
+                        Tween.Custom(light2d.color.a, 0, 0.7f, onValueChange: val => light2d.color = new Color(light2d.color.r, light2d.color.g, light2d.color.b, val));
                         Destroy(gameObject, 1);
                     }
                 }

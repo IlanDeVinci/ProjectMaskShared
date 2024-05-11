@@ -28,6 +28,26 @@ public class FlyingEnemyRaycasts : MonoBehaviour
 
     }
 
+    public float DistanceFromCeiling(Transform pos)
+    {
+
+        RaycastHit2D hitResult = Physics2D.Raycast(
+            pos.position,
+            Vector2.up,
+            10,
+            _groundLayerMask
+            );
+        if (hitResult.collider == null)
+        {
+            return 10;
+        }
+        else
+        {
+            return hitResult.distance;
+        }
+
+    }
+
     public float DistanceFromLeft()
     {
         RaycastHit2D hitResult = Physics2D.Raycast(

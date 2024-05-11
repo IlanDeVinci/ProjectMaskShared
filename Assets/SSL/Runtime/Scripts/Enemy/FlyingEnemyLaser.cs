@@ -19,6 +19,7 @@ public class FlyingEnemyLaser : MonoBehaviour
     [SerializeField] private LayerMask world;
     private Tween tween;
     [SerializeField] ParticleSystem particle;
+    [SerializeField] int damage;
 
     private void Start()
     {
@@ -88,7 +89,7 @@ public class FlyingEnemyLaser : MonoBehaviour
     {
         Vector2 direction = end - (Vector2)origin.position;
 
-        RaycastHit2D final = Physics2D.CircleCast(origin.position, 0.5f, direction, 1000, world);
+        RaycastHit2D final = Physics2D.CircleCast(origin.position, 0.3f, direction, 1000, world);
         if(final.collider == null)
         {
             final = Physics2D.CircleCast(origin.position, 0.5f, direction, 1000, player);
@@ -109,13 +110,13 @@ public class FlyingEnemyLaser : MonoBehaviour
         yield return tween.ToYieldInstruction();
         tween = Tween.Custom(m_Laser.widthMultiplier, 15, 0.2f, ease: Ease.InSine, onValueChange: val => m_Laser.widthMultiplier = val);
         yield return tween.ToYieldInstruction();
-        RaycastHit2D raycastHit = Physics2D.CircleCast(origin.position, 0.5f, direction, 1000, player);
+        RaycastHit2D raycastHit = Physics2D.CircleCast(origin.position, 0.3f, direction, 1000, player);
         particle.transform.position = new Vector2(final.point.x, final.point.y);
         particle.transform.up = -direction;
         particle.Play();
         GameObject savedLight = Instantiate(_light, particle.transform.position, Quaternion.identity);
         var lightValues = savedLight.GetComponent<LaserLightScript>();
-        lightValues.intensity = 20;
+        lightValues.intensity = 30;
         lightValues.radius = 5;
         lightValues.color = Color.red;
         lightValues.delay = 0;
@@ -124,7 +125,7 @@ public class FlyingEnemyLaser : MonoBehaviour
         {
             if (raycastHit.collider.CompareTag("PlayerTrigger") || raycastHit.collider.CompareTag("Player"))
             {
-                raycastHit.collider.GetComponent<HealthManager>().TakeDamage(20);
+                raycastHit.collider.GetComponent<HealthManager>().TakeDamage(damage);
 
             }
         }

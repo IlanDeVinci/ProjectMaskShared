@@ -36,6 +36,8 @@ public class FlyingEnemyEntity : MonoBehaviour
     private bool isPatrollingRight = true;
     private bool isSearchingLastPos = false;
     public bool isShooting = false;
+    private bool isPlayerHiding = false;
+    private float playerHidingTime = 0;
     [SerializeField] private float fireRate = 0.5f;
     [SerializeField] private Transform gun;
     [SerializeField] private LayerMask player;
@@ -260,7 +262,35 @@ public class FlyingEnemyEntity : MonoBehaviour
         Vector2 posToFollowAt = target.position;
         if (!isShooting)
         {
-            if (direction.x > 0)
+            playerHidingTime += Time.deltaTime;
+            if(playerHidingTime > 3)
+            {
+                isPlayerHiding = false;
+            }
+            bool goRight = false;
+            if(direction.x > 0) goRight = true;
+            RaycastHit2D raycastHit2D = Physics2D.CircleCast(transform.position, 1, direction, 1000, player);
+            Debug.Log(raycastHit2D.collider.tag);
+
+            if (raycastHit2D.collider.CompareTag("Ground") || raycastHit2D.collider.CompareTag("Tremplin"))
+            {
+                isPlayerHiding = true;
+                playerHidingTime = Time.time;
+
+            }
+            if (isPlayerHiding)
+            {
+                if (goRight)
+                {
+                    goRight = false;
+                }
+                else
+                {
+                    goRight = true;
+                }
+            }
+
+            if (goRight)
             {
                 posToFollowAt.y += followOffsetY + oscillation;
                 posToFollowAt.x -= followOffsetX;
@@ -305,6 +335,7 @@ public class FlyingEnemyEntity : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        Debug.Log(isPlayerDetected);
         if (healthManager.currentHealth <= 0)
         {
             Destroy(flyingLaser);

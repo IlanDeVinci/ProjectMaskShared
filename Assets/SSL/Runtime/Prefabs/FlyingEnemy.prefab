@@ -10123,6 +10123,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 192
   particle: {fileID: 6735836883959817529}
+  damage: 7
 --- !u!114 &1471062352678509839
 MonoBehaviour:
   m_ObjectHideFlags: 0

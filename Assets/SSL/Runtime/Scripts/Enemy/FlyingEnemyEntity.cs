@@ -34,20 +34,23 @@ public class FlyingEnemyEntity : MonoBehaviour
     private Vector2 velocity;
     private bool isPatrolling = true;
     private bool isPatrollingRight = true;
-
+    private bool isSearchingLastPos = false;
     public bool isShooting = false;
     [SerializeField] private float fireRate = 0.5f;
     [SerializeField] private Transform gun;
     [SerializeField] private LayerMask player;
     [SerializeField] private float followOffsetX;
     [SerializeField] private float followOffsetY;
+    private Vector2 lastSeenPos;
+            private Vector2 lastSeenPosForLaser;
+
     // Start is called before the first frame update
     void Start()
     {
         posWithoutOscillation = transform.position;
         target = GameObject.FindGameObjectWithTag("PlayerTrigger").transform;
         oscillationTween = Tween.Custom(startValue: 0, endValue: maxOscillation, settings: settingsTween, onValueChange: val => oscillation = val);
-
+        flyingLaser.HideLaser();
     }
 
     private void ResetOscillation()
@@ -85,7 +88,7 @@ public class FlyingEnemyEntity : MonoBehaviour
         posWithoutOscillation = new Vector2(transform.position.x, newPos);
         //if (canOscillate)
 
-        if(canOscillate)
+        if (canOscillate)
         {
             newPos += oscillation;
         }
@@ -109,8 +112,46 @@ public class FlyingEnemyEntity : MonoBehaviour
                 }
             }
         }
-        
+
     }
+
+    private void GoToLastPos()
+    {
+        Vector2 posToFollowAt = lastSeenPos;
+
+        if (distanceToLeft < 1f)
+        {
+            lastSeenPos.x = transform.position.x + 1f;
+        }
+        if (distanceToRight < 1f)
+        {
+            lastSeenPos.x = transform.position.x - 1f;
+        }
+        if (distanceToCeiling < 1f)
+        {
+            lastSeenPos.y = transform.position.y - 1f;
+        }
+        if(distanceToGround < 3.5f)
+        {
+            lastSeenPos.y = transform.position.y + 3.5f;
+        }
+
+        transform.position = Vector2.SmoothDamp(transform.position, posToFollowAt, ref velocity, 2, movementSettings.moveSpeedx * Time.deltaTime);
+
+        posWithoutOscillation = transform.position;
+
+        flyingLaser.LaserPointer(lastSeenPosForLaser);
+
+        if (Mathf.Abs(transform.position.x - lastSeenPos.x) < 0.5f)
+        {
+            isSearchingLastPos = false;
+            flyingLaser.HideLaser();
+            ResetOscillation();
+
+        }
+    }
+
+
     private void LocatePlayer()
     {
 
@@ -124,11 +165,12 @@ public class FlyingEnemyEntity : MonoBehaviour
             {
                 if (!isPlayerDetected)
                 {
-                    shootTime = Time.time + 1f/fireRate;
+                    shootTime = Time.time + 1f / fireRate;
                     velocity = Vector2.zero;
                     posWithoutOscillation = transform.position;
                     isPlayerDetected = true;
                     oscillationTween.isPaused = false;
+                    isSearchingLastPos = false;
 
                 }
             }
@@ -137,7 +179,20 @@ public class FlyingEnemyEntity : MonoBehaviour
                 if (isPlayerDetected)
                 {
                     isPlayerDetected = false;
-                    ResetOscillation();
+
+                    lastSeenPos = targetPos;
+                    if(lastSeenPos.x < transform.position.x)
+                    {
+                        lastSeenPos.x -= 3;
+                    }
+                    else
+                    {
+                        lastSeenPos.x += 3;
+
+                    }
+                    lastSeenPosForLaser = targetPos;
+                    isSearchingLastPos = true;
+
                 }
             }
         }
@@ -145,11 +200,23 @@ public class FlyingEnemyEntity : MonoBehaviour
         {
             if (isPlayerDetected)
             {
-                ResetOscillation();
                 isPlayerDetected = false;
+                lastSeenPos = targetPos;
+                if (lastSeenPos.x < transform.position.x)
+                {
+                    lastSeenPos.x -= 3;
+                }
+                else
+                {
+                    lastSeenPos.x += 3;
+
+                }
+                lastSeenPosForLaser = targetPos;
+                isSearchingLastPos = true;
+
             }
         }
-        if (isPlayerDetected)
+        if (isPlayerDetected || isSearchingLastPos)
         {
 
             hasPutAwayGun = false;
@@ -161,8 +228,12 @@ public class FlyingEnemyEntity : MonoBehaviour
             {
                 putGunAwayy.Stop();
             }
-            if(!isShooting) gun.transform.up = -direction;
-            if (Time.time > shootTime)
+            if (isSearchingLastPos)
+            {
+                direction = lastSeenPosForLaser - posWithoutOscillation;
+            }
+            if (!isShooting) gun.transform.up = -direction;
+            if (Time.time > shootTime && isPlayerDetected)
             {
                 shootTime = Time.time + 1f / fireRate;
                 Shoot();
@@ -170,7 +241,7 @@ public class FlyingEnemyEntity : MonoBehaviour
         }
         else
         {
-            if (!isShooting)
+            if (!isShooting && isSearchingLastPos)
             {
                 flyingLaser.HideLaser();
             }
@@ -201,11 +272,11 @@ public class FlyingEnemyEntity : MonoBehaviour
                 {
                     posToFollowAt.x = transform.position.x - 10;
                 }
-                if(distanceToCeiling < 1.5f)
+                if (distanceToCeiling < 1.5f)
                 {
                     posToFollowAt.y = transform.position.y - 10;
                 }
-                
+
                 transform.position = Vector2.SmoothDamp(transform.position, posToFollowAt, ref velocity, 1, movementSettings.moveSpeedx * Time.deltaTime);
             }
             else
@@ -234,19 +305,19 @@ public class FlyingEnemyEntity : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(healthManager.currentHealth <= 0)
+        if (healthManager.currentHealth <= 0)
         {
             Destroy(flyingLaser);
         }
         if (!GlobalManager.isGamePaused && healthManager.currentHealth >= 0)
         {
             LocatePlayer();
-            if (!isPlayerDetected)
+            if (!isPlayerDetected && !isSearchingLastPos)
             {
-                if(!isPatrolling)
+                if (!isPatrolling)
                 {
                     isPatrolling = true;
-                    if(direction.x < 0)
+                    if (direction.x < 0)
                     {
                         isPatrollingRight = true;
 
@@ -267,6 +338,10 @@ public class FlyingEnemyEntity : MonoBehaviour
                 if (isPlayerDetected)
                 {
                     FollowPlayer();
+                }
+                else if (isSearchingLastPos)
+                {
+                    GoToLastPos();
                 }
                 else if (!hasPutAwayGun)
                 {

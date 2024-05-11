@@ -8,7 +8,6 @@ using UnityEngine.UI;
 public class PauseManager : MonoBehaviour
 {
     [SerializeField] private CanvasGroup canvasGroup;
-
     [SerializeField] private GameObject panel;
     [SerializeField] private GameObject upgradeTree;
     [SerializeField] private Image fade;

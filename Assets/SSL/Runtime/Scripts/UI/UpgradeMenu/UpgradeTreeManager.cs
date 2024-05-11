@@ -110,6 +110,7 @@ public class UpgradeTreeManager : MonoBehaviour
             savedButton.transform.SetParent(backgroundImage.transform, true);
             UpgradeButton upgradeButton = savedButton.GetComponent<UpgradeButton>();
             upgradeButton.upgrade = upgrade;
+            upgradeButton.image = backgroundImage;
             savedButton.SendMessage("Initiate");
             buttonsList.Add(upgradeButton);
         }

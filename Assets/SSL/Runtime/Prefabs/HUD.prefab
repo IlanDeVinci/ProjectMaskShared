@@ -911,7 +911,7 @@ CanvasGroup:
   m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
+  m_IgnoreParentGroups: 1
 --- !u!1 &2757197008705851768
 GameObject:
   m_ObjectHideFlags: 0
@@ -1000,7 +1000,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1920, y: 1080}
+  m_ReferenceResolution: {x: 1920, y: 1200}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -2473,7 +2473,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6693955614777369584}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3229,11 +3229,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3033900759486353483, guid: e75a4fee66b33674fabebe41fc482527, type: 3}
       propertyPath: m_RaycastTarget
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3442383689693066439, guid: e75a4fee66b33674fabebe41fc482527, type: 3}
+      propertyPath: scaler
+      value: 
+      objectReference: {fileID: 4643656287723230064}
     - target: {fileID: 3797801878501112002, guid: e75a4fee66b33674fabebe41fc482527, type: 3}
       propertyPath: m_RaycastTarget
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7582285804075547789, guid: e75a4fee66b33674fabebe41fc482527, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7582285804075547789, guid: e75a4fee66b33674fabebe41fc482527, type: 3}
+      propertyPath: m_OverrideSorting
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7912357418192021976, guid: e75a4fee66b33674fabebe41fc482527, type: 3}
       propertyPath: m_Pivot.x

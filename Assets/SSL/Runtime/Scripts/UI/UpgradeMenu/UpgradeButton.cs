@@ -24,7 +24,7 @@ public class UpgradeButton : MonoBehaviour
     [SerializeField] private GameObject fadingText;
     [SerializeField] private Image buttonImage;
     Tween tweenColor;
-
+    public Image image;
 
     public void SetColors()
     {
@@ -132,17 +132,39 @@ public class UpgradeButton : MonoBehaviour
     }
     public void Initiate()
     {
+        int totalLength = Screen.width *2;
+        float totalHeight = Screen.height *2.75f;
 
+        if(totalLength < 2000)
+        {
+            totalLength *= 2;
+        }
+        if(totalHeight < 2000)
+        {
+            totalHeight *= 2;
+        }
+        Debug.Log(totalLength);
+
+        Debug.Log(totalHeight);
         upgradeNameText.text = upgrade.upgradeName;
-        transform.position = new Vector2(-1300, +2100);
+        transform.position =
+            //new Vector2(-1300, +2100)
+            new Vector2(-totalLength/3, totalHeight/1.5f);
+            ;
         //transform.position = new Vector2(2900, -1000);
 
 
         columns = GlobalUpgrades.Instance.columnNumber;
-        columnsIncrement = 4200 / columns;
+        columnsIncrement = 
+            //4200 / columns
+            totalLength/columns
+            ;
 
         rows = GlobalUpgrades.Instance.rowNumber;
-        rowsIncrement = 3100 / rows;
+        rowsIncrement =
+            //3100 / rows
+            (int)totalHeight/rows
+            ;
 
 
         transform.localPosition = new Vector2(transform.localPosition.x + (upgrade.column * columnsIncrement), transform.localPosition.y - (upgrade.row * rowsIncrement));

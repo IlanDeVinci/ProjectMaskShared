@@ -143,7 +143,10 @@ public class FlyingEnemyEntity : MonoBehaviour
         posWithoutOscillation = transform.position;
 
         if(!isShooting) {
-            flyingLaser.LaserPointer(lastSeenPosForLaser);
+            if (flyingLaser.LaserPointer(lastSeenPosForLaser))
+            {
+                lastSeenPos = target.position;
+            }
 
         }
 

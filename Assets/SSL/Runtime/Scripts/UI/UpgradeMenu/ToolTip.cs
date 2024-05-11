@@ -9,7 +9,7 @@ public class ToolTip : MonoBehaviour
     [SerializeField] private CanvasGroup _canvasGroup;
     [SerializeField] private TextMeshProUGUI textm;
     private Tween tween;
-
+    public float scale = 1;
     void Start()
     {
         _canvasGroup.alpha = 0f;
@@ -32,17 +32,17 @@ public class ToolTip : MonoBehaviour
     void Update()
     {
         Vector3 mouse = Input.mousePosition;
-        transform.position = new Vector3(mouse.x + 250, mouse.y + 110, 0);
+        transform.position = new Vector3(mouse.x + (250 * scale), mouse.y + (110 * scale), 0);
 
         if (mouse.x > Screen.width / 1.3f)
         {
-            transform.position = new Vector3(mouse.x - 250, mouse.y + 110, 0);
+            transform.position = new Vector3(mouse.x - (250 * scale), mouse.y + (110 * scale), 0);
 
         }
 
         if(mouse.y > Screen.height / 1.3f)
         {
-            transform.position = new Vector3(transform.position.x, mouse.y - 110, 0);
+            transform.position = new Vector3(transform.position.x, mouse.y - (110 * scale), 0);
         }
     }
 }

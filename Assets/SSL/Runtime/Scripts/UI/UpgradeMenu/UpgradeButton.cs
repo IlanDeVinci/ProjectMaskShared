@@ -24,7 +24,7 @@ public class UpgradeButton : MonoBehaviour
     [SerializeField] private GameObject fadingText;
     [SerializeField] private Image buttonImage;
     Tween tweenColor;
-    public Image image;
+    public RectTransform canvas;
 
     public void SetColors()
     {
@@ -132,24 +132,19 @@ public class UpgradeButton : MonoBehaviour
     }
     public void Initiate()
     {
-        int totalLength = Screen.width *2;
-        float totalHeight = Screen.height *2.75f;
+        toolTip.scale = canvas.localScale.x;
+        RectTransform rectTransform = GetComponent<RectTransform>();
+        rectTransform.localScale = Vector3.one;
+        int totalLength = (int)(4200) ;
+        float totalHeight = (int)(3100);
 
-        if(totalLength < 2000)
-        {
-            totalLength *= 2;
-        }
-        if(totalHeight < 2000)
-        {
-            totalHeight *= 2;
-        }
         Debug.Log(totalLength);
 
         Debug.Log(totalHeight);
         upgradeNameText.text = upgrade.upgradeName;
         transform.position =
             //new Vector2(-1300, +2100)
-            new Vector2(-totalLength/3, totalHeight/1.5f);
+            new Vector2(-totalLength*0.309f * canvas.localScale.x, totalHeight*0.677f * canvas.localScale.x);
             ;
         //transform.position = new Vector2(2900, -1000);
 

@@ -10068,7 +10068,7 @@ MonoBehaviour:
   movementSettings:
     minHeight: 2.5
     maxHeight: 6
-    moveSpeedx: 400
+    moveSpeedx: 250
     moveSpeedy: 2
   raycasts: {fileID: 1471062352678509839}
   flyingLaser: {fileID: 3106870018358494465}

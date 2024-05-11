@@ -26,9 +26,11 @@ public class UpgradeTreeManager : MonoBehaviour
     [SerializeField] public List<UpgradeButton> buttonsList;
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private TextMeshProUGUI coins;
-
+    [SerializeField] private RectTransform rect;
+    private PauseManager pauseManager;
     private void Start()
     {
+        pauseManager = GameObject.FindAnyObjectByType<PauseManager>();
         GlobalManager.isFirstTimeOpeningTree = true;
         canvasGroup.alpha = 0;
         canMove = false;
@@ -72,7 +74,7 @@ public class UpgradeTreeManager : MonoBehaviour
 
     public void HideUpgradeTree()
     {
-        gameObject.GetComponentInParent<PauseManager>().Fade();
+        pauseManager.Fade();
         StartCoroutine(HideTree());
 
     }
@@ -110,7 +112,7 @@ public class UpgradeTreeManager : MonoBehaviour
             savedButton.transform.SetParent(backgroundImage.transform, true);
             UpgradeButton upgradeButton = savedButton.GetComponent<UpgradeButton>();
             upgradeButton.upgrade = upgrade;
-            upgradeButton.image = backgroundImage;
+            upgradeButton.canvas = rect;
             savedButton.SendMessage("Initiate");
             buttonsList.Add(upgradeButton);
         }

@@ -842,10 +842,16 @@ public class HeroEntity : MonoBehaviour
         _orientVisualRoot.localScale = newScale;
     }
 
-    private void _ChangeOrientFromHorizontalMovement()
+    public void _ChangeOrientFromHorizontalMovement()
     {
         if (_moveDirX == 0) return;
         _orientX = Mathf.Sign(_moveDirX);
+    }
+    
+    public void _ApplyOrientDirX(float dirX)
+    {
+        Debug.Log("Apply Orient");
+        _orientX = dirX;
     }
 
     private void OnGUI()

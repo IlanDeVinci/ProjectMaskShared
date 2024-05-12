@@ -191,6 +191,7 @@ public class EnemyEntity : MonoBehaviour
         while (Mathf.Abs(_directionToPlayer) <= _stopDistance && Mathf.Abs(_heightToPlayer) <= 3)
         {
             _AttackPlayer();
+            yield return new WaitForSeconds(0.5f);
             _ShockWave();
             yield return new WaitForSeconds(_attackCooldown);
         }
@@ -240,29 +241,32 @@ public class EnemyEntity : MonoBehaviour
 
     private void _ShockWave()
     {
+        
         if (_colliderRangeGauche.IsPlayerInRangeLeft)
         {
-            if (_OrientDirX == 1)
+            if (_heroEntity._orientX == 1)
             {
-                _horizontalSpeed = -2;
+                _heroEntity._ApplyOrientDirX(-1f);
+                _heroEntity.AddSpeed(new Vector2 (20, 2));
                 _healthManager.TakeDamage(7);
             }
-            if (_OrientDirX == -1)
+            if (_heroEntity._orientX == -1)
             {
-                _horizontalSpeed = 2;
+                _heroEntity.AddSpeed(new Vector2 (20, 2));
                 _healthManager.TakeDamage(7);
             }
         }
         if (_colliderRangeDroit.IsPlayerInRangeRight)
         {
-            if (_OrientDirX == 1)
+            if (_heroEntity._orientX == 1)
             {
-                _horizontalSpeed = 2;
+                _heroEntity.AddSpeed(new Vector2 (20, 2));
                 _healthManager.TakeDamage(7);
             }
-            if (_OrientDirX == -1)
+            if (_heroEntity._orientX == -1)
             {
-                _horizontalSpeed = -2;
+                _heroEntity._ApplyOrientDirX(1f);
+                _heroEntity.AddSpeed(new Vector2 (20, 2));
                 _healthManager.TakeDamage(7);
             }
         }

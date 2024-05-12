@@ -123,6 +123,11 @@ public class HeroEntity : MonoBehaviour
         
     }
 
+    public void AddSpeed(Vector2 speed)
+    {
+        _horizontalSpeed = speed.x;
+        _verticalSpeed = speed.y;
+    }
     private void _UpdateCameraFollowPosition()
     {
         _cameraFollowable.FollowDirection = _orientX;
@@ -609,24 +614,28 @@ public class HeroEntity : MonoBehaviour
 
     private void _ResetSpeedOnWallCollision()
     {
-        if (!isJumping || _jumpState == JumpState.Falling)
+        if (!IsTouchingCeiling)
         {
-            if (IsTouchingWallLeft)
+            if (!isJumping || _jumpState == JumpState.Falling)
             {
-                if (_orientX != 1)
+                if (IsTouchingWallLeft)
                 {
-                    _horizontalSpeed = 0;
+                    if (_orientX != 1)
+                    {
+                        _horizontalSpeed = 0;
+                    }
                 }
-            }
 
-            if (IsTouchingWallRight)
-            {
-                if (_orientX != -1)
+                if (IsTouchingWallRight)
                 {
-                    _horizontalSpeed = 0;
+                    if (_orientX != -1)
+                    {
+                        _horizontalSpeed = 0;
+                    }
                 }
             }
         }
+      
     }
 
     private bool _AreOrientAndMovementOpposite()

@@ -142,7 +142,7 @@ public class FlyingEnemyEntity : MonoBehaviour
         posWithoutOscillation = transform.position;
 
         if(!isShooting) {
-            if (flyingLaser.LaserPointer(lastSeenPosForLaser))
+            if (flyingLaser && flyingLaser.LaserPointer(lastSeenPosForLaser))
             {
                 lastSeenPos = target.position;
             }
@@ -152,7 +152,7 @@ public class FlyingEnemyEntity : MonoBehaviour
         if (Mathf.Abs(transform.position.x - lastSeenPos.x) < 0.5f)
         {
             isSearchingLastPos = false;
-            flyingLaser.HideLaser();
+            if (flyingLaser) flyingLaser.HideLaser();
             ResetOscillation();
 
         }
@@ -258,7 +258,7 @@ public class FlyingEnemyEntity : MonoBehaviour
     private void Shoot()
     {
         isShooting = true;
-        flyingLaser.ShootLaser(target.position);
+        if (flyingLaser) flyingLaser.ShootLaser(target.position);
     }
 
     private void FollowPlayer()
@@ -333,7 +333,7 @@ public class FlyingEnemyEntity : MonoBehaviour
             }
             posWithoutOscillation = transform.position;
 
-            flyingLaser.LaserPointer(target.position);
+            if(flyingLaser) flyingLaser.LaserPointer(target.position);
         }
     }
     // Update is called once per frame
@@ -341,7 +341,8 @@ public class FlyingEnemyEntity : MonoBehaviour
     {
         if (healthManager.currentHealth <= 0)
         {
-            Destroy(flyingLaser);
+            if (flyingLaser) flyingLaser.HideLaser();
+            if (flyingLaser) Destroy(flyingLaser);
         }
         if (!GlobalManager.isGamePaused && healthManager.currentHealth >= 0)
         {

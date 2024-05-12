@@ -10191,7 +10191,8 @@ MonoBehaviour:
   damageMultiplier: 1
   entity: {fileID: 7933624646914003413}
   dmgText: {fileID: 7238166602704635420, guid: acdc41b42aaeb5a4bad063e260780239, type: 3}
-  spriteRenderers: []
+  spriteRenderers:
+  - {fileID: 997804483885870568}
   particle: {fileID: 4812863478961463484}
   currentHealth: 0
   currentLives: 0

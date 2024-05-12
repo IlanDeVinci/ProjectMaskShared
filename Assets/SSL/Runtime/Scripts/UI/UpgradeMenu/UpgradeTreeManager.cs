@@ -8,7 +8,8 @@ using UnityEngine.UI;
 public class UpgradeTreeManager : MonoBehaviour
 {
     [SerializeField] private Image backgroundImage;
-    [SerializeField] private int mDelta = 200;
+    [SerializeField] private int UnscaledMoveSpeedDelta = 200;
+    private float mDelta;
     public float xPos;
     public float yPos;
     [SerializeField] private float maxXPos;
@@ -26,9 +27,11 @@ public class UpgradeTreeManager : MonoBehaviour
     [SerializeField] public List<UpgradeButton> buttonsList;
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private TextMeshProUGUI coins;
-
+    [SerializeField] private RectTransform rect;
+    private PauseManager pauseManager;
     private void Start()
     {
+        pauseManager = GameObject.FindAnyObjectByType<PauseManager>();
         GlobalManager.isFirstTimeOpeningTree = true;
         canvasGroup.alpha = 0;
         canMove = false;
@@ -72,7 +75,7 @@ public class UpgradeTreeManager : MonoBehaviour
 
     public void HideUpgradeTree()
     {
-        gameObject.GetComponentInParent<PauseManager>().Fade();
+        pauseManager.Fade();
         StartCoroutine(HideTree());
 
     }
@@ -110,6 +113,7 @@ public class UpgradeTreeManager : MonoBehaviour
             savedButton.transform.SetParent(backgroundImage.transform, true);
             UpgradeButton upgradeButton = savedButton.GetComponent<UpgradeButton>();
             upgradeButton.upgrade = upgrade;
+            upgradeButton.canvas = rect;
             savedButton.SendMessage("Initiate");
             buttonsList.Add(upgradeButton);
         }
@@ -198,6 +202,7 @@ public class UpgradeTreeManager : MonoBehaviour
 }
     private void Update()
     {
+        mDelta = (float)UnscaledMoveSpeedDelta * (float)(Screen.width / 1920f);
         if (GlobalManager.isGamePaused)
         {
             if (canMove)

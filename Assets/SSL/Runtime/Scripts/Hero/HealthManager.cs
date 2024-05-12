@@ -77,7 +77,7 @@ onValueChange: newVal => healthSlider.value = newVal / maxHealth);
         {
             damageMultiplier = 1;
         }
-
+        if(damage <= 0) damage = 1;
         Tween.Custom(startValue: currentHealth, endValue: currentHealth - (damage*damageMultiplier), duration: 1, ease: Ease.OutSine,
             onValueChange: newVal => healthSlider.value = newVal / maxHealth);
 

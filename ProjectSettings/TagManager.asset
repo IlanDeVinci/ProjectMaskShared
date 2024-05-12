@@ -15,6 +15,7 @@ TagManager:
   - MaskImage
   - HPSlider
   - Enemy
+  - Ground
   layers:
   - Default
   - TransparentFX

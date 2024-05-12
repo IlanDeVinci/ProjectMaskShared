@@ -5236,7 +5236,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.5
+      scalar: 0.3
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -5785,7 +5785,7 @@ ParticleSystem:
     serializedVersion: 6
     enabled: 1
     type: 4
-    angle: 50
+    angle: 69
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
@@ -10068,8 +10068,8 @@ MonoBehaviour:
   movementSettings:
     minHeight: 2.5
     maxHeight: 6
-    moveSpeedx: 400
-    moveSpeedy: 2
+    moveSpeedx: 250
+    moveSpeedy: 1
   raycasts: {fileID: 1471062352678509839}
   flyingLaser: {fileID: 3106870018358494465}
   healthManager: {fileID: 2921853363239052282}
@@ -10123,6 +10123,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 192
   particle: {fileID: 6735836883959817529}
+  damage: 7
 --- !u!114 &1471062352678509839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10371,7 +10372,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8190c6169c598664c8259663341d7a73, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10403,7 +10404,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.028907776
+        value: 0.3383901
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -10445,7 +10446,7 @@ LineRenderer:
       m_NumAlphaKeys: 2
     numCornerVertices: 0
     numCapVertices: 0
-    alignment: 0
+    alignment: 1
     textureMode: 0
     textureScale: {x: 1, y: 1}
     shadowBias: 0.5

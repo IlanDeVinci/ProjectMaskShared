@@ -8,7 +8,8 @@ using UnityEngine.UI;
 public class UpgradeTreeManager : MonoBehaviour
 {
     [SerializeField] private Image backgroundImage;
-    [SerializeField] private int mDelta = 200;
+    [SerializeField] private int UnscaledMoveSpeedDelta = 200;
+    private float mDelta;
     public float xPos;
     public float yPos;
     [SerializeField] private float maxXPos;
@@ -201,6 +202,8 @@ public class UpgradeTreeManager : MonoBehaviour
 }
     private void Update()
     {
+        mDelta = (float)UnscaledMoveSpeedDelta * (float)(Screen.width / 1920f);
+        Debug.Log(mDelta);
         if (GlobalManager.isGamePaused)
         {
             if (canMove)

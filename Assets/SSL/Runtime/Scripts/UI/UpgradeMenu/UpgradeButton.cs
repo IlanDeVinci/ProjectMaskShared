@@ -122,7 +122,7 @@ public class UpgradeButton : MonoBehaviour
                 for (float i = 0f; i < smoothness; i++)
                 {
 
-                    smoothpoints.Add(Bezier(points[0], new Vector2(points[0].x + 1000, points[0].y), new Vector2(points[1].x - 1000, points[1].y), points[1], i / smoothness));
+                    smoothpoints.Add(Bezier(points[0], new Vector2(points[0].x + ((points[1].x - points[0].x)*0.8f), points[0].y), new Vector2(points[1].x - ((points[1].x - points[0].x) * 0.8f), points[1].y), points[1], i / smoothness));
                 }
                 lineRenderer.points = smoothpoints;
             }
@@ -202,18 +202,18 @@ public class UpgradeButton : MonoBehaviour
         string text = "";
         if (upgrade.upgradesList.Count != 2)
         {
-            text = $"Niveau : {upgrade.upgradeLevel}\n";
+            text = $"Niveau : <b>{upgrade.upgradeLevel}</b>\n";
             if (upgrade.upgradeLevel >= upgrade.upgradesList.Count - 1)
             {
-                text = $"Niveau : Max !\n";
+                text = $"Niveau : <b>Max</b>\n";
 
             }
 
         }
         else
         {
-            if (upgrade.upgradeLevel == 0) { text = $"Non activé.\n"; }
-            else { text = $"Activé.\n"; }
+            if (upgrade.upgradeLevel == 0) { text = $"<b>Non activé.</b>\n"; }
+            else { text = $"<b>Activé.</b>\n"; }
         }
         text += upgrade.upgradeDescription;
         if (upgrade.upgradeLevel < upgrade.upgradesList.Count - 1)
@@ -227,13 +227,13 @@ public class UpgradeButton : MonoBehaviour
             text = text.Replace("level", upgrade.upgradeLevel.ToString());
             if (upgrade.upgradesList.Count != 2)
             {
-                text += $"\nActuel : {upgrade.upgradesList[upgrade.upgradeLevel].upgradeValue}";
+                text += $"\nActuel : <b>{upgrade.upgradesList[upgrade.upgradeLevel].upgradeValue}</b>";
             }
             if (upgrade.upgradeType == GlobalUpgrades.UpgradeType.JumpHeight)
             {
                 text += "x";
             }
-            text += $"\nCoût : {upgrade.upgradesList[upgrade.upgradeLevel + 1].upgradeCost}";
+            text += $"\nCoût : <b>{upgrade.upgradesList[upgrade.upgradeLevel + 1].upgradeCost}</b>";
 
         }
         toolTip.ShowTooltip(text);

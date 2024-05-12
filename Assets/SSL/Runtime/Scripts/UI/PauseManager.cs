@@ -14,20 +14,20 @@ public class PauseManager : MonoBehaviour
     [SerializeField] private GameObject player;
 
     private Tween tween;
-
+    private Sequence sequence;
     public void Fade()
     {
-        Tween.Alpha(fade, 1, 1, cycleMode: CycleMode.Yoyo, cycles: 2);
+        tween = Tween.Alpha(fade, 1, 1, cycleMode: CycleMode.Yoyo, cycles: 2);
     }
 
     public void FadeIn()
     {
-        Sequence.Create().Group(Tween.Alpha(fade, 0, 0.0001f)).Chain(Tween.Alpha(fade, 1, 1));
+        sequence = Sequence.Create().Group(Tween.Alpha(fade, 0, 0.0001f)).Chain(Tween.Alpha(fade, 1, 1));
 
     }
     public void FadeOut()
     {
-        Sequence.Create().Group(Tween.Alpha(fade, 1, 0.0001f)).Chain(Tween.Alpha(fade, 0, 1));
+        sequence = Sequence.Create().Group(Tween.Alpha(fade, 1, 0.0001f)).Chain(Tween.Alpha(fade, 0, 1));
     }
 
     // Start is called before the first frame update

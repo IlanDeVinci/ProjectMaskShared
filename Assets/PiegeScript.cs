@@ -72,7 +72,6 @@ public class PiegeScript : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        Debug.Log(collision.name);
         if(dmgTimer > 1f)
         {
             if(collision.CompareTag("PlayerTrigger") || collision.CompareTag("Player"))
@@ -91,7 +90,7 @@ public class PiegeScript : MonoBehaviour
             dmgTimer += Time.deltaTime;
             var direction = target.position - transform.position;
             distance = Physics2D.Raycast(transform.position, direction, detectionRadius, player);
-            hit = Physics2D.Raycast(transform.position, direction, detectionRadius + 1, player);
+            hit = Physics2D.Raycast(transform.position, direction, detectionRadius + 0.5f, player);
 
             if (distance && distance.collider.CompareTag("PlayerTrigger"))
             {

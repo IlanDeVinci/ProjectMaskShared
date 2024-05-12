@@ -9,6 +9,7 @@ public class FlyingEnemyLaser : MonoBehaviour
     [SerializeField] private Transform origin;
     [SerializeField] private FlyingEnemyEntity entity;
     [SerializeField] private GameObject _light;
+    private HealthManager healthManager;
     private Vector2 target;
     private Vector2 savedPos;
     private float shootDelay;
@@ -24,6 +25,7 @@ public class FlyingEnemyLaser : MonoBehaviour
     private void Start()
     {
         positions[1] = origin.position  ;
+        healthManager = GameObject.FindAnyObjectByType<HealthManager>();
 
     }
     private void Update()
@@ -90,7 +92,7 @@ public class FlyingEnemyLaser : MonoBehaviour
         {
             if (raycastHit.collider.CompareTag("PlayerTrigger") || raycastHit.collider.CompareTag("Player"))
             {
-                raycastHit.collider.GetComponent<HealthManager>().TakeDamage(damage);
+                healthManager.TakeDamage(damage);
 
             }
         }

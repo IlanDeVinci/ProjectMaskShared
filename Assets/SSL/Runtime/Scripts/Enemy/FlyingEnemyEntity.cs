@@ -1,6 +1,7 @@
 using PrimeTween;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FlyingEnemyEntity : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class FlyingEnemyEntity : MonoBehaviour
     [SerializeField] private FlyingEnemyLaser flyingLaser;
     [SerializeField] private EnemyHealthManager healthManager;
     [SerializeField] private float detectionRange;
+    [SerializeField] private SpriteRenderer detectionImage;
 
     private bool canMove = true;
     private bool isPlayerDetected = false;
@@ -391,7 +393,17 @@ public class FlyingEnemyEntity : MonoBehaviour
                 }
             }
             posWithoutOscillationTransform.position = posWithoutOscillation;
-
+            if(isPlayerDetected)
+            {
+                detectionImage.color = Color.red;
+            } else if (isSearchingLastPos)
+            {
+                detectionImage.color = Color.yellow;
+            }
+            else
+            {
+                detectionImage.color = Color.green;
+            }
         }
 
     }

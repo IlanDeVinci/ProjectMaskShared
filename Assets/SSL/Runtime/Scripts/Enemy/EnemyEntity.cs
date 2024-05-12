@@ -44,6 +44,11 @@ public class EnemyEntity : MonoBehaviour
 
     [SerializeField] private float _attackCooldown = 2f;
 
+    [Header("Detection")]
+    [SerializeField] private Collider_Range_Gauche _colliderRangeGauche;
+
+    [SerializeField] private Collider_Range_Droit _colliderRangeDroit;
+
 
     // [Header("Vie")]
     // private float health = 5f;
@@ -186,6 +191,7 @@ public class EnemyEntity : MonoBehaviour
         while (Mathf.Abs(_directionToPlayer) <= _stopDistance && Mathf.Abs(_heightToPlayer) <= 3)
         {
             _AttackPlayer();
+            _ShockWave();
             yield return new WaitForSeconds(_attackCooldown);
         }
         isAttacking = false;
@@ -219,7 +225,6 @@ public class EnemyEntity : MonoBehaviour
         }
 
         if (Mathf.Abs(_directionToPlayer) <=_stopDistance && Mathf.Abs(_heightToPlayer) <= 3 && !isAttacking){
-            Debug.Log("Coroutine Attack");
             StartCoroutine(Attack());
         }
         else
@@ -230,11 +235,38 @@ public class EnemyEntity : MonoBehaviour
 
     private void _AttackPlayer()
     {
-        Debug.Log("Attack");
         _healthManager.TakeDamage(_attackForce);
-        
     }
 
+    private void _ShockWave()
+    {
+        if (_colliderRangeGauche.IsPlayerInRangeLeft)
+        {
+            if (_OrientDirX == 1)
+            {
+                _horizontalSpeed = -2;
+                _healthManager.TakeDamage(7);
+            }
+            if (_OrientDirX == -1)
+            {
+                _horizontalSpeed = 2;
+                _healthManager.TakeDamage(7);
+            }
+        }
+        if (_colliderRangeDroit.IsPlayerInRangeRight)
+        {
+            if (_OrientDirX == 1)
+            {
+                _horizontalSpeed = 2;
+                _healthManager.TakeDamage(7);
+            }
+            if (_OrientDirX == -1)
+            {
+                _horizontalSpeed = -2;
+                _healthManager.TakeDamage(7);
+            }
+        }
+    }
     private void OnGUI(){
             GUILayout.Label($"IsEnemyTouchingGround: {IsEnemyTouchingGround}");
             GUILayout.Label($"IsEnemyTouchingWallRight: {IsEnemyTouchingWallRight}");

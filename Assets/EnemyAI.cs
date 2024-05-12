@@ -41,12 +41,14 @@ public class EnemyAI : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(TargetInRange() && followEnabled)
+        if(!GlobalManager.isGamePaused)
         {
-            PathFollow();
+            if (TargetInRange() && followEnabled)
+            {
+                PathFollow();
+            }
+            jumptimer += Time.deltaTime;
         }
-        jumptimer += Time.deltaTime;
-
     }
 
     private void UpdatePath()

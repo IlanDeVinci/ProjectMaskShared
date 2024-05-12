@@ -86,7 +86,7 @@ public class KamikazeScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!isOver)
+        if(!isOver && !GlobalManager.isGamePaused)
         {
             LocatePlayer();
             if (isPlayerInRange)

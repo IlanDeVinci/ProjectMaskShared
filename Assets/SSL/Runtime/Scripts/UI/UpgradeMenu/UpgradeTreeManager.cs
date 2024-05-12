@@ -203,7 +203,6 @@ public class UpgradeTreeManager : MonoBehaviour
     private void Update()
     {
         mDelta = (float)UnscaledMoveSpeedDelta * (float)(Screen.width / 1920f);
-        Debug.Log(mDelta);
         if (GlobalManager.isGamePaused)
         {
             if (canMove)

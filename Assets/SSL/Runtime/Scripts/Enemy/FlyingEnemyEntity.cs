@@ -13,7 +13,7 @@ public class FlyingEnemyEntity : MonoBehaviour
     private bool canMove = true;
     private bool isPlayerDetected = false;
     private float distanceToGround => raycasts.DistanceFromGround(posWithoutOscillationTransform);
-    private float distanceToCeiling => raycasts.DistanceFromCeiling(posWithoutOscillationTransform);
+    private float distanceToCeiling => raycasts.DistanceFromCeiling(transform);
 
     private float distanceToLeft => raycasts.DistanceFromLeft();
     private float distanceToRight => raycasts.DistanceFromRight();
@@ -86,14 +86,13 @@ public class FlyingEnemyEntity : MonoBehaviour
 
             oscillationTween.isPaused = false;
         }
-
         posWithoutOscillation = new Vector2(transform.position.x, newPos);
         //if (canOscillate)
 
         if (canOscillate)
         {
-            newPos += oscillation;
         }
+        newPos += oscillation;
 
         transform.position = new Vector2(transform.position.x, newPos);
         if (isPatrollingRight)

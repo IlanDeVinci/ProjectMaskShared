@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backgroundImage: {fileID: 3797801878501112002}
-  mDelta: 150
+  UnscaledMoveSpeedDelta: 100
   xPos: 0
   yPos: 0
   maxXPos: 1800

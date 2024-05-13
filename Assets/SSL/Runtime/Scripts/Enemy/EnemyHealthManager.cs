@@ -14,6 +14,7 @@ public class EnemyHealthManager : MonoBehaviour
     [SerializeField] private GameObject entity;
     [SerializeField] private GameObject dmgText;
     [SerializeField] private SpriteRenderer[] spriteRenderers;
+    [SerializeField] private GameObject[] toDestroy;
     [SerializeField] private ParticleSystem particle;
     private bool hasDied = false;
 
@@ -33,6 +34,11 @@ public class EnemyHealthManager : MonoBehaviour
         float alpha = 1.0f;
         Tween die = Tween.Custom(1, 0f, 1f, onValueChange: val => alpha = val);
         particle.Play();
+        foreach(GameObject game in toDestroy)
+        {
+            Destroy(game);
+        }
+
         while (die.isAlive)
         {
             foreach (SpriteRenderer spriteRenderer in spriteRenderers)

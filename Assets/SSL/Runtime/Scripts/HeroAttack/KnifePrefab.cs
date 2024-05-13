@@ -212,7 +212,6 @@ public class KnifePrefab : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(boxCollider.isTrigger);
         if (boxCollider.isTrigger) DoCollisionTrigger(collision);
 
     }

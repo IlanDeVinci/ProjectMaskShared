@@ -1,7 +1,6 @@
 using PrimeTween;
 using System.Collections;
 using UnityEngine;
-using PrimeTween;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
@@ -18,10 +17,15 @@ public class KamikazeScript : MonoBehaviour
     [SerializeField] int explosionDamage;
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] ParticleSystem particle;
+    [SerializeField] Slider slider;
+    [SerializeField] Image fill;
+
+    private Collider2D col;
+    private Rigidbody2D rb;
     private Shader shaderGUItext;
     [SerializeField] private Shader shaderSpritesDefault;
     private Coroutine coroutine;
-    private Slider healthBar;
+    [SerializeField] private Slider healthBar;
     private Light2D lightboom;
     private HealthManager healthManager;
     private float explosionTimer;
@@ -37,8 +41,9 @@ public class KamikazeScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        col = GetComponent<Collider2D>();
+        rb = GetComponent<Rigidbody2D>();
         shaderGUItext = Shader.Find("GUI/Text Shader");
-        healthBar = GetComponentInChildren<Slider>();
         lightboom = GetComponentInChildren<Light2D>();
         healthManager = GameObject.FindAnyObjectByType<HealthManager>();
         EnemyAI = GetComponent<EnemyAI>();
@@ -86,7 +91,7 @@ public class KamikazeScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!isOver && !GlobalManager.isGamePaused)
+        if(!isOver && !GlobalManager.isGamePaused && healthManager.currentHealth > 0)
         {
             LocatePlayer();
             if (isPlayerInRange)
@@ -99,15 +104,19 @@ public class KamikazeScript : MonoBehaviour
             {
 
                 EnemyAI.followEnabled = true;
-                explosionTimer = 0f;
+                explosionTimer -= 2* Time.deltaTime;
 
             }
+            if(explosionTimer < 0) explosionTimer = 0;
+
             if (explosionTimer > explosionDuration)
             {
                 EnemyAI.followEnabled = false;
                 isOver = true;
                 StartCoroutine(Explode());
             }
+            slider.value = explosionTimer / explosionDuration;
+            if(fill) fill.color = Color.Lerp(Color.green, Color.red, slider.value);
         }
 
     }
@@ -118,16 +127,21 @@ public class KamikazeScript : MonoBehaviour
         Tween.Scale(transform, startValue:transform.localScale, endValue:transform.localScale*1.3f, 0.3f);
         yield return tween.ToYieldInstruction();
         particle.Play();
-        Sequence.Create().Chain(Tween.Custom(lightboom.intensity, 10, 0.8f, onValueChange:val => lightboom.intensity = val)).Chain(Tween.Custom(lightboom.intensity, 0, 0.1f, onValueChange: val => lightboom.intensity = val));    
+        Sequence.Create().Chain(Tween.Custom(lightboom.intensity, 10, 0.2f, onValueChange:val => lightboom.intensity = val)).Group(Tween.Custom(lightboom.pointLightOuterRadius, 10, 0.2f, onValueChange: val => lightboom.pointLightOuterRadius = val)).Chain(Tween.Custom(lightboom.intensity, 0, 0.2f, onValueChange: val => lightboom.intensity = val));    
         var direction = target.position - transform.position;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, explosionRange, onlyPlayer);
         if (hit)
         {
             healthManager.TakeDamage(explosionDamage);
         }
-        StopCoroutine(coroutine);
+        Destroy(rb);
+        Destroy(col);
         Destroy(healthBar);
+        Destroy(slider);
+        Destroy(fill);
+        StopCoroutine(coroutine);
+
         Destroy(spriteRenderer);
-        Destroy(gameObject, 1);
+        Destroy(gameObject, 0.6f);
     }
 }

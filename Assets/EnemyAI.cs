@@ -14,7 +14,6 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private float nextWaypointDistance = 3f;
     [SerializeField] private float jumpNodeHeightRequirement = 0.8f;
     [SerializeField] private float jumpModifier = 0.3f;
-    [SerializeField] private float jumpCheckOffset = 0.1f;
 
     [Header("Custom Behaviour")]
     [SerializeField] public bool followEnabled = true;
@@ -25,8 +24,11 @@ public class EnemyAI : MonoBehaviour
     private Path path;
     private int currentWaypoint = 0;
     private float jumptimer = 0;
+    private float wallTimer = 0;
+    private bool isPaused = false;
     [SerializeField] LayerMask groundLayer;
-
+    private Vector2 velocityBeforePause;
+    private float gravityBeforePause;
     [SerializeField] Seeker seeker;
     [SerializeField] public Rigidbody2D rb;
     [SerializeField] Collider2D col;
@@ -43,12 +45,34 @@ public class EnemyAI : MonoBehaviour
     {
         if(!GlobalManager.isGamePaused)
         {
-            if (TargetInRange() && followEnabled)
+
+            if (TargetInRange() && followEnabled && target.CompareTag("PlayerTrigger"))
             {
                 PathFollow();
             }
             jumptimer += Time.deltaTime;
+            wallTimer += Time.deltaTime;
         }
+        else
+        {
+            if (!isPaused)
+            {
+                StartCoroutine(Pause());
+            }
+        }
+    }
+
+    private IEnumerator Pause()
+    {
+        isPaused = true;
+        gravityBeforePause = rb.gravityScale;
+        rb.gravityScale = 0;
+        velocityBeforePause = rb.velocity;
+        rb.velocity = Vector2.zero;
+        yield return new WaitUntil(() => GlobalManager.isGamePaused == false);
+        rb.velocity = velocityBeforePause;
+        isPaused = false;
+        rb.gravityScale = gravityBeforePause;
     }
 
     private void UpdatePath()
@@ -77,28 +101,37 @@ public class EnemyAI : MonoBehaviour
         bool isHole = false;
         RaycastHit2D isHoleRight = Physics2D.Raycast(new Vector2((transform.position.x + col.bounds.extents.x + 0.5f),transform.position.y), Vector2.down, col.bounds.extents.y + 0.5f, groundLayer);
         RaycastHit2D isHoleLeft = Physics2D.Raycast(new Vector2((transform.position.x - col.bounds.extents.x - 0.5f), transform.position.y), Vector2.down, col.bounds.extents.y + 0.5f, groundLayer);
-        if(rb.velocity.x > 0 && !isHoleRight) { 
+        RaycastHit2D isWallRight = Physics2D.Raycast(new Vector2(transform.position.x, (transform.position.y - col.bounds.extents.y)), Vector2.right, col.bounds.extents.x + 2f, groundLayer);
+        RaycastHit2D isWallLeft = Physics2D.Raycast(new Vector2(transform.position.x, (transform.position.y - col.bounds.extents.y)), Vector2.left, col.bounds.extents.x + 2f, groundLayer);
+        if(isWallLeft || isWallRight)
+        {
+            wallTimer = 0;
+            if(isGrounded && jumptimer > 1.25f)
+            {
+                isHole=true;
+            }
+        }
+        if (rb.velocity.x > 0 && !isHoleRight) { 
             isHole = true;
         } else if(rb.velocity.x < 0 && !isHoleLeft)
         {
             isHole = true;
         }
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
+        direction.Normalize();
         Vector2 force = direction * speed * Time.deltaTime;
         float verticalDistance = target.transform.position.y - transform.position.y;
         if(verticalDistance <= 1) {
             verticalDistance = 1;
         }
-        if(jumpEnabled && isGrounded && (jumptimer > 1.5f|| isHole))
+        if(jumpEnabled && isGrounded && (jumptimer > 1.25f || isHole))
         {
             if((direction.y > jumpNodeHeightRequirement) || isHole)
             {
                 //verticalDistance = Mathf.Min(verticalDistance, 10);
                 float extraJump = Mathf.Log(Mathf.Abs(verticalDistance));
-                Debug.Log(extraJump);
 
                 extraJump = Mathf.Clamp(extraJump,1, 1.5f);
-                Debug.Log(extraJump);
 
                 rb.AddForce(Vector2.up * speed * jumpModifier * extraJump);
                 jumptimer = 0;
@@ -107,6 +140,21 @@ public class EnemyAI : MonoBehaviour
         }
 
         rb.AddForce(force);
+        if(!isWallRight && !isWallLeft && wallTimer < 0.5f)
+        {
+
+            if (target.position.x > transform.position.x)
+            {
+                rb.AddForce(Vector2.right * 100);
+
+            }
+            else
+            {
+                rb.AddForce(Vector2.left * 100);
+            }
+
+            wallTimer = 1;
+        }
 
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
         if(distance < nextWaypointDistance)

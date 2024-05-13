@@ -96,7 +96,10 @@ public class KamikazeScript : MonoBehaviour
             LocatePlayer();
             if (isPlayerInRange)
             {
-                EnemyAI.followEnabled = false;
+                if(Mathf.Abs(target.position.y - transform.position.y) > 0.2f)
+                {
+                    EnemyAI.followEnabled = false;
+                }
                 explosionTimer += Time.deltaTime;
                 
             }

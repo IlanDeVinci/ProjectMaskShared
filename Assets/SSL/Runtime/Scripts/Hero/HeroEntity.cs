@@ -463,8 +463,9 @@ public class HeroEntity : MonoBehaviour
         }
         else
         {
-            _ResetVerticalSpeed();
-            _jumpState = JumpState.NotJumping;
+        if (_verticalSpeed <= 0) _jumpState = JumpState.NotJumping;
+        _ResetVerticalSpeed();
+
         }
     }
 
@@ -776,6 +777,7 @@ public class HeroEntity : MonoBehaviour
             _ApplyVerticalSpeed();
 
             _ResetSpeedOnWallCollision();
+
         }
         else
         {

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8191962397384550361}
   - component: {fileID: 3767215664581562166}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10239,14 +10239,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthSlider: {fileID: 4954586945066844204}
-  maxHealth: 100
+  maxHealth: 50
   totalLives: 1
-  damageMultiplier: 1
   entity: {fileID: 7522587848472986232}
   dmgText: {fileID: 7238166602704635420, guid: acdc41b42aaeb5a4bad063e260780239, type: 3}
   spriteRenderers:
   - {fileID: 3767215664581562166}
   - {fileID: 1857729555685452429}
+  - {fileID: 5592401273383593942}
+  canvasGroups:
+  - {fileID: 2396397740223721591}
+  toDestroy: []
   particle: {fileID: 2405501694991682772}
   currentHealth: 0
   currentLives: 0
@@ -10646,6 +10649,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73823e3d4a8fa974b9c93d097a8ff1b2, type: 3}
+--- !u!225 &2396397740223721591 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 7720111318445070851, guid: 73823e3d4a8fa974b9c93d097a8ff1b2, type: 3}
+  m_PrefabInstance: {fileID: 5360109680996739700}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4954586945066844204 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1054077369411578456, guid: 73823e3d4a8fa974b9c93d097a8ff1b2, type: 3}

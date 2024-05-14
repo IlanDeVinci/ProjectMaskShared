@@ -138,9 +138,6 @@ public class UpgradeButton : MonoBehaviour
         int totalLength = (int)(4200) ;
         float totalHeight = (int)(3100);
 
-        Debug.Log(totalLength);
-
-        Debug.Log(totalHeight);
         upgradeNameText.text = upgrade.upgradeName;
         transform.position =
             //new Vector2(-1300, +2100)
@@ -185,9 +182,7 @@ public class UpgradeButton : MonoBehaviour
     {
         if (GlobalManager.playerMoney >= upgrade.upgradesList[upgrade.upgradeLevel + 1].upgradeCost && upgrade.upgradeLevel < upgrade.upgradesList.Count - 1)
         {
-            Debug.Log(GlobalManager.playerMoney);
             GlobalManager.playerMoney -= upgrade.upgradesList[upgrade.upgradeLevel + 1].upgradeCost;
-            Debug.Log(GlobalManager.playerMoney);
             var savedText = Instantiate(fadingText, GameObject.FindGameObjectWithTag("UpgradeMenuImage").transform);
             savedText.GetComponent<TextFollowMouse>().value = upgrade.upgradesList[upgrade.upgradeLevel + 1].upgradeCost;
             upgrade.upgradeLevel++;

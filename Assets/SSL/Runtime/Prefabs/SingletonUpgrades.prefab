@@ -166,16 +166,16 @@ MonoBehaviour:
     upgradesList:
     - isUpgradeAcquired: 0
       upgradeCost: 0
-      upgradeValue: 0.9
+      upgradeValue: 1
     - isUpgradeAcquired: 0
       upgradeCost: 20
-      upgradeValue: 1.1
+      upgradeValue: 1.15
     - isUpgradeAcquired: 0
       upgradeCost: 40
       upgradeValue: 1.3
     - isUpgradeAcquired: 0
       upgradeCost: 60
-      upgradeValue: 1.5
+      upgradeValue: 1.42
     upgradeLevel: 0
   - upgradeId: 6
     isUpgradeAcquiredFull: 0

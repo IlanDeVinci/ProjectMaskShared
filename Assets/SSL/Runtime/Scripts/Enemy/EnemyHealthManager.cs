@@ -10,14 +10,16 @@ public class EnemyHealthManager : MonoBehaviour
     [SerializeField] Slider healthSlider;
     [SerializeField] private int maxHealth;
     [SerializeField] private int totalLives;
-    [SerializeField] private int damageMultiplier = 1;
+    private int damageMultiplier = 1;
     [SerializeField] private GameObject entity;
     [SerializeField] private GameObject dmgText;
     [SerializeField] private SpriteRenderer[] spriteRenderers;
+    [SerializeField] private CanvasGroup[] canvasGroups;
+
     [SerializeField] private GameObject[] toDestroy;
     [SerializeField] private ParticleSystem particle;
     private bool hasDied = false;
-
+    private bool isVulnerable = true;
     public int currentHealth;
     public int currentLives;
 
@@ -42,7 +44,13 @@ public class EnemyHealthManager : MonoBehaviour
         while (die.isAlive)
         {
             foreach (SpriteRenderer spriteRenderer in spriteRenderers)
+            {
                 spriteRenderer.color = new Color(255, 255, 255, alpha);
+            }
+            foreach (CanvasGroup canvas in canvasGroups)
+            {
+                canvas.alpha = alpha;
+            }
             yield return new WaitForEndOfFrame();
 
         }
@@ -58,9 +66,24 @@ public class EnemyHealthManager : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            if(!hasDied) StartCoroutine(Die());
+            if(currentLives > 1)
+            {
+                currentLives--;
+                isVulnerable = false;
+                Tween.Custom(0, 1, 3f,  ease:Ease.Linear, onValueChange: val => healthSlider.value = val);
+                currentHealth = maxHealth;
+            }
+            else
+            {
+                if(isVulnerable)
+                {
+                    if (!hasDied) StartCoroutine(Die());
+                }
+            }
             //SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
         }
+        if (healthSlider.value > 0.99) isVulnerable = true;
+
     }
 
     public int GetHP()
@@ -70,20 +93,24 @@ public class EnemyHealthManager : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        var random = new System.Random();
-        damage += random.Next((-damage / 5) - 1, (damage / 5) + 1);
-        damageMultiplier = 1 * GlobalManager.isNextHitDoubled;
-        if(damageMultiplier == 0)
+        if (isVulnerable)
         {
-            damageMultiplier = 1;
+            var random = new System.Random();
+            damage += random.Next((-damage / 5) - 1, (damage / 5) + 1);
+            damageMultiplier = 1 * GlobalManager.isNextHitDoubled;
+            if (damageMultiplier == 0)
+            {
+                damageMultiplier = 1;
+            }
+            GlobalManager.isNextHitDoubled = 1;
+
+            Tween.Custom(startValue: currentHealth, endValue: currentHealth - (damage * damageMultiplier), duration: 1, ease: Ease.OutSine,
+                onValueChange: newVal => healthSlider.value = newVal / maxHealth);
+
+            currentHealth -= damage * damageMultiplier;
+            GameObject savedText = Instantiate(dmgText, transform.position, Quaternion.identity);
+            savedText.GetComponent<DamageTextScript>().value = damage * damageMultiplier;
         }
-        GlobalManager.isNextHitDoubled = 1;
-
-        Tween.Custom(startValue: currentHealth, endValue: currentHealth - (damage * damageMultiplier), duration: 1, ease: Ease.OutSine,
-            onValueChange: newVal => healthSlider.value = newVal / maxHealth);
-
-        currentHealth -= damage * damageMultiplier;
-        GameObject savedText = Instantiate(dmgText, transform.position, Quaternion.identity);
-        savedText.GetComponent<DamageTextScript>().value = damage * damageMultiplier;
+      
     }
 }

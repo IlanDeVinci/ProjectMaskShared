@@ -35,11 +35,43 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] LayerMask platform;
     [SerializeField] LayerMask groundandplatform;
 
+
     private void Start()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         target = GameObject.FindGameObjectWithTag("PlayerTrigger").transform;
         InvokeRepeating("UpdatePath", 0f, updateCd);
+    }
+
+    private void Idle()
+    {
+        RaycastHit2D isWallRight = Physics2D.Raycast(new Vector2(transform.position.x, (transform.position.y - col.bounds.extents.y + 0.2f)), Vector2.right, col.bounds.extents.x + 2f, groundLayer);
+        RaycastHit2D isWallLeft = Physics2D.Raycast(new Vector2(transform.position.x, (transform.position.y - col.bounds.extents.y + 0.2f)), Vector2.left, col.bounds.extents.x + 2f, groundLayer);
+        RaycastHit2D isHoleRight = Physics2D.Raycast(new Vector2((transform.position.x + col.bounds.extents.x + 0.5f), transform.position.y), Vector2.down, col.bounds.extents.y + 0.5f, groundandplatform);
+        RaycastHit2D isHoleLeft = Physics2D.Raycast(new Vector2((transform.position.x - col.bounds.extents.x - 0.5f), transform.position.y), Vector2.down, col.bounds.extents.y + 0.5f, groundandplatform);
+        if(spriteRenderer.flipX == false)
+        {
+            if (!isWallLeft && isHoleLeft)
+            {
+                rb.AddForce(new Vector2(-1, 0));
+            }
+            else
+            {
+                spriteRenderer.flipX = true;
+            }
+        }
+        else
+        {
+            if (!isWallRight && isHoleRight)
+            {
+                rb.AddForce(new Vector2(1, 0));
+            }
+            else
+            {
+                spriteRenderer.flipX = false;
+            }
+        }
+
     }
 
     private void FixedUpdate()
@@ -50,6 +82,17 @@ public class EnemyAI : MonoBehaviour
             if (TargetInRange() && followEnabled && target.CompareTag("PlayerTrigger"))
             {
                 PathFollow();
+            }
+            else
+            {
+                if (!followEnabled)
+                {
+                    rb.velocity = new Vector2(rb.velocity.x / 1.2f, rb.velocity.y);
+                }
+                else
+                {
+                    Idle();
+                }
             }
             jumptimer += Time.deltaTime;
             wallTimer += Time.deltaTime;

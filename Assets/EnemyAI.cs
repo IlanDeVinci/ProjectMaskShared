@@ -32,12 +32,13 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] Seeker seeker;
     [SerializeField] public Rigidbody2D rb;
     [SerializeField] Collider2D col;
+    [SerializeField] LayerMask platform;
+    [SerializeField] LayerMask groundandplatform;
 
     private void Start()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         target = GameObject.FindGameObjectWithTag("PlayerTrigger").transform;
-
         InvokeRepeating("UpdatePath", 0f, updateCd);
     }
 
@@ -62,6 +63,16 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    private bool isTouchingPlatform()
+    {
+        if(col.IsTouchingLayers(platform)) return true;
+      
+        return false;
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+    }
     private IEnumerator Pause()
     {
         isPaused = true;
@@ -99,17 +110,21 @@ public class EnemyAI : MonoBehaviour
 
         RaycastHit2D isGrounded = Physics2D.BoxCast(col.bounds.center, col.bounds.size, 0, Vector2.down, 0.1f, groundLayer);
         bool isHole = false;
-        RaycastHit2D isHoleRight = Physics2D.Raycast(new Vector2((transform.position.x + col.bounds.extents.x + 0.5f),transform.position.y), Vector2.down, col.bounds.extents.y + 0.5f, groundLayer);
-        RaycastHit2D isHoleLeft = Physics2D.Raycast(new Vector2((transform.position.x - col.bounds.extents.x - 0.5f), transform.position.y), Vector2.down, col.bounds.extents.y + 0.5f, groundLayer);
+        RaycastHit2D isHoleRight = Physics2D.Raycast(new Vector2((transform.position.x + col.bounds.extents.x + 0.5f),transform.position.y), Vector2.down, col.bounds.extents.y + 0.5f, groundandplatform);
+        RaycastHit2D isHoleLeft = Physics2D.Raycast(new Vector2((transform.position.x - col.bounds.extents.x - 0.5f), transform.position.y), Vector2.down, col.bounds.extents.y + 0.5f, groundandplatform);
         RaycastHit2D isWallRight = Physics2D.Raycast(new Vector2(transform.position.x, (transform.position.y - col.bounds.extents.y)), Vector2.right, col.bounds.extents.x + 2f, groundLayer);
         RaycastHit2D isWallLeft = Physics2D.Raycast(new Vector2(transform.position.x, (transform.position.y - col.bounds.extents.y)), Vector2.left, col.bounds.extents.x + 2f, groundLayer);
-        if(isWallLeft || isWallRight)
+        if (!isTouchingPlatform())
         {
-            wallTimer = 0;
-            if(isGrounded && jumptimer > 1.25f)
+            if ((isWallLeft && !isWallRight) || (!isWallLeft && isWallRight))
             {
-                isHole=true;
+                wallTimer = 0;
+                if (isGrounded && jumptimer > 1.25f)
+                {
+                    isHole = true;
+                }
             }
+
         }
         if (rb.velocity.x > 0 && !isHoleRight) { 
             isHole = true;

@@ -501,6 +501,7 @@ public class HeroEntity : MonoBehaviour
         }
     }
 
+    
     private void _ApplyGroundDetection()
     {
         IsTouchingGround = _groundDetector.DetectGroundNearBy();
@@ -568,7 +569,7 @@ public class HeroEntity : MonoBehaviour
 
     private void _ResetVerticalSpeed()
     {
-        _verticalSpeed = 0f;
+        if(_verticalSpeed < 0)  _verticalSpeed = 0f;
     }
 
     private void _ResetHorizontalSpeed()

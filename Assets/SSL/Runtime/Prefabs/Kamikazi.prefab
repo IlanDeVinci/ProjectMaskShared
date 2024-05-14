@@ -10498,7 +10498,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -10551,7 +10551,6 @@ MonoBehaviour:
   nextWaypointDistance: 3
   jumpNodeHeightRequirement: 0.8
   jumpModifier: 1
-  jumpCheckOffset: 0.1
   followEnabled: 1
   jumpEnabled: 1
   directionEnabled: 1
@@ -10561,6 +10560,12 @@ MonoBehaviour:
   seeker: {fileID: 949328313752326430}
   rb: {fileID: 8513348235271471989}
   col: {fileID: 5979621331468437812}
+  platform:
+    serializedVersion: 2
+    m_Bits: 8192
+  groundandplatform:
+    serializedVersion: 2
+    m_Bits: 8384
 --- !u!114 &949328313752326430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10601,7 +10606,7 @@ BoxCollider2D:
   m_Material: {fileID: 6200000, guid: 3aa90e189c58491468a67afb3329e400, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8384
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 3328
@@ -10611,7 +10616,7 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_ForceReceiveLayers:
     serializedVersion: 2
-    m_Bits: 7679
+    m_Bits: 15871
   m_ContactCaptureLayers:
     serializedVersion: 2
     m_Bits: 4294967295

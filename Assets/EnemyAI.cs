@@ -87,7 +87,12 @@ public class EnemyAI : MonoBehaviour
             {
                 if (!followEnabled)
                 {
-                    rb.velocity = new Vector2(rb.velocity.x / 1.2f, rb.velocity.y);
+                    if(target.position.y > transform.position.y + 1)
+                    {
+                        if (rb)
+                            rb.velocity = new Vector2(rb.velocity.x / 1.2f, rb.velocity.y);
+                    }
+
                 }
                 else
                 {
@@ -119,14 +124,20 @@ public class EnemyAI : MonoBehaviour
     private IEnumerator Pause()
     {
         isPaused = true;
-        gravityBeforePause = rb.gravityScale;
-        rb.gravityScale = 0;
-        velocityBeforePause = rb.velocity;
-        rb.velocity = Vector2.zero;
+        if (rb)
+        {
+            gravityBeforePause = rb.gravityScale;
+            rb.gravityScale = 0;
+            velocityBeforePause = rb.velocity;
+            rb.velocity = Vector2.zero;
+        }
         yield return new WaitUntil(() => GlobalManager.isGamePaused == false);
-        rb.velocity = velocityBeforePause;
         isPaused = false;
-        rb.gravityScale = gravityBeforePause;
+        if (rb) {
+            rb.velocity = velocityBeforePause;
+            rb.gravityScale = gravityBeforePause;
+        }
+
     }
 
     private void UpdatePath()

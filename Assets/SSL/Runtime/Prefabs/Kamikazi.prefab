@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8891234027081756988}
   - component: {fileID: 4812863478961463484}
   - component: {fileID: 4925931482665971251}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Died
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4899,7 +4899,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8522173993653495950}
   - component: {fileID: 5559610696259608114}
-  m_Layer: 5
+  m_Layer: 14
   m_Name: Timer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4988,7 +4988,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5969383688973553176}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5026,7 +5026,7 @@ GameObject:
   - component: {fileID: 364662244209835762}
   - component: {fileID: 8867493139725624060}
   - component: {fileID: 2894396389514946039}
-  m_Layer: 5
+  m_Layer: 14
   m_Name: Center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5101,7 +5101,7 @@ GameObject:
   - component: {fileID: 6336864766929105734}
   - component: {fileID: 5621142034672993531}
   - component: {fileID: 6888909168576233365}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5176,7 +5176,7 @@ GameObject:
   - component: {fileID: 1471872021078309963}
   - component: {fileID: 4080053779349714137}
   - component: {fileID: 7759427899800217738}
-  m_Layer: 5
+  m_Layer: 14
   m_Name: InnerBorder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5252,7 +5252,7 @@ GameObject:
   - component: {fileID: 6041209402588488695}
   - component: {fileID: 8177275633834050865}
   - component: {fileID: 5759346100638550546}
-  m_Layer: 5
+  m_Layer: 14
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5327,7 +5327,7 @@ GameObject:
   - component: {fileID: 1245023228374342322}
   - component: {fileID: 3959068767196923567}
   - component: {fileID: 9133921703109196101}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5401,7 +5401,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8349798352773780161}
   - component: {fileID: 7834405592877534425}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5491,7 +5491,7 @@ GameObject:
   - component: {fileID: 5378277036002777232}
   - component: {fileID: 4504504517793669757}
   - component: {fileID: 7609446989116405891}
-  m_Layer: 5
+  m_Layer: 14
   m_Name: OuterBorder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5565,7 +5565,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9188302279210287291}
   - component: {fileID: 997804483885870568}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5650,7 +5650,7 @@ GameObject:
   - component: {fileID: 369412260054764197}
   - component: {fileID: 7175417463471828391}
   - component: {fileID: 552417081512091162}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: BigBoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10540,7 +10540,7 @@ GameObject:
   - component: {fileID: 6853979788958677836}
   - component: {fileID: 122468813795398464}
   - component: {fileID: 4255325290530785160}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10653,7 +10653,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5478398871692684075}
   - component: {fileID: 3793499199275781040}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: EnemyLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10740,7 +10740,7 @@ GameObject:
   - component: {fileID: 949328313752326430}
   - component: {fileID: 5979621331468437812}
   - component: {fileID: 3814002435416538945}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Kamikazi
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -10853,7 +10853,7 @@ MonoBehaviour:
     m_Bits: 8192
   groundandplatform:
     serializedVersion: 2
-    m_Bits: 8384
+    m_Bits: 24768
 --- !u!114 &949328313752326430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10942,7 +10942,6 @@ MonoBehaviour:
   healthSlider: {fileID: 7834405592877534425}
   maxHealth: 50
   totalLives: 0
-  damageMultiplier: 1
   entity: {fileID: 7933624646914003413}
   dmgText: {fileID: 7238166602704635420, guid: acdc41b42aaeb5a4bad063e260780239, type: 3}
   spriteRenderers:
@@ -10955,6 +10954,7 @@ MonoBehaviour:
   particle: {fileID: 4812863478961463484}
   currentHealth: 0
   currentLives: 0
+  isBoss: 0
 --- !u!1 &8385984898446273582
 GameObject:
   m_ObjectHideFlags: 0
@@ -10964,7 +10964,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3130342643029210369}
-  m_Layer: 5
+  m_Layer: 14
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}

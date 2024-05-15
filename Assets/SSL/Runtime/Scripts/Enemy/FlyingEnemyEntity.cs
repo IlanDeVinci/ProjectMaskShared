@@ -45,8 +45,10 @@ public class FlyingEnemyEntity : MonoBehaviour
     [SerializeField] private LayerMask player;
     [SerializeField] private float followOffsetX;
     [SerializeField] private float followOffsetY;
+    private float lastFollowUpdateTime = 0;
+    private Vector2 lastFollowUpdatePos;
     private Vector2 lastSeenPos;
-            private Vector2 lastSeenPosForLaser;
+    private Vector2 lastSeenPosForLaser;
 
     // Start is called before the first frame update
     void Start()
@@ -265,8 +267,12 @@ public class FlyingEnemyEntity : MonoBehaviour
 
     private void FollowPlayer()
     {
-
-        Vector2 posToFollowAt = target.position;
+        if(lastFollowUpdateTime < Time.time - 1)
+        {
+            lastFollowUpdateTime = Time.time;
+            lastFollowUpdatePos = target.position;
+        }
+        Vector2 posToFollowAt = lastFollowUpdatePos;
         if (!isShooting)
         {
             playerHidingTime += Time.deltaTime;

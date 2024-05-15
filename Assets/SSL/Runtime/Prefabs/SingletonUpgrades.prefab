@@ -120,16 +120,16 @@ MonoBehaviour:
     upgradesList:
     - isUpgradeAcquired: 0
       upgradeCost: 0
-      upgradeValue: 2
+      upgradeValue: 4
     - isUpgradeAcquired: 0
       upgradeCost: 10
-      upgradeValue: 4
+      upgradeValue: 5
     - isUpgradeAcquired: 0
       upgradeCost: 15
       upgradeValue: 6
     - isUpgradeAcquired: 0
       upgradeCost: 20
-      upgradeValue: 8
+      upgradeValue: 7
     upgradeLevel: 0
   - upgradeId: 4
     isUpgradeAcquiredFull: 0

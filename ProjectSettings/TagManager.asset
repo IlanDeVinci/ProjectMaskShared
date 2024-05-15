@@ -16,6 +16,7 @@ TagManager:
   - HPSlider
   - Enemy
   - Ground
+  - BossHPBar
   layers:
   - Default
   - TransparentFX
@@ -31,7 +32,7 @@ TagManager:
   - PlayerCollision
   - Particles
   - Platform
-  - 
+  - Enemy
   - 
   - 
   - 

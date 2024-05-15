@@ -49,8 +49,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   circle: {fileID: 8431449623550921770}
-  collider: {fileID: 3373783819277866848}
+  circleCollider: {fileID: 0}
   particle: {fileID: 4249793070361166711}
+  damage: 5
   rb: {fileID: 4079508744701348085}
 --- !u!50 &4079508744701348085
 Rigidbody2D:
@@ -94,7 +95,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 24576
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2

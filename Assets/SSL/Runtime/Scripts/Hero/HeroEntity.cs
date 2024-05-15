@@ -521,6 +521,7 @@ public class HeroEntity : MonoBehaviour
     {
         float i = 1;
         isFixingCeiling = true;
+        _verticalSpeed = -1;
         while (IsTouchingCeiling)
         {
             IsTouchingWallLeft = false;
@@ -788,8 +789,15 @@ public class HeroEntity : MonoBehaviour
         }
         if (healthManager.currentHealth <= 0)
         {
-            gameObject.SetActive(false);
+            StartCoroutine(SetActiveFalse());
+            //gameObject.SetActive(false);
         }
+    }
+
+    private IEnumerator SetActiveFalse()
+    {
+        yield return new WaitForSeconds(0.02f);
+        gameObject.SetActive(false);
     }
 
     public void Reload()
@@ -863,6 +871,8 @@ public class HeroEntity : MonoBehaviour
 
         GUILayout.BeginVertical(GUI.skin.box);
         GUILayout.Label(gameObject.name);
+        GUILayout.Label($"isTouchingCeiling = {IsTouchingCeiling}");
+
         GUILayout.Label($"MoveDirX = {_moveDirX}");
         GUILayout.Label($"OrientX = {_orientX}");
         GUILayout.Label($"Dash Orient = {_dashOrient}");

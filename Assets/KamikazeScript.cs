@@ -101,7 +101,6 @@ public class KamikazeScript : MonoBehaviour
                     EnemyAI.followEnabled = false;
                 }
                 explosionTimer += Time.deltaTime;
-                
             }
             else
             {

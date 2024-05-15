@@ -1217,6 +1217,7 @@ MonoBehaviour:
   hero: {fileID: 6480041685457909243}
   damageMultiplier: 1
   dmgText: {fileID: 7238166602704635420, guid: acdc41b42aaeb5a4bad063e260780239, type: 3}
+  particle: {fileID: 6524829575941687277, guid: 309de5f7188c2e34189ce39e9b3dc570, type: 3}
   currentHealth: 200
   currentLives: 3
 --- !u!1 &6690839856867164257
@@ -1604,7 +1605,7 @@ MonoBehaviour:
   spriteList:
   - {fileID: 21300000, guid: e5e99f7e3279a5c47985cc1e6f3eb76a, type: 3}
   - {fileID: 21300000, guid: 0e83bfb56894445488729078b654c37f, type: 3}
-  - {fileID: 21300000, guid: 0c28a1fd5e29fe044bb09760e753f0a5, type: 3}
+  - {fileID: 21300000, guid: fa53d5b3b72609c4ca5e675988236fa6, type: 3}
   doubleDouble: 0
   lineRenderer: {fileID: 6605557691363704061}
 --- !u!1 &7665817120985935036

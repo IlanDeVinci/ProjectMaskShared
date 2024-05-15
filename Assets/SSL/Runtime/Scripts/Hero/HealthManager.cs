@@ -9,12 +9,12 @@ using UnityEngine.UI;
 public class HealthManager : MonoBehaviour
 {
     [SerializeField] Slider healthSlider;
-    [SerializeField] private int maxHealth;
+    [SerializeField] public int maxHealth;
     [SerializeField] private int totalLives;
     [SerializeField] private HeroEntity hero;
     [SerializeField] private int damageMultiplier = 1;
     [SerializeField] private GameObject dmgText;
-
+    [SerializeField] private ParticleSystem particle;
     public int currentHealth;
     public int currentLives;
 
@@ -53,7 +53,8 @@ onValueChange: newVal => healthSlider.value = newVal / maxHealth);
         }
 
         if (currentHealth <= 0)
-        { 
+        {
+            Instantiate(particle, transform.position, Quaternion.identity);
             //SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
         }
     }

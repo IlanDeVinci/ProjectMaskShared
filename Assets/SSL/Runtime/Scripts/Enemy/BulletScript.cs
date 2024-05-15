@@ -15,6 +15,7 @@ public class BulletScript : MonoBehaviour
     private float lifetime = 2;
     private float lifeTimer;
     private bool hasHitTarget = false;
+    public int damage = 5;
     [SerializeField] private Rigidbody2D rb;
 
     // Start is called before the first frame update
@@ -69,7 +70,7 @@ public class BulletScript : MonoBehaviour
             {
                 if(!hasHitTarget)
                 {
-                    collision.gameObject.GetComponent<HealthManager>().TakeDamage(5);
+                    collision.gameObject.GetComponent<HealthManager>().TakeDamage(damage);
                     hasHitTarget = true;
                 }
             }

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class EnemyHealthManager : MonoBehaviour
 {
-    [SerializeField] Slider healthSlider;
+    [SerializeField] public Slider healthSlider;
     [SerializeField] private int maxHealth;
     [SerializeField] private int totalLives;
     private int damageMultiplier = 1;
@@ -22,12 +22,18 @@ public class EnemyHealthManager : MonoBehaviour
     private bool isVulnerable = true;
     public int currentHealth;
     public int currentLives;
+    [SerializeField] bool isBoss = false;
 
     private void Awake()
     {
         currentHealth = maxHealth;
         currentLives = totalLives;
+        if (isBoss)
+        {
+            healthSlider = GameObject.FindGameObjectWithTag("BossHPBar").GetComponent<Slider>();
+        }
         healthSlider.value = currentHealth / maxHealth;
+
     }
 
     private IEnumerator Die()
@@ -57,7 +63,7 @@ public class EnemyHealthManager : MonoBehaviour
 
         yield return die.ToYieldInstruction();
         die.Stop();
-        Destroy(entity,0.01f);
+        Destroy(gameObject,0.01f);
 
     }
 

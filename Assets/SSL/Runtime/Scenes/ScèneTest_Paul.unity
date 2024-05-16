@@ -955,6 +955,7 @@ GameObject:
   m_Component:
   - component: {fileID: 915643690}
   - component: {fileID: 915643691}
+  - component: {fileID: 915643692}
   m_Layer: 0
   m_Name: Collider_Gauche
   m_TagString: Untagged
@@ -971,7 +972,7 @@ Transform:
   m_GameObject: {fileID: 915643689}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1006,12 +1007,26 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -3.34, y: 0}
   m_Size: {x: 4.73, y: 7}
   m_Direction: 0
+--- !u!114 &915643692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 915643689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc94b139cde00ce41bc64cf3a1c2a4cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _colliderGauche: {fileID: 915643691}
+  IsPlayerInRangeLeft: 0
 --- !u!1 &957727670
 GameObject:
   m_ObjectHideFlags: 0
@@ -1336,7 +1351,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!70 &1089603968
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -2376,6 +2391,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1778398268}
   - component: {fileID: 1778398269}
+  - component: {fileID: 1778398270}
   m_Layer: 0
   m_Name: Collider_Droit
   m_TagString: Untagged
@@ -2392,7 +2408,7 @@ Transform:
   m_GameObject: {fileID: 1778398267}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2427,12 +2443,26 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 3.34, y: 0}
   m_Size: {x: 4.73, y: 7}
   m_Direction: 0
+--- !u!114 &1778398270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778398267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92a69d6e7e203e64e97fdafc9b7c24e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _colliderDroit: {fileID: 1778398269}
+  IsPlayerInRangeRight: 0
 --- !u!1 &1782409181
 GameObject:
   m_ObjectHideFlags: 0
@@ -3167,6 +3197,14 @@ PrefabInstance:
       propertyPath: _healthManager
       value: 
       objectReference: {fileID: 1613551707}
+    - target: {fileID: 7239278857251976760, guid: 050c6b3b1d2a1764fb5e94b0a88a4d30, type: 3}
+      propertyPath: _colliderRangeDroit
+      value: 
+      objectReference: {fileID: 1778398270}
+    - target: {fileID: 7239278857251976760, guid: 050c6b3b1d2a1764fb5e94b0a88a4d30, type: 3}
+      propertyPath: _colliderRangeGauche
+      value: 
+      objectReference: {fileID: 915643692}
     - target: {fileID: 7513094520790647153, guid: 050c6b3b1d2a1764fb5e94b0a88a4d30, type: 3}
       propertyPath: particle
       value: 

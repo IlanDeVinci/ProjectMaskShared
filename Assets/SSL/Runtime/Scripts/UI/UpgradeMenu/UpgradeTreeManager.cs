@@ -82,14 +82,14 @@ public class UpgradeTreeManager : MonoBehaviour
 
     private IEnumerator HideTree()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSecondsRealtime(1);
         canMove = false;
         gameObject.SetActive(false);
     }
 
     private IEnumerator OpenTree()
     {
-        yield return new WaitForEndOfFrame();
+        yield return new WaitForSecondsRealtime(0.01f);
         if(GlobalManager.isFirstTimeOpeningTree)
         {
             xPos = 0; yPos = -200;

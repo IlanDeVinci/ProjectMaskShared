@@ -142,6 +142,7 @@ public class EnemyAI : MonoBehaviour
 
     private void UpdatePath()
     {
+        if (!target) return;
         if(followEnabled && TargetInRange() && seeker.IsDone())
         {
             seeker.StartPath(rb.position, target.position, OnPathComplete);

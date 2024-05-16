@@ -71,7 +71,7 @@ onValueChange: newVal => healthSlider.value = newVal / maxHealth);
         {
             var upgrade = GlobalUpgrades.Instance.Upgrades.Find(x => x.upgradeType == GlobalUpgrades.UpgradeType.Resistance);
             int resistance = (int)upgrade.upgradesList[upgrade.upgradeLevel].upgradeValue;
-            damage = maxHealth / resistance;
+            damage *= 10/resistance;
             damageMultiplier = 1;
         }
         else

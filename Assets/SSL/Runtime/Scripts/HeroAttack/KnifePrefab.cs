@@ -166,7 +166,7 @@ public class KnifePrefab : MonoBehaviour
 
     private void DoCollisionTrigger(Collider2D collision)
     {
-        if (!collision.CompareTag("Player") && !collision.CompareTag("PlayerTrigger") && !collision.CompareTag("Player") && !collision.CompareTag("CameraTriggerTarget"))
+        if (!collision.CompareTag("Player") && !collision.CompareTag("PlayerTrigger") && !collision.CompareTag("Player") && !collision.CompareTag("CameraTriggerTarget") && !collision.CompareTag("Knife"))
         {
             if (collision.CompareTag("Enemy"))
             {

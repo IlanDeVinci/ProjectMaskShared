@@ -51,7 +51,7 @@ public class EnemyHealthManager : MonoBehaviour
         {
             foreach (SpriteRenderer spriteRenderer in spriteRenderers)
             {
-                spriteRenderer.color = new Color(255, 255, 255, alpha);
+                spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, alpha);
             }
             foreach (CanvasGroup canvas in canvasGroups)
             {

@@ -38,7 +38,7 @@ public class UpgradeButton : MonoBehaviour
                 tweenColor.Stop();
 
             }
-            tweenColor = Tween.Color(buttonImage, Color.white, 1);
+            tweenColor = Tween.Color(buttonImage, Color.white, 1, useUnscaledTime: true);
         }
         else
         {
@@ -52,14 +52,14 @@ public class UpgradeButton : MonoBehaviour
                     tweenColor.Stop();
 
                 }
-                tweenColor = Tween.Color(buttonImage, Color.green, 1);
+                tweenColor = Tween.Color(buttonImage, Color.green, 1, useUnscaledTime: true);
             }
             if (tweenColor.isAlive)
             {
                 tweenColor.Stop();
 
             }
-            tweenColor = Tween.Color(buttonImage, Color.gray, 1);
+            tweenColor = Tween.Color(buttonImage, Color.gray, 1, useUnscaledTime: true);
             tweenButton.canTween = false;
             button.interactable = false;
         }
@@ -68,7 +68,7 @@ public class UpgradeButton : MonoBehaviour
         {
             if (upgradeTreeManager.buttonsList[upgrade.previousUpgradeId].upgrade.thresholdToUnlockNext <= previousUpgrade.upgradeLevel)
             {
-                Tween.Color(lineRenderer, Color.green, 1);
+                Tween.Color(lineRenderer, Color.green, 1, useUnscaledTime: true);
             }
             else
             {
@@ -80,7 +80,7 @@ public class UpgradeButton : MonoBehaviour
                     tweenColor.Stop();
 
                 }
-                tweenColor = Tween.Color(buttonImage, Color.gray, 1);
+                tweenColor = Tween.Color(buttonImage, Color.gray, 1, useUnscaledTime: true);
 
             }
 

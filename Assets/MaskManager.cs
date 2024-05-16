@@ -82,6 +82,7 @@ public class MaskManager : MonoBehaviour
             maskImage.sprite = spriteList[0];
             _currentMask = Mask.None;
         }
+        if (GlobalManager.isGamePaused) return;
 
 
         cooldownSlider.value = currentInvisibilityTime/invisibilityCooldown;
@@ -116,7 +117,6 @@ public class MaskManager : MonoBehaviour
                             GlobalManager.isNextHitDoubled = 2;
                             if (doubleDouble) GlobalManager.isNextHitDoubled = 4;
                             currentInvisibilityTime = 0;
-                            Debug.Log("a");
                             SetAlpha(0.3f);
                             hero.tag = "Player";
 

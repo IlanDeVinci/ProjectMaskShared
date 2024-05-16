@@ -18,17 +18,17 @@ public class PauseManager : MonoBehaviour
     private Sequence sequence;
     public void Fade()
     {
-        tween = Tween.Alpha(fade, 1, 1, cycleMode: CycleMode.Yoyo, cycles: 2);
+        tween = Tween.Alpha(fade, 1, 1, cycleMode: CycleMode.Yoyo, cycles: 2, useUnscaledTime: true);
     }
 
     public void FadeIn()
     {
-        sequence = Sequence.Create().Group(Tween.Alpha(fade, 0, 0.0001f)).Chain(Tween.Alpha(fade, 1, 1));
+        sequence = Sequence.Create(useUnscaledTime: true).Group(Tween.Alpha(fade, 0, 0.0001f, useUnscaledTime: true)).Chain(Tween.Alpha(fade, 1, 1, useUnscaledTime: true));
 
     }
     public void FadeOut()
     {
-        sequence = Sequence.Create().Group(Tween.Alpha(fade, 1, 0.0001f)).Chain(Tween.Alpha(fade, 0, 1));
+        sequence = Sequence.Create(useUnscaledTime: true).Group(Tween.Alpha(fade, 1, 0.0001f, useUnscaledTime: true)).Chain(Tween.Alpha(fade, 0, 1, useUnscaledTime: true));
     }
 
     // Start is called before the first frame update
@@ -58,20 +58,21 @@ public class PauseManager : MonoBehaviour
         {
             GlobalManager.isGamePaused = true;
             panel.SetActive(true);
-            Tween.Scale(panel.transform, 0.5f, 1, 1, Ease.InOutCubic);
-            tween = Tween.Custom(canvasGroup.alpha, 1, 1, ease: Ease.InOutCubic,
+            Tween.Scale(panel.transform, 0.5f, 1, 1, Ease.InOutCubic, useUnscaledTime:true);
+            tween = Tween.Custom(canvasGroup.alpha, 1, 1, ease: Ease.InOutCubic, useUnscaledTime: true,
                 onValueChange: newVal => canvasGroup.alpha = newVal);
             foreach(CanvasGroup canvasGroup in buttons)
             {
-                Tween.Custom(startValue:0f, endValue:1f, duration:1, ease:Ease.OutSine, startDelay: 0.5f, onValueChange:val => canvasGroup.alpha = val);
-                Tween.PositionX(canvasGroup.transform, canvasGroup.transform.position.x-100, canvasGroup.transform.position.x, 1, Ease.OutSine, startDelay:0.5f);
+                Tween.Custom(startValue:0f, endValue:1f, duration:1, ease:Ease.OutSine, startDelay: 0.5f, useUnscaledTime: true, onValueChange:val => canvasGroup.alpha = val);
+                Tween.PositionX(canvasGroup.transform, canvasGroup.transform.position.x-100, canvasGroup.transform.position.x, 1, Ease.OutSine, startDelay:0.5f, useUnscaledTime: true);
             }
             yield return tween.ToYieldInstruction();
         }
         else
         {
-            Tween.Scale(panel.transform, 1f, 0.5f, 1, Ease.InOutCubic);
-            tween = Tween.Custom(canvasGroup.alpha, 0, 1, ease: Ease.InOutCubic,
+            Time.timeScale = 1f;
+            Tween.Scale(panel.transform, 1f, 0.5f, 1, Ease.InOutCubic, useUnscaledTime: true);
+            tween = Tween.Custom(canvasGroup.alpha, 0, 1, ease: Ease.InOutCubic, useUnscaledTime: true,
                 onValueChange: newVal => canvasGroup.alpha = newVal);
             yield return tween.ToYieldInstruction();
             GlobalManager.isGamePaused = false;

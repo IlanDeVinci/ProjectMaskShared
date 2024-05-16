@@ -12,7 +12,7 @@ public class FlyingEnemyLaser : MonoBehaviour
 
     [SerializeField] private GameObject _light;
     private HealthManager healthManager;
-    private Vector2 target;
+    public Transform target;
     private Vector2 savedPos;
     private float shootDelay;
     private bool canAim = true;
@@ -63,7 +63,7 @@ public class FlyingEnemyLaser : MonoBehaviour
     }
 
 
-    private IEnumerator Laser(Vector2 end, float radius = 1, int boomdamage = 10)
+    private IEnumerator Laser(Vector2 end, float radius = 1, int boomdamage = 10, int laserradius = 15)
     {
         Vector2 direction = end - (Vector2)origin.position;
 
@@ -75,19 +75,17 @@ public class FlyingEnemyLaser : MonoBehaviour
         }
 
         positions[1] = final.point;
-        m_Laser.SetPositions(lightning);
         tween = Tween.Custom(m_Laser.widthMultiplier, 0, 0.3f, ease: Ease.InSine, onValueChange: val => m_Laser.widthMultiplier = val);
         yield return tween.ToYieldInstruction();
         if(doesExplosion)
         {
             yield return new WaitForSeconds(0.4f);
         }
-        int maxsize = 15;
+        int maxsize = laserradius;
         if (doesExplosion) maxsize *= 2;
         tween = Tween.Custom(m_Laser.widthMultiplier, maxsize, 0.2f, ease: Ease.InSine, onValueChange: val => m_Laser.widthMultiplier = val);
         yield return tween.ToYieldInstruction();
-        float dmgradius = 0.3f;
-        if (doesExplosion) dmgradius *= 1.7f;
+        float dmgradius = (float)laserradius/50f;
         RaycastHit2D raycastHit = Physics2D.CircleCast(origin.position, dmgradius, direction, 1000, player);
         particle.transform.position = new Vector2(final.point.x, final.point.y);
         particle.transform.up = -direction;
@@ -95,7 +93,7 @@ public class FlyingEnemyLaser : MonoBehaviour
         GameObject savedLight = Instantiate(_light, particle.transform.position, Quaternion.identity);
         var lightValues = savedLight.GetComponent<LaserLightScript>();
         lightValues.intensity = 30;
-        lightValues.radius = 5;
+        lightValues.radius = radius;
         if (doesExplosion)
         {
             lightValues.intensity *= 2;
@@ -106,7 +104,8 @@ public class FlyingEnemyLaser : MonoBehaviour
         lightValues.duration = 0.5f;
         if (doesExplosion)
         {
-            RaycastHit2D boom = Physics2D.CircleCast(end, radius, direction, 0.1f, player);
+            Vector2 playerdir = (Vector2)target.position - final.point;
+            RaycastHit2D boom = Physics2D.Raycast(final.point, playerdir, radius, player);
             if (boom)
             {
                 healthManager.TakeDamage(boomdamage);
@@ -135,9 +134,9 @@ public class FlyingEnemyLaser : MonoBehaviour
         }
         m_Laser.widthMultiplier = 1;
     }
-    public void ShootLaser(Vector2 end, float radius = 1, int boomdamage = 10)
+    public void ShootLaser(Vector2 end, float radius = 1, int boomdamage = 10, int laserradius = 15)
     {
-        StartCoroutine(Laser(end, radius, boomdamage));
+        StartCoroutine(Laser(end, radius, boomdamage, laserradius));
     }
 
     public void HideLaser()

@@ -145,7 +145,7 @@ MonoBehaviour:
     cycleMode: 0
     startDelay: 0
     endDelay: 0
-    useUnscaledTime: 0
+    useUnscaledTime: 1
     useFixedUpdate: 0
   buttonPrefab: {fileID: 4415847970771201964, guid: 80b7b10fe5c1aa14d905cbbe97fabd60, type: 3}
   buttonsList: []

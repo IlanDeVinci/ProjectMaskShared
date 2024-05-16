@@ -17,6 +17,7 @@ TagManager:
   - Enemy
   - Ground
   - BossHPBar
+  - Knife
   layers:
   - Default
   - TransparentFX

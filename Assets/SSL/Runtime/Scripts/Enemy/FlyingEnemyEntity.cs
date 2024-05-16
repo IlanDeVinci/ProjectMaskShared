@@ -284,7 +284,7 @@ public class FlyingEnemyEntity : MonoBehaviour
             if(direction.x > 0) goRight = true;
             RaycastHit2D raycastHit2D = Physics2D.CircleCast(transform.position, 1, direction, 1000, player);
 
-            if (raycastHit2D && raycastHit2D.collider.CompareTag("Ground") || raycastHit2D.collider.CompareTag("Tremplin"))
+            if (raycastHit2D && raycastHit2D.collider != null && (raycastHit2D.collider.CompareTag("Ground") || raycastHit2D.collider.CompareTag("Tremplin")))
             {
                 isPlayerHiding = true;
                 playerHidingTime = Time.time;

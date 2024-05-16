@@ -25,7 +25,7 @@ public class TweenButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             soundPlayer.Play();
             tween.Stop();
             tweenScale = Tween.Scale(transform, settings);
-            tween = Tween.Color(image, color, duration: 0.5f);
+            tween = Tween.Color(image, color, duration: 0.5f, useUnscaledTime: true);
         }
 
     }
@@ -41,7 +41,7 @@ public class TweenButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         {
             tween.Stop();
             tweenScale = Tween.Scale(transform, settings.WithDirection(toEndValue: false));
-            tween = Tween.Color(image, Color.white, duration: 0.5f);
+            tween = Tween.Color(image, Color.white, duration: 0.5f, useUnscaledTime: true);
         }
 
     }

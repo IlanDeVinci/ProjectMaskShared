@@ -19,13 +19,13 @@ public class ToolTip : MonoBehaviour
     {
         tween.Stop();
         textm.text = tip;
-        tween = Tween.Alpha(_canvasGroup, 1, 0.7f);
+        tween = Tween.Alpha(_canvasGroup, 1, 0.7f, useUnscaledTime: true);
     }
 
     public void HideTooltip()
     {
         tween.Stop();
-        tween = Tween.Alpha(_canvasGroup, 0, 0.4f);
+        tween = Tween.Alpha(_canvasGroup, 0, 0.4f, useUnscaledTime: true);
     }
 
     // Update is called once per frame

@@ -30,12 +30,12 @@ public class TextFollowMouse : MonoBehaviour
         }
         else
         {
-            Tween.Alpha(x, 0, 1.5f);
+            Tween.Alpha(x, 0, 1.5f, useUnscaledTime: true);
             image.gameObject.SetActive(false);
         }
 
-        Tween.Alpha(textm, 0, 1.5f);
-        Tween.Alpha(image, 0, 1.5f);
+        Tween.Alpha(textm, 0, 1.5f, useUnscaledTime: true);
+        Tween.Alpha(image, 0, 1.5f, useUnscaledTime: true);
         Vector3 mouse = Input.mousePosition;
         transform.position = new Vector3(mouse.x, mouse.y, 0);
         startPos = transform.position;

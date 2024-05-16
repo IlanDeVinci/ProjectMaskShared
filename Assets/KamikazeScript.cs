@@ -28,6 +28,7 @@ public class KamikazeScript : MonoBehaviour
     [SerializeField] private Slider healthBar;
     private Light2D lightboom;
     private HealthManager healthManager;
+    [SerializeField] private EnemyHealthManager enemyHealthManager;
     private float explosionTimer;
     private bool isOver = false;
     private enum State
@@ -91,7 +92,7 @@ public class KamikazeScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!isOver && !GlobalManager.isGamePaused && healthManager.currentHealth > 0)
+        if(!isOver && !GlobalManager.isGamePaused && healthManager && healthManager.currentHealth > 0)
         {
             LocatePlayer();
             if (isPlayerInRange)
@@ -136,14 +137,8 @@ public class KamikazeScript : MonoBehaviour
         {
             healthManager.TakeDamage(explosionDamage);
         }
-        Destroy(rb);
-        Destroy(col);
-        Destroy(healthBar);
-        Destroy(slider);
-        Destroy(fill);
+        enemyHealthManager.currentHealth = 0;
         StopCoroutine(coroutine);
 
-        Destroy(spriteRenderer);
-        Destroy(gameObject, 0.6f);
     }
 }

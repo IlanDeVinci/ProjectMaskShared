@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ClairvoyantManager : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> clairvoyantObjects;
+    [SerializeField] public List<GameObject> clairvoyantObjects;
     [SerializeField] public bool isClairvoyant => GlobalManager.isPlayerClairvoyant;
     // Start is called before the first frame update
     private Tween visibilitytween;
@@ -47,17 +47,41 @@ public class ClairvoyantManager : MonoBehaviour
                 visibilitytween = Tween.Custom(cycles: 1, startValue: alpha, endValue: 1, duration: 1, ease: Ease.InOutSine, onValueChange: val => alpha = val);
             }
         }
+        
         foreach (GameObject obj in clairvoyantObjects)
-        {
-            obj.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, alpha);
-            if(obj.GetComponent<Collider2D>() != null)
+        {   
+            if (obj != null)
             {
-                if (GlobalManager.isPlayerClairvoyant)
+                if (obj.GetComponent<SpriteRenderer>() != null)
                 {
-                    obj.GetComponent<Collider2D>().enabled = true;
-                } else
+                    SpriteRenderer spriterenderer = obj.GetComponent<SpriteRenderer>();
+                    spriterenderer.color = new Color(spriterenderer.color.r, spriterenderer.color.g, spriterenderer.color.b, alpha);
+                }
+                if (obj.GetComponentInChildren<SpriteRenderer>() != null)
                 {
-                    obj.GetComponent<Collider2D>().enabled = false;
+                    SpriteRenderer spriterenderer = obj.GetComponentInChildren<SpriteRenderer>();
+
+                    spriterenderer.color = new Color(spriterenderer.color.r, spriterenderer.color.g, spriterenderer.color.b, alpha);
+                }
+                if (obj.GetComponentInChildren<CanvasGroup>() != null)
+                {
+                    CanvasGroup[] canvasGroups = obj.GetComponentsInChildren<CanvasGroup>();
+                    foreach (CanvasGroup canvasgroup in canvasGroups)
+                    {
+                        canvasgroup.alpha = alpha;
+                    }
+                }
+
+                if (obj.GetComponent<Collider2D>() != null && obj.GetComponent<Rigidbody2D>() == null)
+                {
+                    if (GlobalManager.isPlayerClairvoyant)
+                    {
+                        obj.GetComponent<Collider2D>().enabled = true;
+                    }
+                    else
+                    {
+                        obj.GetComponent<Collider2D>().enabled = false;
+                    }
                 }
             }
         }

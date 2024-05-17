@@ -206,6 +206,7 @@ public class FlyingEnemyEntity : MonoBehaviour
 
                     }
                     lastSeenPosForLaser = targetPos;
+                    if(canMove)
                     isSearchingLastPos = true;
 
                 }
@@ -227,6 +228,7 @@ public class FlyingEnemyEntity : MonoBehaviour
 
                 }
                 lastSeenPosForLaser = targetPos;
+                if(canMove)
                 isSearchingLastPos = true;
 
             }

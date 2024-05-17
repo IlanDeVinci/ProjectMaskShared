@@ -39,7 +39,6 @@ public class FlyingBossEntity : MonoBehaviour
     public bool isShootingExplosion = false;
     private float shootTimeLaser = 0;
     private float shootTimeMini = 0;
-    private float shootTimeExplosion = 0;
     [SerializeField] private Transform shootPoint;
     [SerializeField] private float bulletSpeed;
     [SerializeField] private int bulletDamage;
@@ -78,7 +77,7 @@ public class FlyingBossEntity : MonoBehaviour
     [SerializeField] private GameObject kamikaze;
     [SerializeField] private GameObject turret1;
     [SerializeField] private GameObject turret2;
-
+    private GameObject arenaDoor;
     // Start is called before the first frame update
     void Start()
     {
@@ -89,8 +88,18 @@ public class FlyingBossEntity : MonoBehaviour
         flyingLaser.HideLaser();
         startPos = transform.position;
         clairvoyantManager = FindAnyObjectByType<ClairvoyantManager>();
+        arenaDoor = GameObject.FindGameObjectWithTag("BossArenaWall");
     }
 
+    private void CloseDoor()
+    {
+        arenaDoor.SetActive(true);
+    }
+
+    private void OpenDoor()
+    {
+        arenaDoor.SetActive(false);
+    }
     private IEnumerator BreakGround()
     {
         GameObject[] groundToBreak = GameObject.FindGameObjectsWithTag("BossBreakGround");
@@ -623,10 +632,12 @@ public class FlyingBossEntity : MonoBehaviour
         if (Vector2.Distance((Vector2)transform.position, target.position) < 15)
         {
             fightStarted = true;
+            CloseDoor();
         }
         else if (Vector2.Distance((Vector2)transform.position, target.position) > 40)
         {
             fightStarted = false;
+            OpenDoor();
         }
         healthManager.healthSlider.GetComponent<CanvasGroup>().alpha = 0;
 

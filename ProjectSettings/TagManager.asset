@@ -19,6 +19,7 @@ TagManager:
   - BossHPBar
   - Knife
   - BossBreakGround
+  - DeadZone
   layers:
   - Default
   - TransparentFX

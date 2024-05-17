@@ -124,6 +124,13 @@ public class HeroEntity : MonoBehaviour
         
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("DeadZone"))
+        {
+            healthManager.currentHealth = 0;
+        }
+    }
     public void AddSpeed(Vector2 speed)
     {
         _horizontalSpeed = speed.x;

@@ -5,6 +5,7 @@ using UnityEngine.Serialization;
 public class HeroEntity : MonoBehaviour
 {
     [Header("Sprite")] [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] private Animator _animator;
     [Header("Physics")] [SerializeField] private Rigidbody2D _rigidbody;
 
     [Header("Horizontal Movements")] [FormerlySerializedAs("_movementSettings")] [SerializeField]
@@ -705,6 +706,11 @@ public class HeroEntity : MonoBehaviour
             _slideTimer += Time.fixedDeltaTime;
             _dashTimer += Time.fixedDeltaTime;
 
+            if (_animator != null)
+            {
+                _animator.SetFloat("velocityX", Mathf.Abs(_horizontalSpeed));
+            }
+
             if (isDashing && !_dashSettings.isLongDash)
             {
                 _UpdateDash();
@@ -852,19 +858,14 @@ public class HeroEntity : MonoBehaviour
         Vector3 newScale = _orientVisualRoot.localScale;
         newScale.x = _orientX;
         _orientVisualRoot.localScale = newScale;
+
     }
 
     public void _ChangeOrientFromHorizontalMovement()
     {
         if (_moveDirX == 0) return;
         _orientX = Mathf.Sign(_moveDirX);
-        if(_orientX < 0){
-            _spriteRenderer.flipX = true;
-            Debug.Log("FlipX");
-        }
-        else{
-            _spriteRenderer.flipX = false;
-        }
+        
     }
     
     public void _ApplyOrientDirX(float dirX)

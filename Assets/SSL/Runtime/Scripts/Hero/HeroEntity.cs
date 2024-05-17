@@ -4,6 +4,7 @@ using UnityEngine.Serialization;
 
 public class HeroEntity : MonoBehaviour
 {
+    [Header("Sprite")] [SerializeField] private SpriteRenderer _spriteRenderer;
     [Header("Physics")] [SerializeField] private Rigidbody2D _rigidbody;
 
     [Header("Horizontal Movements")] [FormerlySerializedAs("_movementSettings")] [SerializeField]
@@ -857,6 +858,13 @@ public class HeroEntity : MonoBehaviour
     {
         if (_moveDirX == 0) return;
         _orientX = Mathf.Sign(_moveDirX);
+        if(_orientX < 0){
+            _spriteRenderer.flipX = true;
+            Debug.Log("FlipX");
+        }
+        else{
+            _spriteRenderer.flipX = false;
+        }
     }
     
     public void _ApplyOrientDirX(float dirX)

@@ -302,8 +302,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -557.8, y: 658.4}
-  m_SizeDelta: {x: 700, y: 220}
+  m_AnchoredPosition: {x: -507.32126, y: 670.3562}
+  m_SizeDelta: {x: 810.2953, y: 254.6642}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &277895424
 MonoBehaviour:
@@ -324,7 +324,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -411,7 +411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c206ddc144e609c42b8962b504f05d01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 0.78113204, g: 0.78113204, b: 0.78113204, a: 1}
+  color: {r: 1, g: 1, b: 1, a: 1}
   settings:
     startFromCurrent: 0
     startValue: {x: 1, y: 1, z: 1}
@@ -808,8 +808,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -455.9, y: 224.9}
-  m_SizeDelta: {x: 500, y: 180}
+  m_AnchoredPosition: {x: -507, y: 234.34357}
+  m_SizeDelta: {x: 425.9602, y: 153.3457}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1013503610
 MonoBehaviour:
@@ -823,7 +823,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c206ddc144e609c42b8962b504f05d01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 0.78113204, g: 0.78113204, b: 0.78113204, a: 1}
+  color: {r: 1, g: 1, b: 1, a: 1}
   settings:
     startFromCurrent: 0
     startValue: {x: 1, y: 1, z: 1}
@@ -865,7 +865,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -964,8 +964,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -465.7, y: 430}
-  m_SizeDelta: {x: 600, y: 180}
+  m_AnchoredPosition: {x: -487, y: 429}
+  m_SizeDelta: {x: 561.549, y: 168.4647}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1016239514
 MonoBehaviour:
@@ -979,7 +979,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c206ddc144e609c42b8962b504f05d01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 0.78113204, g: 0.78113204, b: 0.78113204, a: 1}
+  color: {r: 1, g: 1, b: 1, a: 1}
   settings:
     startFromCurrent: 0
     startValue: {x: 1, y: 1, z: 1}
@@ -1021,7 +1021,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}

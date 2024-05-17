@@ -519,7 +519,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 6.85, y: 9.87}
+    oldSize: {x: 5.51, y: 9.51}
     newSize: {x: 5.51, y: 9.51}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -2021,7 +2021,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6771865885331362632, guid: 58ffc10b51f5a6a4996c22f63f520b49, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6771865885331362632, guid: 58ffc10b51f5a6a4996c22f63f520b49, type: 3}
       propertyPath: m_TagString
@@ -3373,6 +3373,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1617704853381296219, guid: 85d676030caaef646839f261f054a070, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1978364652943630010, guid: 85d676030caaef646839f261f054a070, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -3457,6 +3461,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 4146270441045658622, guid: 85d676030caaef646839f261f054a070, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4452484547712436275, guid: 85d676030caaef646839f261f054a070, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -3464,6 +3472,14 @@ PrefabInstance:
     - target: {fileID: 4452484547712436275, guid: 85d676030caaef646839f261f054a070, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6033638680837734931, guid: 85d676030caaef646839f261f054a070, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6760817530199878284, guid: 85d676030caaef646839f261f054a070, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6927527070246546311, guid: 85d676030caaef646839f261f054a070, type: 3}
       propertyPath: m_AnchorMax.x

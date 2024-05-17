@@ -1331,7 +1331,7 @@ GameObject:
   - component: {fileID: 413831147}
   m_Layer: 6
   m_Name: Ground (17)
-  m_TagString: Ground
+  m_TagString: DeadZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1345,7 +1345,7 @@ Transform:
   m_GameObject: {fileID: 413831145}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 136.5256, y: 92.73, z: 0}
+  m_LocalPosition: {x: 139.253, y: 92.73, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1400,13 +1400,13 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 4, y: 4}
-    newSize: {x: 109.05119, y: 4}
+    newSize: {x: 126.6052, y: 4}
     adaptiveTilingThreshold: 0.5
     drawMode: 2
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 109.05119, y: 4}
+  m_Size: {x: 126.6052, y: 4}
   m_EdgeRadius: 0
 --- !u!212 &413831149
 SpriteRenderer:
@@ -1454,7 +1454,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 109.05119, y: 4}
+  m_Size: {x: 126.6052, y: 4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

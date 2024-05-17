@@ -13,6 +13,8 @@ public class FlyingBossEntity : MonoBehaviour
     [SerializeField] private float detectionRange;
     [SerializeField] private SpriteRenderer detectionImage;
     [SerializeField] private GameObject bullet;
+    [SerializeField] private Transform toflip;
+
     private bool isPlayerDetected = true;
     private float distanceToGround => raycasts.DistanceFromGround(posWithoutOscillationTransform);
     private float distanceToCeiling => raycasts.DistanceFromCeiling(transform);
@@ -558,7 +560,7 @@ public class FlyingBossEntity : MonoBehaviour
                 break;
         }
         yield return new WaitForSeconds(turnAroundT);
-        transform.localScale = new Vector3(transform.localScale.x * -1f, transform.localScale.y, transform.localScale.z);
+        toflip.localScale = new Vector3(toflip.localScale.x * -1f, toflip.localScale.y, toflip.localScale.z);
         isTurning = false;
     }
     private void TurnAround()
@@ -641,7 +643,7 @@ public class FlyingBossEntity : MonoBehaviour
             if (target.CompareTag("PlayerTrigger") && !isShootingRandom)
             {
                 lastAttackTime += Time.deltaTime;
-                facing = (int)Mathf.Sign(transform.localScale.x);
+                facing = (int)Mathf.Sign(toflip.localScale.x);
                 if (lastAttackTime < timeBetweenExplosion)
                 {
 

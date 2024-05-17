@@ -1582,13 +1582,13 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 4, y: 4}
-    newSize: {x: 2, y: 56.755745}
+    newSize: {x: 7.6825256, y: 56.755745}
     adaptiveTilingThreshold: 0.5
     drawMode: 2
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2, y: 56.755745}
+  m_Size: {x: 7.6825256, y: 56.755745}
   m_EdgeRadius: 0
 --- !u!212 &472971580
 SpriteRenderer:
@@ -1636,7 +1636,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 2, y: 56.755745}
+  m_Size: {x: 7.6825256, y: 56.755745}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1651,7 +1651,7 @@ Transform:
   m_GameObject: {fileID: 472971578}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 190.27, y: 123.3778, z: 0}
+  m_LocalPosition: {x: 193.1113, y: 123.3778, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1785,7 +1785,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &552528534
 Transform:
   m_ObjectHideFlags: 0
@@ -1795,7 +1795,7 @@ Transform:
   m_GameObject: {fileID: 552528533}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 152.2, y: 128.0073, z: 0}
+  m_LocalPosition: {x: 151.2056, y: 128.0073, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1850,13 +1850,13 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 4, y: 4}
-    newSize: {x: 2, y: 58.447506}
+    newSize: {x: 3.9888763, y: 58.447506}
     adaptiveTilingThreshold: 0.5
     drawMode: 2
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2, y: 58.447506}
+  m_Size: {x: 3.9888763, y: 58.447506}
   m_EdgeRadius: 0
 --- !u!212 &552528537
 SpriteRenderer:
@@ -1904,7 +1904,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 2, y: 58.447506}
+  m_Size: {x: 3.9888763, y: 58.447506}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -2502,7 +2502,7 @@ Transform:
   m_GameObject: {fileID: 724390166}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 158.5627, y: 106.8345, z: 0}
+  m_LocalPosition: {x: 158.5627, y: 111.0254, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2554,7 +2554,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 65.125305, y: 23.668938}
+  m_Size: {x: 65.125305, y: 32.050655}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -3306,7 +3306,7 @@ Transform:
   m_GameObject: {fileID: 901536165}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 152.2, y: 129.9169, z: 0}
+  m_LocalPosition: {x: 151.2056, y: 129.9169, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3361,13 +3361,13 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 4, y: 4}
-    newSize: {x: 2, y: 54.62837}
+    newSize: {x: 3.9888763, y: 54.62837}
     adaptiveTilingThreshold: 0.5
     drawMode: 2
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2, y: 54.62837}
+  m_Size: {x: 3.9888763, y: 54.62837}
   m_EdgeRadius: 0
 --- !u!212 &901536169
 SpriteRenderer:
@@ -3415,7 +3415,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 2, y: 54.62837}
+  m_Size: {x: 3.9888763, y: 54.62837}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -7781,7 +7781,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2921853363239052282, guid: 195e51c1553660949afabe58a427f439, type: 3}
       propertyPath: totalLives
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3767215664581562166, guid: 195e51c1553660949afabe58a427f439, type: 3}
       propertyPath: m_Color.a

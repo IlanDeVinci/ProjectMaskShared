@@ -637,6 +637,7 @@ public class FlyingBossEntity : MonoBehaviour
         else if (Vector2.Distance((Vector2)transform.position, target.position) > 40)
         {
             fightStarted = false;
+            transform.position = Vector2.MoveTowards(transform.position, startPos, 300);
             OpenDoor();
         }
         healthManager.healthSlider.GetComponent<CanvasGroup>().alpha = 0;

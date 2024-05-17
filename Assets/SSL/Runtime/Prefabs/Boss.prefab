@@ -10781,7 +10781,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2921853363239052282, guid: 195e51c1553660949afabe58a427f439, type: 3}
       propertyPath: maxHealth
-      value: 300
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 3106870018358494465, guid: 195e51c1553660949afabe58a427f439, type: 3}
       propertyPath: player.m_Bits
@@ -10872,7 +10872,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2921853363239052282, guid: 195e51c1553660949afabe58a427f439, type: 3}
       propertyPath: maxHealth
-      value: 300
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 3106870018358494465, guid: 195e51c1553660949afabe58a427f439, type: 3}
       propertyPath: player.m_Bits

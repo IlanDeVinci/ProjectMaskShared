@@ -46,6 +46,25 @@ public class PauseManager : MonoBehaviour
         StartCoroutine(RetryCo());
     }
 
+    public void ReturnButton()
+    {
+        StartCoroutine(Pause());
+    }
+
+    private IEnumerator Quitted()
+    {
+        sequence = Sequence.Create(useUnscaledTime: true).Group(Tween.Alpha(fade, 0, 0.0001f, useUnscaledTime: true)).Chain(Tween.Alpha(fade, 1, 1, useUnscaledTime: true));
+
+        yield return sequence.ToYieldInstruction();
+
+        SceneManager.LoadSceneAsync("MainMenu");
+
+    }
+    public void QuitGame()
+    {
+        StartCoroutine(Quitted());
+    }
+
     private IEnumerator RetryCo()
     {
         FadeIn();

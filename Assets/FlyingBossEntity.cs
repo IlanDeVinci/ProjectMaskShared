@@ -652,7 +652,7 @@ public class FlyingBossEntity : MonoBehaviour
         }
         if (!GlobalManager.isGamePaused && healthManager.currentHealth >= 0)
         {
-            if (target.CompareTag("PlayerTrigger") && !isShootingRandom)
+            if (target.CompareTag("PlayerTrigger") && !isShootingRandom && !isShootingExplosion)
             {
                 lastAttackTime += Time.deltaTime;
                 facing = (int)Mathf.Sign(toflip.localScale.x);

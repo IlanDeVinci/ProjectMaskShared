@@ -100,8 +100,8 @@ MonoBehaviour:
   UnscaledMoveSpeedDelta: 100
   xPos: 0
   yPos: 0
-  maxXPos: 1800
-  maxYPos: 1400
+  maxXPos: 1300
+  maxYPos: 900
   mSpeed: 550
   canMove: 1
   ease: 3
@@ -338,7 +338,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 8000, y: 4000}
+  m_SizeDelta: {x: 6000, y: 3000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4244401166797937874
 CanvasRenderer:

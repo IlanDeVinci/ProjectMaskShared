@@ -4,7 +4,6 @@ using UnityEngine.Serialization;
 
 public class HeroEntity : MonoBehaviour
 {
-    [Header("Sprite")] [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private Animator _animator;
     [Header("Physics")] [SerializeField] private Rigidbody2D _rigidbody;
 

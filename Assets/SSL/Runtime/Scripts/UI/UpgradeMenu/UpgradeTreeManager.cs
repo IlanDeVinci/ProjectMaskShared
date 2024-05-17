@@ -92,9 +92,9 @@ public class UpgradeTreeManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(0.01f);
         if(GlobalManager.isFirstTimeOpeningTree)
         {
-            xPos = 0; yPos = -200;
-            Tween tween = Tween.Custom(0, 1800, 2, onValueChange: newVal => xPos = newVal);
-            Tween.Custom(0, -201, 2, onValueChange: newVal => yPos = newVal);
+            xPos = 0; yPos = -100;
+            Tween tween = Tween.Custom(0, 1250, 2, onValueChange: newVal => xPos = newVal);
+            Tween.Custom(0, 1, 2, onValueChange: newVal => yPos = newVal);
 
             yield return tween.ToYieldInstruction();
             GlobalManager.isFirstTimeOpeningTree = false;

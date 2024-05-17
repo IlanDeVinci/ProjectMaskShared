@@ -135,8 +135,8 @@ public class UpgradeButton : MonoBehaviour
         toolTip.scale = canvas.localScale.x;
         RectTransform rectTransform = GetComponent<RectTransform>();
         rectTransform.localScale = Vector3.one;
-        int totalLength = (int)(4200) ;
-        float totalHeight = (int)(3100);
+        int totalLength = (int)(3200) ;
+        float totalHeight = (int)(2100);
 
         upgradeNameText.text = upgrade.upgradeName;
         transform.position =

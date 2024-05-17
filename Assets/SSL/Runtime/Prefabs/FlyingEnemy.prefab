@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8191962397384550361}
   - component: {fileID: 3767215664581562166}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7249747210253253873}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: origin
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -125,7 +125,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1609016507340405609}
   - component: {fileID: 5592401273383593942}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Detection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -208,7 +208,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6516670973028402097}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Center
   m_TagString: Untagged
   m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
@@ -240,7 +240,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8200950680747139134}
   - component: {fileID: 1857729555685452429}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -326,7 +326,7 @@ GameObject:
   - component: {fileID: 4018820398623461857}
   - component: {fileID: 2405501694991682772}
   - component: {fileID: 7959407335758720635}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Died
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5215,7 +5215,7 @@ GameObject:
   - component: {fileID: 8052607992295371267}
   - component: {fileID: 6735836883959817529}
   - component: {fileID: 6210450882116909120}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Boom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10108,7 +10108,7 @@ GameObject:
   - component: {fileID: 2921853363239052282}
   - component: {fileID: 9192839388153683567}
   - component: {fileID: 1504394241623063744}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: FlyingEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -10160,6 +10160,7 @@ MonoBehaviour:
   healthManager: {fileID: 2921853363239052282}
   detectionRange: 11
   detectionImage: {fileID: 5592401273383593942}
+  canMove: 0
   settingsTween:
     duration: 3
     ease: 4
@@ -10201,7 +10202,9 @@ MonoBehaviour:
   m_Laser: {fileID: 586188413429831099}
   origin: {fileID: 7249747210253253873}
   entity: {fileID: 8313387542521068861}
+  bossentity: {fileID: 0}
   _light: {fileID: 6746097356854021792, guid: 3bf3efbf4382a4e43819dd94e7a3ddb1, type: 3}
+  target: {fileID: 0}
   player:
     serializedVersion: 2
     m_Bits: 2496
@@ -10210,6 +10213,7 @@ MonoBehaviour:
     m_Bits: 192
   particle: {fileID: 6735836883959817529}
   damage: 7
+  doesExplosion: 0
 --- !u!114 &1471062352678509839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10253,6 +10257,7 @@ MonoBehaviour:
   particle: {fileID: 2405501694991682772}
   currentHealth: 0
   currentLives: 0
+  isBoss: 0
 --- !u!61 &9192839388153683567
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10335,7 +10340,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7843547271282670939}
   - component: {fileID: 5049234528350736779}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: EnemyLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10417,7 +10422,7 @@ GameObject:
   m_Component:
   - component: {fileID: 97674617910509550}
   - component: {fileID: 586188413429831099}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: LaserHolder
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -10556,6 +10561,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyHPBar
       objectReference: {fileID: 0}
+    - target: {fileID: 36561589939065842, guid: 73823e3d4a8fa974b9c93d097a8ff1b2, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 1184415089976004200, guid: 73823e3d4a8fa974b9c93d097a8ff1b2, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -10563,6 +10572,14 @@ PrefabInstance:
     - target: {fileID: 1184415089976004200, guid: 73823e3d4a8fa974b9c93d097a8ff1b2, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1501230186525391427, guid: 73823e3d4a8fa974b9c93d097a8ff1b2, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 1507761590326989208, guid: 73823e3d4a8fa974b9c93d097a8ff1b2, type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 3694019235693468179, guid: 73823e3d4a8fa974b9c93d097a8ff1b2, type: 3}
       propertyPath: m_Pivot.x
@@ -10643,6 +10660,14 @@ PrefabInstance:
     - target: {fileID: 3694019235693468179, guid: 73823e3d4a8fa974b9c93d097a8ff1b2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4721730557369269832, guid: 73823e3d4a8fa974b9c93d097a8ff1b2, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 6952795918748572845, guid: 73823e3d4a8fa974b9c93d097a8ff1b2, type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

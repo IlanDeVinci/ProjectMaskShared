@@ -18,6 +18,7 @@ TagManager:
   - Ground
   - BossHPBar
   - Knife
+  - BossBreakGround
   layers:
   - Default
   - TransparentFX

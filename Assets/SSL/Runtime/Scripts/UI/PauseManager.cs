@@ -9,6 +9,8 @@ public class PauseManager : MonoBehaviour
 {
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private GameObject panel;
+    [SerializeField] private GameObject panelBackground;
+
     [SerializeField] private GameObject upgradeTree;
     [SerializeField] private Image fade;
     [SerializeField] private GameObject player;
@@ -37,6 +39,7 @@ public class PauseManager : MonoBehaviour
         FadeOut();
         canvasGroup.alpha = 0f;
         panel.SetActive(false);
+        panelBackground.SetActive(false);
     }
     public void Retry()
     {
@@ -58,6 +61,7 @@ public class PauseManager : MonoBehaviour
         {
             GlobalManager.isGamePaused = true;
             panel.SetActive(true);
+            panelBackground.SetActive(true);
             Tween.Scale(panel.transform, 0.5f, 1, 1, Ease.InOutCubic, useUnscaledTime:true);
             tween = Tween.Custom(canvasGroup.alpha, 1, 1, ease: Ease.InOutCubic, useUnscaledTime: true,
                 onValueChange: newVal => canvasGroup.alpha = newVal);
@@ -77,6 +81,7 @@ public class PauseManager : MonoBehaviour
             yield return tween.ToYieldInstruction();
             GlobalManager.isGamePaused = false;
             panel.SetActive(false);
+            panelBackground.SetActive(false);
             upgradeTree.SetActive(false);
             foreach (CanvasGroup canvasGroup in buttons)
             {

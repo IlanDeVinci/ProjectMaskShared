@@ -72,7 +72,11 @@ public class FlyingBossEntity : MonoBehaviour
     private Vector2 startPos;
     private ClairvoyantManager clairvoyantManager;
     private bool isShootingRandom = false;
+    private bool hasBrokenGround=false;
     [SerializeField] private GameObject kamikaze;
+    [SerializeField] private GameObject turret1;
+    [SerializeField] private GameObject turret2;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -85,6 +89,19 @@ public class FlyingBossEntity : MonoBehaviour
         clairvoyantManager = FindAnyObjectByType<ClairvoyantManager>();
     }
 
+    private IEnumerator BreakGround()
+    {
+        GameObject[] groundToBreak = GameObject.FindGameObjectsWithTag("BossBreakGround");
+        foreach (GameObject go in groundToBreak)
+        {
+            Tween.Color(go.GetComponent<SpriteRenderer>(), Color.clear, 1);
+            yield return new WaitForSeconds(0.1f);
+        }
+        foreach (GameObject go in groundToBreak)
+        {
+            Destroy(go);
+        }
+    }
     private void ResetOscillation()
     {
         if (oscillationTween.isAlive)
@@ -96,7 +113,6 @@ public class FlyingBossEntity : MonoBehaviour
     }
     private void DoIdle()
     {
-
         float newPos = posWithoutOscillation.y;
 
         if (distanceToGround < movementSettings.minHeight || distanceToGround > movementSettings.maxHeight)
@@ -587,6 +603,21 @@ public class FlyingBossEntity : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if(healthManager.currentLives == 2)
+        {
+            if(turret1 != null)
+            turret1.SetActive(true);
+            if(turret2 != null)
+            turret2.SetActive(true);
+        }
+        if(healthManager.currentLives == 1)
+        {
+            if (!hasBrokenGround)
+            {
+                hasBrokenGround = true;
+                StartCoroutine(BreakGround());
+            }
+        }
         if (Vector2.Distance((Vector2)transform.position, target.position) < 15)
         {
             fightStarted = true;

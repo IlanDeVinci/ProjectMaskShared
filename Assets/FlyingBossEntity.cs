@@ -13,6 +13,8 @@ public class FlyingBossEntity : MonoBehaviour
     [SerializeField] private float detectionRange;
     [SerializeField] private SpriteRenderer detectionImage;
     [SerializeField] private GameObject bullet;
+    [SerializeField] private Transform toflip;
+
     private bool isPlayerDetected = true;
     private float distanceToGround => raycasts.DistanceFromGround(posWithoutOscillationTransform);
     private float distanceToCeiling => raycasts.DistanceFromCeiling(transform);
@@ -37,7 +39,6 @@ public class FlyingBossEntity : MonoBehaviour
     public bool isShootingExplosion = false;
     private float shootTimeLaser = 0;
     private float shootTimeMini = 0;
-    private float shootTimeExplosion = 0;
     [SerializeField] private Transform shootPoint;
     [SerializeField] private float bulletSpeed;
     [SerializeField] private int bulletDamage;
@@ -72,7 +73,11 @@ public class FlyingBossEntity : MonoBehaviour
     private Vector2 startPos;
     private ClairvoyantManager clairvoyantManager;
     private bool isShootingRandom = false;
+    private bool hasBrokenGround=false;
     [SerializeField] private GameObject kamikaze;
+    [SerializeField] private GameObject turret1;
+    [SerializeField] private GameObject turret2;
+    private GameObject arenaDoor;
     // Start is called before the first frame update
     void Start()
     {
@@ -83,8 +88,31 @@ public class FlyingBossEntity : MonoBehaviour
         flyingLaser.HideLaser();
         startPos = transform.position;
         clairvoyantManager = FindAnyObjectByType<ClairvoyantManager>();
+        arenaDoor = GameObject.FindGameObjectWithTag("BossArenaWall");
     }
 
+    private void CloseDoor()
+    {
+        arenaDoor.SetActive(true);
+    }
+
+    private void OpenDoor()
+    {
+        arenaDoor.SetActive(false);
+    }
+    private IEnumerator BreakGround()
+    {
+        GameObject[] groundToBreak = GameObject.FindGameObjectsWithTag("BossBreakGround");
+        foreach (GameObject go in groundToBreak)
+        {
+            Tween.Color(go.GetComponent<SpriteRenderer>(), Color.clear, 1);
+            yield return new WaitForSeconds(0.1f);
+        }
+        foreach (GameObject go in groundToBreak)
+        {
+            Destroy(go);
+        }
+    }
     private void ResetOscillation()
     {
         if (oscillationTween.isAlive)
@@ -96,7 +124,6 @@ public class FlyingBossEntity : MonoBehaviour
     }
     private void DoIdle()
     {
-
         float newPos = posWithoutOscillation.y;
 
         if (distanceToGround < movementSettings.minHeight || distanceToGround > movementSettings.maxHeight)
@@ -542,7 +569,7 @@ public class FlyingBossEntity : MonoBehaviour
                 break;
         }
         yield return new WaitForSeconds(turnAroundT);
-        transform.localScale = new Vector3(transform.localScale.x * -1f, transform.localScale.y, transform.localScale.z);
+        toflip.localScale = new Vector3(toflip.localScale.x * -1f, toflip.localScale.y, toflip.localScale.z);
         isTurning = false;
     }
     private void TurnAround()
@@ -587,13 +614,31 @@ public class FlyingBossEntity : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if(healthManager.currentLives == 2)
+        {
+            if(turret1 != null)
+            turret1.SetActive(true);
+            if(turret2 != null)
+            turret2.SetActive(true);
+        }
+        if(healthManager.currentLives == 1)
+        {
+            if (!hasBrokenGround)
+            {
+                hasBrokenGround = true;
+                StartCoroutine(BreakGround());
+            }
+        }
         if (Vector2.Distance((Vector2)transform.position, target.position) < 15)
         {
             fightStarted = true;
+            CloseDoor();
         }
         else if (Vector2.Distance((Vector2)transform.position, target.position) > 40)
         {
             fightStarted = false;
+            transform.position = Vector2.MoveTowards(transform.position, startPos, 300);
+            OpenDoor();
         }
         healthManager.healthSlider.GetComponent<CanvasGroup>().alpha = 0;
 
@@ -610,7 +655,7 @@ public class FlyingBossEntity : MonoBehaviour
             if (target.CompareTag("PlayerTrigger") && !isShootingRandom)
             {
                 lastAttackTime += Time.deltaTime;
-                facing = (int)Mathf.Sign(transform.localScale.x);
+                facing = (int)Mathf.Sign(toflip.localScale.x);
                 if (lastAttackTime < timeBetweenExplosion)
                 {
 

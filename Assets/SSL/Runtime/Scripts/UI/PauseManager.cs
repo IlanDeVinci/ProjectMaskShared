@@ -9,6 +9,8 @@ public class PauseManager : MonoBehaviour
 {
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private GameObject panel;
+    [SerializeField] private GameObject panelBackground;
+
     [SerializeField] private GameObject upgradeTree;
     [SerializeField] private Image fade;
     [SerializeField] private GameObject player;
@@ -37,10 +39,30 @@ public class PauseManager : MonoBehaviour
         FadeOut();
         canvasGroup.alpha = 0f;
         panel.SetActive(false);
+        panelBackground.SetActive(false);
     }
     public void Retry()
     {
         StartCoroutine(RetryCo());
+    }
+
+    public void ReturnButton()
+    {
+        StartCoroutine(Pause());
+    }
+
+    private IEnumerator Quitted()
+    {
+        sequence = Sequence.Create(useUnscaledTime: true).Group(Tween.Alpha(fade, 0, 0.0001f, useUnscaledTime: true)).Chain(Tween.Alpha(fade, 1, 1, useUnscaledTime: true));
+
+        yield return sequence.ToYieldInstruction();
+
+        SceneManager.LoadSceneAsync("MainMenu");
+
+    }
+    public void QuitGame()
+    {
+        StartCoroutine(Quitted());
     }
 
     private IEnumerator RetryCo()
@@ -58,6 +80,7 @@ public class PauseManager : MonoBehaviour
         {
             GlobalManager.isGamePaused = true;
             panel.SetActive(true);
+            panelBackground.SetActive(true);
             Tween.Scale(panel.transform, 0.5f, 1, 1, Ease.InOutCubic, useUnscaledTime:true);
             tween = Tween.Custom(canvasGroup.alpha, 1, 1, ease: Ease.InOutCubic, useUnscaledTime: true,
                 onValueChange: newVal => canvasGroup.alpha = newVal);
@@ -77,6 +100,7 @@ public class PauseManager : MonoBehaviour
             yield return tween.ToYieldInstruction();
             GlobalManager.isGamePaused = false;
             panel.SetActive(false);
+            panelBackground.SetActive(false);
             upgradeTree.SetActive(false);
             foreach (CanvasGroup canvasGroup in buttons)
             {

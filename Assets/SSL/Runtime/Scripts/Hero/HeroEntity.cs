@@ -4,8 +4,11 @@ using UnityEngine.Serialization;
 
 public class HeroEntity : MonoBehaviour
 {
+<<<<<<< HEAD
     [Header("Sprite")] [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private Animator _animator;
+=======
+>>>>>>> 43a846c6f616148496e5c31f7a8d0ce3295b0844
     [Header("Physics")] [SerializeField] private Rigidbody2D _rigidbody;
 
     [Header("Horizontal Movements")] [FormerlySerializedAs("_movementSettings")] [SerializeField]
@@ -125,6 +128,13 @@ public class HeroEntity : MonoBehaviour
         
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("DeadZone"))
+        {
+            healthManager.currentHealth = 0;
+        }
+    }
     public void AddSpeed(Vector2 speed)
     {
         _horizontalSpeed = speed.x;
@@ -865,7 +875,10 @@ public class HeroEntity : MonoBehaviour
     {
         if (_moveDirX == 0) return;
         _orientX = Mathf.Sign(_moveDirX);
+<<<<<<< HEAD
         
+=======
+>>>>>>> 43a846c6f616148496e5c31f7a8d0ce3295b0844
     }
     
     public void _ApplyOrientDirX(float dirX)

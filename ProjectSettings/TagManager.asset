@@ -18,6 +18,9 @@ TagManager:
   - Ground
   - BossHPBar
   - Knife
+  - BossBreakGround
+  - DeadZone
+  - BossArenaWall
   layers:
   - Default
   - TransparentFX

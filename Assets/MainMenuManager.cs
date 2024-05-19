@@ -19,6 +19,9 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private Button buttonstart;
     [SerializeField] private Button buttonoption;
     [SerializeField] private Button buttonquit;
+    [SerializeField] private CanvasGroup canvasGroupTitle;
+    [SerializeField] private Transform veilRotate;
+    [SerializeField] private Image flicker;
 
     public void StartLevel()
     {
@@ -37,6 +40,7 @@ public class MainMenuManager : MonoBehaviour
         PrimeTweenConfig.warnZeroDuration = false;
         Sequence sequence = Sequence.Create().
             Group(Tween.Alpha(fade, startValue: 1, endValue: 1, duration: 0)).
+            Group(Tween.Alpha(canvasGroupTitle, 1, 0, 1)).
             Group(Tween.Scale(bladestart.transform, startValue: 1, endValue:0, 0.1f)).
             Group(Tween.Scale(bladeoption.transform, startValue: 1, endValue: 0, 0.1f)).
             Group(Tween.Scale(bladequit.transform, startValue: 1, endValue: 0, 0.1f)).
@@ -48,6 +52,7 @@ public class MainMenuManager : MonoBehaviour
             ChainDelay(1).
             Chain(Tween.Alpha(logo, 0, 2)).
             Chain(Tween.Alpha(fade, startValue: 1, 0, 3, ease: Ease.InSine)).
+            Group(Tween.Alpha(canvasGroupTitle, 0, 1, 2, startDelay:2)).
             Group(Tween.PositionX(hair.transform, hair.transform.position.x - 300, hair.transform.position.x, 3, ease: Ease.OutSine)).
             Group(Tween.PositionX(anotis.transform, anotis.transform.position.x - 300, anotis.transform.position.x, 3, ease: Ease.OutSine)).
             Group(Tween.PositionY(fist.transform, fist.transform.position.y - 300, fist.transform.position.y, 1.2f, ease: Ease.OutSine)).
@@ -63,6 +68,8 @@ public class MainMenuManager : MonoBehaviour
 
             ;
         Tween.Rotation(hair.transform, new Vector3(0, 0, 10), 2, cycles: -1, cycleMode: CycleMode.Yoyo, endDelay: 0.05f);
+        Tween.Rotation(veilRotate, new Vector3(0, 0, 1.5f), 3f, ease:Ease.OutSine, cycles: -1, cycleMode: CycleMode.Yoyo, endDelay: 0.07f);
+        Tween.Custom(flicker.color, Color.clear, duration:2f, ease:Ease.InOutElastic, cycles: -1, cycleMode: CycleMode.Rewind, endDelay: 0.5f, onValueChange:val=> flicker.color = val);
     }
 
     // Update is called once per frame

@@ -10871,7 +10871,7 @@ MonoBehaviour:
   onlyPlayer:
     serializedVersion: 2
     m_Bits: 1024
-  explosionRange: 3.5
+  explosionRange: 3
   explosionDuration: 2
   explosionDamage: 15
   spriteRenderer: {fileID: 997804483885870568}
@@ -10893,7 +10893,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c7dc98f5e80e7146ba13a3f20968dec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRange: 13
+  detectionRange: 15
   updateCd: 0.2
   speed: 700
   nextWaypointDistance: 3

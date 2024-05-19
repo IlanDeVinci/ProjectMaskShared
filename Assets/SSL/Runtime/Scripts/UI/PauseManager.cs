@@ -30,16 +30,17 @@ public class PauseManager : MonoBehaviour
     }
     public void FadeOut()
     {
-        sequence = Sequence.Create(useUnscaledTime: true).Group(Tween.Alpha(fade, 1, 0.0001f, useUnscaledTime: true)).Chain(Tween.Alpha(fade, 0, 1, useUnscaledTime: true));
+        Tween.Alpha(fade, 0, 1);
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        FadeOut();
         canvasGroup.alpha = 0f;
+        fade.color = Color.black;
         panel.SetActive(false);
         panelBackground.SetActive(false);
+        FadeOut();
     }
     public void Retry()
     {

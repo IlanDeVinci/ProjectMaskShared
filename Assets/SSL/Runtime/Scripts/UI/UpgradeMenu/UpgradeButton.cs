@@ -10,6 +10,7 @@ public class UpgradeButton : MonoBehaviour
 {
 
     [SerializeField] TextMeshProUGUI upgradeNameText;
+    [SerializeField] private List<Sprite> sprites;
     public GlobalUpgrades.Upgrade upgrade;
     private UpgradeTreeManager upgradeTreeManager;
     [SerializeField] UILineRenderer lineRenderer;
@@ -23,6 +24,7 @@ public class UpgradeButton : MonoBehaviour
     [SerializeField] private ToolTip toolTip;
     [SerializeField] private GameObject fadingText;
     [SerializeField] private Image buttonImage;
+    [SerializeField] private Image spriteRenderer;
     Tween tweenColor;
     public RectTransform canvas;
 
@@ -53,6 +55,7 @@ public class UpgradeButton : MonoBehaviour
 
                 }
                 tweenColor = Tween.Color(buttonImage, Color.green, 1, useUnscaledTime: true);
+                tweenButton.transform.localScale = Vector3.one;
             }
             if (tweenColor.isAlive)
             {
@@ -62,6 +65,7 @@ public class UpgradeButton : MonoBehaviour
             tweenColor = Tween.Color(buttonImage, Color.gray, 1, useUnscaledTime: true);
             tweenButton.canTween = false;
             button.interactable = false;
+            tweenButton.transform.localScale = Vector3.one;
         }
 
         if (upgrade.previousUpgradeId != -1)
@@ -81,7 +85,7 @@ public class UpgradeButton : MonoBehaviour
 
                 }
                 tweenColor = Tween.Color(buttonImage, Color.gray, 1, useUnscaledTime: true);
-
+                tweenButton.transform.localScale = Vector3.one;
             }
 
 
@@ -122,7 +126,7 @@ public class UpgradeButton : MonoBehaviour
                 for (float i = 0f; i < smoothness; i++)
                 {
 
-                    smoothpoints.Add(Bezier(points[0], new Vector2(points[0].x + ((points[1].x - points[0].x)*0.8f), points[0].y), new Vector2(points[1].x - ((points[1].x - points[0].x) * 0.8f), points[1].y), points[1], i / smoothness));
+                    smoothpoints.Add(Bezier(points[0], new Vector2(points[0].x + ((points[1].x - points[0].x) * 0.8f), points[0].y), new Vector2(points[1].x - ((points[1].x - points[0].x) * 0.8f), points[1].y), points[1], i / smoothness));
                 }
                 lineRenderer.points = smoothpoints;
             }
@@ -135,32 +139,34 @@ public class UpgradeButton : MonoBehaviour
         toolTip.scale = canvas.localScale.x;
         RectTransform rectTransform = GetComponent<RectTransform>();
         rectTransform.localScale = Vector3.one;
-        int totalLength = (int)(3200) ;
+        int totalLength = (int)(3200);
         float totalHeight = (int)(2100);
 
-        upgradeNameText.text = upgrade.upgradeName;
+        //upgradeNameText.text = upgrade.upgradeName;
         transform.position =
             //new Vector2(-1300, +2100)
-            new Vector2(-totalLength*0.309f * canvas.localScale.x, totalHeight*0.677f * canvas.localScale.x);
-            ;
+            new Vector2(-totalLength * 0.309f * canvas.localScale.x, totalHeight * 0.677f * canvas.localScale.x);
+        ;
         //transform.position = new Vector2(2900, -1000);
 
 
         columns = GlobalUpgrades.Instance.columnNumber;
-        columnsIncrement = 
+        columnsIncrement =
             //4200 / columns
-            totalLength/columns
+            totalLength / columns
             ;
 
         rows = GlobalUpgrades.Instance.rowNumber;
         rowsIncrement =
             //3100 / rows
-            (int)totalHeight/rows
+            (int)totalHeight / rows
             ;
 
 
         transform.localPosition = new Vector2(transform.localPosition.x + (upgrade.column * columnsIncrement), transform.localPosition.y - (upgrade.row * rowsIncrement));
         upgradeTreeManager = GetComponentInParent<UpgradeTreeManager>();
+        spriteRenderer.sprite = sprites[upgrade.upgradeId];
+
     }
 
     Vector2 Bezier(Vector2 a, Vector2 b, float t)

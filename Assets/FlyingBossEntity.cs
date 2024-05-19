@@ -545,6 +545,7 @@ public class FlyingBossEntity : MonoBehaviour
             }
             transform.position = Vector2.SmoothDamp(transform.position, startPos, ref velocity, 5, 500);
             isShootingRandom = true;
+            toflip.localScale = new Vector3(facing, toflip.localScale.y, toflip.localScale.z);
         }
 
     }

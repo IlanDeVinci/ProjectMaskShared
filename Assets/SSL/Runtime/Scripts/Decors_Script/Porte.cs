@@ -6,6 +6,7 @@ public class Porte : MonoBehaviour
 {
 
     [SerializeField] private Collider2D _colliderDetec;
+    
     [SerializeField] private bool _playerDetected = false;
 
     void FixedUpdate()

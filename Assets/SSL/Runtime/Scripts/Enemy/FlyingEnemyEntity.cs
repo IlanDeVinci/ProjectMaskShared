@@ -55,6 +55,7 @@ public class FlyingEnemyEntity : MonoBehaviour
     {
         posWithoutOscillation = transform.position;
         target = GameObject.FindGameObjectWithTag("Player").transform;
+        flyingLaser.target = target;
         oscillationTween = Tween.Custom(startValue: 0, endValue: maxOscillation, settings: settingsTween, onValueChange: val => oscillation = val);
         flyingLaser.HideLaser();
     }

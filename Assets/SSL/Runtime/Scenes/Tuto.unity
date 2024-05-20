@@ -2689,7 +2689,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 38012d60ed8df504cb0c2c7174c1d3bb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3976,6 +3976,10 @@ PrefabInstance:
     - target: {fileID: 6125235494269448290, guid: 94f9aa042a0272d48b2ca66309414450, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6599293394835787015, guid: 94f9aa042a0272d48b2ca66309414450, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 7748174674749030678, guid: 94f9aa042a0272d48b2ca66309414450, type: 3}
       propertyPath: m_Color.a
@@ -35181,6 +35185,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlyingEnemy (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8313387542521068861, guid: 195e51c1553660949afabe58a427f439, type: 3}
+      propertyPath: canMove
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9116901269547540761, guid: 195e51c1553660949afabe58a427f439, type: 3}
       propertyPath: m_LocalPosition.x
       value: 74
@@ -36296,6 +36304,10 @@ PrefabInstance:
       propertyPath: canIdle
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8313387542521068861, guid: 195e51c1553660949afabe58a427f439, type: 3}
+      propertyPath: canMove
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9116901269547540761, guid: 195e51c1553660949afabe58a427f439, type: 3}
       propertyPath: m_LocalPosition.x
       value: 48.5
@@ -36637,6 +36649,10 @@ PrefabInstance:
     - target: {fileID: 7522587848472986232, guid: 195e51c1553660949afabe58a427f439, type: 3}
       propertyPath: m_Name
       value: FlyingEnemy (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8313387542521068861, guid: 195e51c1553660949afabe58a427f439, type: 3}
+      propertyPath: canMove
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9116901269547540761, guid: 195e51c1553660949afabe58a427f439, type: 3}
       propertyPath: m_LocalPosition.x

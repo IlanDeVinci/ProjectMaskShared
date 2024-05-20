@@ -1468,7 +1468,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moving:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 32768
   _animator: {fileID: 7946664899417390308}
   _rigidbody: {fileID: 7212136366118121974}
   _groundHorizontalMovementSettings:

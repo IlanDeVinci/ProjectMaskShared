@@ -54,7 +54,7 @@ public class PiegeScript : MonoBehaviour
         for (int i = 0; i < amountOfHits; i++)
         {
             if (hit) targetHealth.TakeDamage(hitDamage);
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.15f);
         }
         first = Tween.Custom(startValue: light2D.intensity, endValue: 1, duration: 0.3f, onValueChange: val => { light2D.intensity = val; });
 

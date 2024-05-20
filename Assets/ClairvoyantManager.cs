@@ -1,7 +1,7 @@
 using PrimeTween;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class ClairvoyantManager : MonoBehaviour
 {
@@ -13,7 +13,7 @@ public class ClairvoyantManager : MonoBehaviour
     private bool hasChangedVisibility = false;
     void Start()
     {
-        foreach(Transform child in transform)
+        foreach (Transform child in transform)
         {
             clairvoyantObjects.Add(child.gameObject);
         }
@@ -22,9 +22,9 @@ public class ClairvoyantManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!GlobalManager.isPlayerClairvoyant)
+        if (!GlobalManager.isPlayerClairvoyant)
         {
-            if(hasChangedVisibility)
+            if (hasChangedVisibility)
             {
                 visibilitytween.Stop();
                 visibilitytween = Tween.Custom(cycles: 1, startValue: alpha, endValue: 0, duration: 1, ease: Ease.InOutSine, onValueChange: val => alpha = val);
@@ -33,25 +33,35 @@ public class ClairvoyantManager : MonoBehaviour
             if (!visibilitytween.isAlive)
             {
                 visibilitytween.Stop();
-                visibilitytween = Tween.Custom(cycles:2, cycleMode:CycleMode.Yoyo, startValue:alpha, endValue:0.005f, duration:1, ease:Ease.InOutElastic, onValueChange: val => alpha = val);
+                visibilitytween = Tween.Custom(cycles: 2, cycleMode: CycleMode.Yoyo, startValue: alpha, endValue: 0.005f, duration: 1, ease: Ease.InOutElastic, onValueChange: val => alpha = val);
 
             }
 
         }
         else
         {
-            if(!hasChangedVisibility)
+            if (!hasChangedVisibility)
             {
                 hasChangedVisibility = true;
                 visibilitytween.Stop();
                 visibilitytween = Tween.Custom(cycles: 1, startValue: alpha, endValue: 1, duration: 1, ease: Ease.InOutSine, onValueChange: val => alpha = val);
             }
         }
-        
+
         foreach (GameObject obj in clairvoyantObjects)
-        {   
+        {
             if (obj != null)
             {
+                if (obj.GetComponent<Tilemap>() != null)
+                {
+                    Tilemap tilemap = obj.GetComponent<Tilemap>();
+                    tilemap.color = new Color(tilemap.color.r, tilemap.color.g, tilemap.color.b, alpha);
+                    obj.GetComponent<TilemapCollider2D>().enabled = true;
+                    if (GlobalManager.isPlayerClairvoyant) obj.GetComponent<TilemapCollider2D>().enabled = false;
+                }
+
+
+
                 if (obj.GetComponent<SpriteRenderer>() != null)
                 {
                     SpriteRenderer spriterenderer = obj.GetComponent<SpriteRenderer>();

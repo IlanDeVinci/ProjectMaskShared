@@ -56,8 +56,8 @@ public class ClairvoyantManager : MonoBehaviour
                 {
                     Tilemap tilemap = obj.GetComponentInChildren<Tilemap>();
                     tilemap.color = new Color(tilemap.color.r, tilemap.color.g, tilemap.color.b, alpha);
-                    obj.GetComponentInChildren<TilemapCollider2D>().enabled = true;
-                    if (GlobalManager.isPlayerClairvoyant) obj.GetComponentInChildren<TilemapCollider2D>().enabled = false;
+                    obj.GetComponentInChildren<TilemapCollider2D>().enabled = false;
+                    if (GlobalManager.isPlayerClairvoyant) obj.GetComponentInChildren<TilemapCollider2D>().enabled = true;
                 }
 
 

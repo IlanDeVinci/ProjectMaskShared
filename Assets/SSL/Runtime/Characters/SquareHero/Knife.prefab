@@ -108,7 +108,7 @@ MonoBehaviour:
   boxCollider: {fileID: 2127123678290574466}
   light2d: {fileID: 4991056342079279547}
   angular: 10
-  knifeSpeed: 0
+  knifeSpeed: 10
   isRight: 0
   rotationSettings:
     startFromCurrent: 0

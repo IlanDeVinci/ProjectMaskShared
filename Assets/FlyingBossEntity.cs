@@ -105,12 +105,8 @@ public class FlyingBossEntity : MonoBehaviour
         GameObject[] groundToBreak = GameObject.FindGameObjectsWithTag("BossBreakGround");
         foreach (GameObject go in groundToBreak)
         {
-            Tween.Color(go.GetComponent<SpriteRenderer>(), Color.clear, 1);
-            yield return new WaitForSeconds(0.1f);
-        }
-        foreach (GameObject go in groundToBreak)
-        {
             Destroy(go);
+            yield return new WaitForSeconds(0.1f);
         }
     }
     private void ResetOscillation()
@@ -462,12 +458,16 @@ public class FlyingBossEntity : MonoBehaviour
         {
             GameObject savedkami = Instantiate(kamikaze, shootPoint.position, Quaternion.identity);
             saved.Add(savedkami);
+            savedkami.GetComponent<EnemyAI>().isLimited = false;
+            savedkami.GetComponent<EnemyAI>().detectionRange = 30;
             savedkami.GetComponent<Rigidbody2D>().AddForce(new Vector3(random.Next(-1000, 1000), 2000, 0));
             yield return new WaitForSeconds(0.2f);
+
         }
         yield return new WaitForSeconds(0.5f);
         foreach (GameObject item in saved)
         {
+            item.GetComponent<EnemyAI>().isLimited = true;
             item.transform.SetParent(clairvoyantManager.transform);
             clairvoyantManager.clairvoyantObjects.Add(item);
         }
@@ -498,7 +498,6 @@ public class FlyingBossEntity : MonoBehaviour
                     Vector2 laserDir = shootPosLaser - (Vector2)flyingLaser.origin.position;
                     laserGun.transform.up = -laserDir;
                     RaycastHit2D hit = Physics2D.CircleCast(flyingLaser.origin.position, 0.1f, laserDir, 100, world);
-                    Debug.Log(hit.point);
                     flyingLaser.LaserPointer(hit.point);
                     ShootLaser(hit.point);
                     for (int i = 0; i < 5; i++)

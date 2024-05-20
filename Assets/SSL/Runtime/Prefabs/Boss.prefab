@@ -10789,15 +10789,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6488856265309070364, guid: 195e51c1553660949afabe58a427f439, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6488856265309070364, guid: 195e51c1553660949afabe58a427f439, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7522587848472986232, guid: 195e51c1553660949afabe58a427f439, type: 3}
       propertyPath: m_Name
       value: FlyingEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 7522587848472986232, guid: 195e51c1553660949afabe58a427f439, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8313387542521068861, guid: 195e51c1553660949afabe58a427f439, type: 3}
       propertyPath: canOscillate
@@ -10880,15 +10884,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6488856265309070364, guid: 195e51c1553660949afabe58a427f439, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6488856265309070364, guid: 195e51c1553660949afabe58a427f439, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7522587848472986232, guid: 195e51c1553660949afabe58a427f439, type: 3}
       propertyPath: m_Name
       value: FlyingEnemy (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7522587848472986232, guid: 195e51c1553660949afabe58a427f439, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8313387542521068861, guid: 195e51c1553660949afabe58a427f439, type: 3}
       propertyPath: canOscillate

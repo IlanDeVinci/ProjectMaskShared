@@ -46,7 +46,7 @@ public class FlyingEnemyLaser : MonoBehaviour
     public bool LaserPointer(Vector2 end)
     {
         m_Laser.enabled = true;
-        Vector2 direction = end - (Vector2)transform.position;
+        Vector2 direction = new Vector2(end.x, end.y + 0.5f) - (Vector2)transform.position;
         RaycastHit2D hit = Physics2D.CircleCast(origin.position, 0.1f, direction, 100, player);
         positions[1] = hit.point;
         if(hit && hit.collider.CompareTag("PlayerTrigger"))

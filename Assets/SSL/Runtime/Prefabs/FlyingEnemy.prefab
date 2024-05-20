@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b7ccb0615dead4241ad96d1fa6537133, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 28a513039a5fa9442b4a6b8d10fed98b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -141,7 +141,7 @@ Transform:
   m_GameObject: {fileID: 4066484463900326152}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.3, z: -2}
+  m_LocalPosition: {x: 0, y: 0, z: -2}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -257,7 +257,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.5, z: 1}
-  m_LocalScale: {x: 0.3, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7249747210253253873}
@@ -10160,6 +10160,7 @@ MonoBehaviour:
   healthManager: {fileID: 2921853363239052282}
   detectionRange: 11
   detectionImage: {fileID: 5592401273383593942}
+  canIdle: 0
   canMove: 0
   settingsTween:
     duration: 3
@@ -10184,7 +10185,7 @@ MonoBehaviour:
   gun: {fileID: 97674617910509550}
   player:
     serializedVersion: 2
-    m_Bits: 448
+    m_Bits: 1216
   followOffsetX: 3.5
   followOffsetY: 2.5
 --- !u!114 &3106870018358494465
@@ -10207,7 +10208,7 @@ MonoBehaviour:
   target: {fileID: 0}
   player:
     serializedVersion: 2
-    m_Bits: 2496
+    m_Bits: 3520
   world:
     serializedVersion: 2
     m_Bits: 192

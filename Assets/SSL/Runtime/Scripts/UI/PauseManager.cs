@@ -103,6 +103,7 @@ public class PauseManager : MonoBehaviour
             panel.SetActive(false);
             panelBackground.SetActive(false);
             upgradeTree.SetActive(false);
+            fade.color = Color.clear;
             foreach (CanvasGroup canvasGroup in buttons)
             {
                 canvasGroup.alpha = 0;

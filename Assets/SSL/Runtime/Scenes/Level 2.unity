@@ -18087,6 +18087,22 @@ PrefabInstance:
       propertyPath: m_Intensity
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1348285662881911868, guid: 94f9aa042a0272d48b2ca66309414450, type: 3}
+      propertyPath: m_Size.x
+      value: 15.210083
+      objectReference: {fileID: 0}
+    - target: {fileID: 1348285662881911868, guid: 94f9aa042a0272d48b2ca66309414450, type: 3}
+      propertyPath: m_Size.y
+      value: 7.1710815
+      objectReference: {fileID: 0}
+    - target: {fileID: 1348285662881911868, guid: 94f9aa042a0272d48b2ca66309414450, type: 3}
+      propertyPath: m_Offset.x
+      value: -830.7017
+      objectReference: {fileID: 0}
+    - target: {fileID: 1348285662881911868, guid: 94f9aa042a0272d48b2ca66309414450, type: 3}
+      propertyPath: m_Offset.y
+      value: -508.98593
+      objectReference: {fileID: 0}
     - target: {fileID: 1879283838339393034, guid: 94f9aa042a0272d48b2ca66309414450, type: 3}
       propertyPath: _defaultCameraProfile
       value: 

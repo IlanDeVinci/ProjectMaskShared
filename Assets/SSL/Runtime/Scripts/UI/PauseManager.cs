@@ -18,6 +18,30 @@ public class PauseManager : MonoBehaviour
 
     private Tween tween;
     private Sequence sequence;
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Player") || collision.CompareTag("PlayerTrigger"))
+        {
+            if(SceneManager.GetActiveScene().name == "Tuto")
+            {
+                StartCoroutine(GoNext("Level 2"));
+            }
+            else
+            {
+                StartCoroutine(GoNext("BossScene"));
+
+            }
+        }
+    }
+
+    private IEnumerator GoNext (string name)
+    {
+        Fade();
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadSceneAsync(name);
+    }
     public void Fade()
     {
         tween = Tween.Alpha(fade, 1, 1, cycleMode: CycleMode.Yoyo, cycles: 2, useUnscaledTime: true);

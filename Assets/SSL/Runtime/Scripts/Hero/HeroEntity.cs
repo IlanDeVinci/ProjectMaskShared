@@ -127,12 +127,13 @@ public class HeroEntity : MonoBehaviour
 
     private void DoPlatformCheck()
     {
-        RaycastHit2D hit = Physics2D.CircleCast(transform.position, 0.2f, Vector2.down, 0.9f, moving);
+        RaycastHit2D hit = Physics2D.CircleCast(transform.position, 0.2f, Vector2.down, 0.95f, moving);
         if (hit && _verticalSpeed < 0.1f)
         {
             if(movingPlatform == null)
-            movingPlatform = hit.collider.gameObject.transform.parent.transform;
+            movingPlatform = hit.collider.gameObject.transform;
             _rigidbody.interpolation = RigidbodyInterpolation2D.None;
+            _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, movingPlatform.GetComponent<Rigidbody2D>().velocity.y);
         }
         else
         {

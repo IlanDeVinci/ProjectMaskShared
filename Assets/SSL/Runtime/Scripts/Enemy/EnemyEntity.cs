@@ -58,6 +58,8 @@ public class EnemyEntity : MonoBehaviour
     void Awake()
     {
         _horizontalSpeed = _movementsSettings._Speed;
+        _heroEntity = GameObject.FindAnyObjectByType<HeroEntity>();
+        _healthManager = FindAnyObjectByType<HealthManager>();
     }
 
     void FixedUpdate()

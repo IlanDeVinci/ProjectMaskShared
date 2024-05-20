@@ -130,7 +130,6 @@ public class HeroEntity : MonoBehaviour
         RaycastHit2D hit = Physics2D.CircleCast(transform.position, 0.2f, Vector2.down, 0.9f, ground);
         if (hit && _verticalSpeed < 0.1f)
         {
-            Debug.Log("onplatform");
             if(movingPlatform == null)
             movingPlatform = hit.collider.gameObject.transform.parent.transform;
             _rigidbody.interpolation = RigidbodyInterpolation2D.None;
@@ -832,7 +831,11 @@ public class HeroEntity : MonoBehaviour
     private IEnumerator SetActiveFalse()
     {
         yield return new WaitForSeconds(0.02f);
+        _rigidbody.velocity = Vector3.zero;
+        _ResetHorizontalSpeed();
+        _ResetVerticalSpeed();
         gameObject.SetActive(false);
+        
     }
 
     public void Reload()

@@ -10,6 +10,7 @@ public class DamageTextScript : MonoBehaviour
     private float offset;
 
     [SerializeField] private TextMeshProUGUI textm;
+    public Color color = Color.white;
     public int value = 0;
     private Vector3 startPos;
 
@@ -27,6 +28,7 @@ public class DamageTextScript : MonoBehaviour
     }
     void Update()
     {
+        textm.color = new Color(color.r,color.g,color.b,textm.color.a);
         textm.text = $"-{value}";
         offset += Time.deltaTime * 1;
         transform.position = new Vector3(startPos.x, startPos.y + offset, 0);

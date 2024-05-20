@@ -116,7 +116,9 @@ public class EnemyHealthManager : MonoBehaviour
             currentHealth -= damage * damageMultiplier;
             GameObject savedText = Instantiate(dmgText, transform.position, Quaternion.identity);
             savedText.GetComponent<DamageTextScript>().value = damage * damageMultiplier;
+            savedText.GetComponent<DamageTextScript>().color = Color.yellow;
+
         }
-      
+
     }
 }

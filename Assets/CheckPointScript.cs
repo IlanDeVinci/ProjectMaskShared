@@ -19,7 +19,7 @@ public class CheckPointScript : MonoBehaviour
     {
         if (collision.CompareTag("PlayerTrigger") || collision.CompareTag("Player"))
         {
-            GlobalManager.playerCheckpointPosition = transform.position;
+            GlobalManager.playerCheckpointPosition = new Vector2(transform.position.x, transform.position.y + 0.5f);
             image.color = Color.green;
             hasBeenHitBefore = true;
         }

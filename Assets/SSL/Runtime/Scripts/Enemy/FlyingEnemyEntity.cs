@@ -10,6 +10,7 @@ public class FlyingEnemyEntity : MonoBehaviour
     [SerializeField] private EnemyHealthManager healthManager;
     [SerializeField] private float detectionRange;
     [SerializeField] private SpriteRenderer detectionImage;
+    [SerializeField] private bool canIdle = true;
 
     [SerializeField] public bool canMove = true;
     private bool isPlayerDetected = false;
@@ -98,7 +99,7 @@ public class FlyingEnemyEntity : MonoBehaviour
         newPos += oscillation;
 
         if (canMove) transform.position = new Vector2(transform.position.x, newPos);
-        if (canMove)
+        if (canMove && canIdle)
         {
             if (isPatrollingRight)
             {

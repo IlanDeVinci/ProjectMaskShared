@@ -40,6 +40,7 @@ public class PauseManager : MonoBehaviour
     {
         Fade();
         yield return new WaitForSeconds(1);
+        fade.color = Color.black;
         SceneManager.LoadSceneAsync(name);
     }
     public void Fade()

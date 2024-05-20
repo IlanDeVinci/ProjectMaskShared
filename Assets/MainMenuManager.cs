@@ -32,7 +32,7 @@ public class MainMenuManager : MonoBehaviour
     {
         Sequence sequence = Sequence.Create().Chain(Tween.Alpha(fade, 0, 1, 1));
         yield return sequence.ToYieldInstruction();
-        SceneManager.LoadSceneAsync("Part3_Camera");
+        SceneManager.LoadSceneAsync("Tuto");
     }
     // Start is called before the first frame update
     void Start()

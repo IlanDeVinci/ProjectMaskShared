@@ -1179,6 +1179,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4684429938789265212, guid: 85d676030caaef646839f261f054a070, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5176385620885227217, guid: 85d676030caaef646839f261f054a070, type: 3}
       propertyPath: fade
       value: 

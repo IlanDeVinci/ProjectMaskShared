@@ -5359,7 +5359,7 @@ MonoBehaviour:
   spriteRenderers: []
   canvasGroups: []
   toDestroy: []
-  particle: {fileID: 0}
+  particle: {fileID: 4383973695902385721}
   currentHealth: 0
   currentLives: 0
   isBoss: 0

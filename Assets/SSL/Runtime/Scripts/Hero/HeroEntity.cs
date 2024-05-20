@@ -4,6 +4,8 @@ using UnityEngine.Serialization;
 
 public class HeroEntity : MonoBehaviour
 {
+    private Transform movingPlatform;
+    [SerializeField] LayerMask ground;
     [SerializeField] private Animator _animator;
     [Header("Physics")] [SerializeField] private Rigidbody2D _rigidbody;
 
@@ -121,9 +123,28 @@ public class HeroEntity : MonoBehaviour
         _cameraFollowable = GetComponent<CameraFollowable>();
         _cameraFollowable.FollowPositionX = _rigidbody.position.x;
         _cameraFollowable.FollowPositionY = _rigidbody.position.y;
-        
     }
 
+    private void DoPlatformCheck()
+    {
+        RaycastHit2D hit = Physics2D.CircleCast(transform.position, 0.2f, Vector2.down, 0.9f, ground);
+        if (hit && _verticalSpeed < 0.1f)
+        {
+            Debug.Log("onplatform");
+            if(movingPlatform == null)
+            movingPlatform = hit.collider.gameObject.transform.parent.transform;
+            _rigidbody.interpolation = RigidbodyInterpolation2D.None;
+        }
+        else
+        {
+            movingPlatform = null;
+            _rigidbody.interpolation = RigidbodyInterpolation2D.Interpolate;
+
+        }
+        if (transform.parent != movingPlatform)
+        transform.parent = movingPlatform;
+
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("DeadZone"))
@@ -701,6 +722,7 @@ public class HeroEntity : MonoBehaviour
 
         if (!GlobalManager.isGamePaused && healthManager.currentHealth >= 0)
         {
+            DoPlatformCheck();
             isPaused = false;
             _ApplyGroundDetection();
             _ApplyWallDetection();

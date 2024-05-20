@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CheckPointScript : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] private SpriteRenderer image;
-    private static bool hasBeenHitBefore = false;
-
+    [SerializeField] private bool hasBeenHitBefore = false;
     private void Awake()
     {
         if (hasBeenHitBefore)

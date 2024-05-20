@@ -6,7 +6,7 @@ public class EnemyAI : MonoBehaviour
 {
     [Header("Pathfinding")]
     private Transform target;
-    [SerializeField] private float detectionRange;
+    [SerializeField] public float detectionRange;
     [SerializeField] private float updateCd = 0.2f;
 
     [Header("Physics")]
@@ -34,12 +34,14 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] Collider2D col;
     [SerializeField] LayerMask platform;
     [SerializeField] LayerMask groundandplatform;
+    public bool isLimited = true;
 
 
     private void Start()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        target = GameObject.FindGameObjectWithTag("PlayerTrigger").transform;
+
+        target = GameObject.FindAnyObjectByType<HealthManager>().transform;
         InvokeRepeating("UpdatePath", 0f, updateCd);
     }
 
@@ -163,7 +165,7 @@ public class EnemyAI : MonoBehaviour
             return;
         }
 
-        RaycastHit2D isGrounded = Physics2D.BoxCast(col.bounds.center, col.bounds.size, 0, Vector2.down, 0.1f, groundLayer);
+        RaycastHit2D isGrounded = Physics2D.BoxCast(col.bounds.center, col.bounds.size, 0, Vector2.down, 0.1f, groundandplatform);
         bool isHole = false;
         RaycastHit2D isHoleRight = Physics2D.Raycast(new Vector2((transform.position.x + col.bounds.extents.x + 0.5f),transform.position.y), Vector2.down, col.bounds.extents.y + 0.5f, groundandplatform);
         RaycastHit2D isHoleLeft = Physics2D.Raycast(new Vector2((transform.position.x - col.bounds.extents.x - 0.5f), transform.position.y), Vector2.down, col.bounds.extents.y + 0.5f, groundandplatform);
@@ -187,6 +189,7 @@ public class EnemyAI : MonoBehaviour
         {
             isHole = true;
         }
+        if(isTouchingPlatform()) isHole = false;
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
         direction.Normalize();
         Vector2 force = direction * speed * Time.deltaTime;
@@ -243,6 +246,11 @@ public class EnemyAI : MonoBehaviour
                 spriteRenderer.flipX = false;
 
             }
+        }
+
+        if(rb.velocity.y > 20 && isLimited)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, 20);
         }
     }
 

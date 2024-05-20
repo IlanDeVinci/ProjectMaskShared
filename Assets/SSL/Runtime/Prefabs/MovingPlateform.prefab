@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4967133347534316006}
   - component: {fileID: 8158150015226194615}
   - component: {fileID: 950481616477306450}
-  m_Layer: 13
+  m_Layer: 15
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -188,7 +188,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4752074991998851199}
   - component: {fileID: 8701821031093738025}
-  m_Layer: 13
+  m_Layer: 15
   m_Name: Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -270,7 +270,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5625877540557909274}
   - component: {fileID: 7816921835136009760}
-  m_Layer: 13
+  m_Layer: 15
   m_Name: MovingPlateform
   m_TagString: Untagged
   m_Icon: {fileID: 0}

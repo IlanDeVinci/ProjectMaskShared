@@ -513,7 +513,7 @@ CapsuleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 8192
+    m_Bits: 65343
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -530,8 +530,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.78525764}
-  m_Size: {x: 0.56483823, y: 0.10666646}
+  m_Offset: {x: -0.000000008385282, y: 0.6796593}
+  m_Size: {x: 0.36162746, y: 0.086860664}
   m_Direction: 1
 --- !u!1 &3058921478872825897
 GameObject:
@@ -1076,7 +1076,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.62592316, y: 2.5463738}
+  m_Size: {x: 0.23415327, y: 0.66153246}
   m_EdgeRadius: 0
 --- !u!1 &5979426045391640429
 GameObject:
@@ -1154,7 +1154,7 @@ GameObject:
   - component: {fileID: 3299704471641658454}
   - component: {fileID: 520926627305205705}
   - component: {fileID: 4306333400840394705}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: TriggerHero
   m_TagString: PlayerTrigger
   m_Icon: {fileID: 0}
@@ -1219,7 +1219,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.3694524, y: 1.7171259}
+  m_Size: {x: 0.4547285, y: 1.8918929}
   m_EdgeRadius: 0
 --- !u!114 &4306333400840394705
 MonoBehaviour:
@@ -1426,7 +1426,7 @@ MonoBehaviour:
   _detectionLength: 0.1
   _groundLayerMask:
     serializedVersion: 2
-    m_Bits: 8256
+    m_Bits: 41024
 --- !u!114 &4289331230081096066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1466,9 +1466,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a0862a60028ffa45a6d6ea616e98a9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ground:
+  moving:
     serializedVersion: 2
-    m_Bits: 8192
+    m_Bits: 0
   _animator: {fileID: 7946664899417390308}
   _rigidbody: {fileID: 7212136366118121974}
   _groundHorizontalMovementSettings:

@@ -48,7 +48,7 @@ public class KamikazeScript : MonoBehaviour
         lightboom = GetComponentInChildren<Light2D>();
         healthManager = GameObject.FindAnyObjectByType<HealthManager>();
         EnemyAI = GetComponent<EnemyAI>();
-        target = GameObject.FindGameObjectWithTag("PlayerTrigger").transform;
+        target = GameObject.FindGameObjectWithTag("Player").transform;
         coroutine = StartCoroutine(Flicker());
     }
 
@@ -80,11 +80,13 @@ public class KamikazeScript : MonoBehaviour
             if (hit.collider.CompareTag("PlayerTrigger"))
             {
                 isPlayerInRange = true;
+                EnemyAI.followEnabled = true;
+
             }
             else
             {
                 isPlayerInRange = false;
-
+                EnemyAI.followEnabled = false;
             }
         }
 

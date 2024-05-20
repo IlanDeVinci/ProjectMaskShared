@@ -10,12 +10,14 @@ public class DeathManager : MonoBehaviour
     [SerializeField] private GameObject deathPanel;
     [SerializeField] private CanvasGroup deathPanelcanvas;
     [SerializeField] private Image avatar;
+    [SerializeField] private Image black;
     [SerializeField] private Sprite[] avatars;
     private bool isOut = false;
     // Start is called before the first frame update
     void Start()
     {
         deathPanel.SetActive(false);
+        black.color = Color.clear;
         deathPanelcanvas.alpha = 0;
         healthManager = GameObject.FindAnyObjectByType<HealthManager>();
     }
@@ -40,12 +42,15 @@ public class DeathManager : MonoBehaviour
             {
                 isOut = true;
                 deathPanel.SetActive(true);
+                black.color = new Color(0.1f,0.1f,0.1f,0.5f);
                 Tween.Alpha(deathPanelcanvas, 1, 1);
             }
         }
         else
         {
             deathPanel.SetActive(false);
+            black.color = Color.clear;
+
             isOut = false;
         }
 

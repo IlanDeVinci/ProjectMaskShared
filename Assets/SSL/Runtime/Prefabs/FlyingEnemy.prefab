@@ -10160,6 +10160,7 @@ MonoBehaviour:
   healthManager: {fileID: 2921853363239052282}
   detectionRange: 11
   detectionImage: {fileID: 5592401273383593942}
+  canIdle: 0
   canMove: 0
   settingsTween:
     duration: 3

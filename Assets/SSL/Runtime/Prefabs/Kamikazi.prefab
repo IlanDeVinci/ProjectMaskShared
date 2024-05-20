@@ -10913,7 +10913,7 @@ MonoBehaviour:
     m_Bits: 8192
   groundandplatform:
     serializedVersion: 2
-    m_Bits: 24768
+    m_Bits: 8384
 --- !u!114 &949328313752326430
 MonoBehaviour:
   m_ObjectHideFlags: 0

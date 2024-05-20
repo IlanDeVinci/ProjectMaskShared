@@ -65,6 +65,7 @@ public class UpgradeButton : MonoBehaviour
             tweenColor = Tween.Color(buttonImage, Color.gray, 1, useUnscaledTime: true);
             tweenButton.canTween = false;
             button.interactable = false;
+            tweenButton.StopTweens();
             tweenButton.transform.localScale = Vector3.one;
         }
 
@@ -85,6 +86,7 @@ public class UpgradeButton : MonoBehaviour
 
                 }
                 tweenColor = Tween.Color(buttonImage, Color.gray, 1, useUnscaledTime: true);
+                tweenButton.StopTweens();
                 tweenButton.transform.localScale = Vector3.one;
             }
 

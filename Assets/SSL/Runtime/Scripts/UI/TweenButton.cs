@@ -32,7 +32,8 @@ public class TweenButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void StopTweens()
     {
-        tween.Stop();
+        tween.Complete();
+        tweenScale.Complete();
     }
 
     public void OnPointerExit(PointerEventData eventData)

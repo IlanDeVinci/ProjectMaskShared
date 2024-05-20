@@ -5,7 +5,7 @@ using UnityEngine.Serialization;
 public class HeroEntity : MonoBehaviour
 {
     private Transform movingPlatform;
-    [SerializeField] LayerMask ground;
+    [SerializeField] LayerMask moving;
     [SerializeField] private Animator _animator;
     [Header("Physics")] [SerializeField] private Rigidbody2D _rigidbody;
 
@@ -127,7 +127,7 @@ public class HeroEntity : MonoBehaviour
 
     private void DoPlatformCheck()
     {
-        RaycastHit2D hit = Physics2D.CircleCast(transform.position, 0.2f, Vector2.down, 0.9f, ground);
+        RaycastHit2D hit = Physics2D.CircleCast(transform.position, 0.2f, Vector2.down, 0.9f, moving);
         if (hit && _verticalSpeed < 0.1f)
         {
             if(movingPlatform == null)

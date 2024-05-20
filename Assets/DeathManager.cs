@@ -43,14 +43,15 @@ public class DeathManager : MonoBehaviour
                 isOut = true;
                 deathPanel.SetActive(true);
                 black.color = new Color(0.1f,0.1f,0.1f,0.5f);
-                Tween.Alpha(deathPanelcanvas, 1, 1);
+                Tween.Scale(deathPanel.transform, 0.5f, 1, 2);
+                Tween.Alpha(deathPanelcanvas, 1, 2);
             }
         }
         else
         {
             deathPanel.SetActive(false);
             black.color = Color.clear;
-
+            deathPanelcanvas.alpha = 0;
             isOut = false;
         }
 

@@ -73,16 +73,16 @@ MonoBehaviour:
     previousUpgradeId: 0
     upgradesList:
     - isUpgradeAcquired: 0
-      upgradeCost: 10
+      upgradeCost: 3
       upgradeValue: 5
     - isUpgradeAcquired: 0
-      upgradeCost: 10
+      upgradeCost: 5
       upgradeValue: 7
     - isUpgradeAcquired: 0
-      upgradeCost: 20
+      upgradeCost: 7
       upgradeValue: 9
     - isUpgradeAcquired: 0
-      upgradeCost: 30
+      upgradeCost: 10
       upgradeValue: 12
     upgradeLevel: 0
   - upgradeId: 2
@@ -96,16 +96,16 @@ MonoBehaviour:
     previousUpgradeId: 0
     upgradesList:
     - isUpgradeAcquired: 0
-      upgradeCost: 10
+      upgradeCost: 3
       upgradeValue: 100
     - isUpgradeAcquired: 0
-      upgradeCost: 10
+      upgradeCost: 5
       upgradeValue: 130
     - isUpgradeAcquired: 0
-      upgradeCost: 20
+      upgradeCost: 7
       upgradeValue: 160
     - isUpgradeAcquired: 0
-      upgradeCost: 35
+      upgradeCost: 10
       upgradeValue: 200
     upgradeLevel: 0
   - upgradeId: 3
@@ -119,16 +119,16 @@ MonoBehaviour:
     previousUpgradeId: 0
     upgradesList:
     - isUpgradeAcquired: 0
-      upgradeCost: 0
+      upgradeCost: 3
       upgradeValue: 4
     - isUpgradeAcquired: 0
-      upgradeCost: 10
+      upgradeCost: 5
       upgradeValue: 5
     - isUpgradeAcquired: 0
-      upgradeCost: 15
+      upgradeCost: 7
       upgradeValue: 6
     - isUpgradeAcquired: 0
-      upgradeCost: 20
+      upgradeCost: 10
       upgradeValue: 7
     upgradeLevel: 0
   - upgradeId: 4
@@ -142,16 +142,16 @@ MonoBehaviour:
     previousUpgradeId: 1
     upgradesList:
     - isUpgradeAcquired: 0
-      upgradeCost: 0
+      upgradeCost: 4
       upgradeValue: 11
     - isUpgradeAcquired: 0
-      upgradeCost: 20
+      upgradeCost: 6
       upgradeValue: 14
     - isUpgradeAcquired: 0
-      upgradeCost: 30
+      upgradeCost: 8
       upgradeValue: 17
     - isUpgradeAcquired: 0
-      upgradeCost: 35
+      upgradeCost: 12
       upgradeValue: 20
     upgradeLevel: 0
   - upgradeId: 5
@@ -165,16 +165,16 @@ MonoBehaviour:
     previousUpgradeId: 2
     upgradesList:
     - isUpgradeAcquired: 0
-      upgradeCost: 0
+      upgradeCost: 4
       upgradeValue: 1
     - isUpgradeAcquired: 0
-      upgradeCost: 20
+      upgradeCost: 6
       upgradeValue: 1.15
     - isUpgradeAcquired: 0
-      upgradeCost: 40
+      upgradeCost: 8
       upgradeValue: 1.3
     - isUpgradeAcquired: 0
-      upgradeCost: 60
+      upgradeCost: 12
       upgradeValue: 1.42
     upgradeLevel: 0
   - upgradeId: 6
@@ -188,16 +188,16 @@ MonoBehaviour:
     previousUpgradeId: 3
     upgradesList:
     - isUpgradeAcquired: 0
-      upgradeCost: 0
+      upgradeCost: 4
       upgradeValue: 8
     - isUpgradeAcquired: 0
-      upgradeCost: 30
+      upgradeCost: 6
       upgradeValue: 7
     - isUpgradeAcquired: 0
-      upgradeCost: 50
+      upgradeCost: 8
       upgradeValue: 6
     - isUpgradeAcquired: 0
-      upgradeCost: 70
+      upgradeCost: 12
       upgradeValue: 5
     upgradeLevel: 0
   - upgradeId: 6
@@ -211,10 +211,10 @@ MonoBehaviour:
     previousUpgradeId: 4
     upgradesList:
     - isUpgradeAcquired: 0
-      upgradeCost: 0
+      upgradeCost: 20
       upgradeValue: 0
     - isUpgradeAcquired: 0
-      upgradeCost: 80
+      upgradeCost: 20
       upgradeValue: 1
     upgradeLevel: 0
   - upgradeId: 6
@@ -228,10 +228,10 @@ MonoBehaviour:
     previousUpgradeId: 4
     upgradesList:
     - isUpgradeAcquired: 0
-      upgradeCost: 0
+      upgradeCost: 20
       upgradeValue: 1
     - isUpgradeAcquired: 0
-      upgradeCost: 100
+      upgradeCost: 20
       upgradeValue: 2
     upgradeLevel: 0
   - upgradeId: 6
@@ -245,13 +245,13 @@ MonoBehaviour:
     previousUpgradeId: 6
     upgradesList:
     - isUpgradeAcquired: 0
-      upgradeCost: 0
+      upgradeCost: 10
       upgradeValue: 2
     - isUpgradeAcquired: 0
-      upgradeCost: 50
+      upgradeCost: 15
       upgradeValue: 4
     - isUpgradeAcquired: 0
-      upgradeCost: 100
+      upgradeCost: 20
       upgradeValue: 6
     upgradeLevel: 0
   - upgradeId: 6
@@ -266,10 +266,10 @@ MonoBehaviour:
     previousUpgradeId: 6
     upgradesList:
     - isUpgradeAcquired: 0
-      upgradeCost: 0
+      upgradeCost: 20
       upgradeValue: 0
     - isUpgradeAcquired: 0
-      upgradeCost: 50
+      upgradeCost: 20
       upgradeValue: 1
     upgradeLevel: 0
   rowNumber: 0

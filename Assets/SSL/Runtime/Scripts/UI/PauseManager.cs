@@ -19,11 +19,26 @@ public class PauseManager : MonoBehaviour
     private Tween tween;
     private Sequence sequence;
 
+    public void NextLevel()
+    {
+        if (SceneManager.GetActiveScene().name == "Tuto")
+        {
+            StartCoroutine(GoNext("Level 2"));
+        }
+        else
+        {
+            StartCoroutine(GoNext("BossScene"));
+
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player") || collision.CompareTag("PlayerTrigger"))
+        Debug.Log("collide");
+
+        if (collision.CompareTag("Player") || collision.CompareTag("PlayerTrigger"))
         {
+            Debug.Log("Player");
             if(SceneManager.GetActiveScene().name == "Tuto")
             {
                 StartCoroutine(GoNext("Level 2"));
@@ -146,6 +161,9 @@ public class PauseManager : MonoBehaviour
             {
                 StartCoroutine(Pause());
             }
+        }
+        if(Input.GetKeyDown(KeyCode.O)) {
+            NextLevel();
         }
     }
 }

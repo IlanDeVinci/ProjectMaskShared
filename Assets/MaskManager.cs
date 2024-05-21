@@ -47,11 +47,11 @@ public class MaskManager : MonoBehaviour
         }
         if(alpha != 1)
         {
-            lineRenderer.enabled = false;
+            //lineRenderer.enabled = false;
         }
         else
         {
-            lineRenderer.enabled = true;
+            //lineRenderer.enabled = true;
         }
     }
 

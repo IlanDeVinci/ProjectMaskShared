@@ -4135,6 +4135,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 314668848}
     m_Modifications:
+    - target: {fileID: 236269983620966656, guid: 204b74da2cddcb84383ae770978575eb, type: 3}
+      propertyPath: playerLayer.m_Bits
+      value: 1216
+      objectReference: {fileID: 0}
     - target: {fileID: 6041209402588488695, guid: 204b74da2cddcb84383ae770978575eb, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -4153,11 +4157,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7085494048167894819, guid: 204b74da2cddcb84383ae770978575eb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -26.861488
+      value: -28.87
       objectReference: {fileID: 0}
     - target: {fileID: 7085494048167894819, guid: 204b74da2cddcb84383ae770978575eb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.7016783
+      value: 7.39
       objectReference: {fileID: 0}
     - target: {fileID: 7085494048167894819, guid: 204b74da2cddcb84383ae770978575eb, type: 3}
       propertyPath: m_LocalPosition.z
@@ -18309,6 +18313,10 @@ PrefabInstance:
       propertyPath: _defaultCameraProfile
       value: 
       objectReference: {fileID: 1837542554}
+    - target: {fileID: 2594872798453235965, guid: 94f9aa042a0272d48b2ca66309414450, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2754357032533864887, guid: 94f9aa042a0272d48b2ca66309414450, type: 3}
       propertyPath: m_Name
       value: Globals
@@ -18331,7 +18339,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5322758825925597591, guid: 94f9aa042a0272d48b2ca66309414450, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: -767.14795
       objectReference: {fileID: 0}
     - target: {fileID: 6125235494269448290, guid: 94f9aa042a0272d48b2ca66309414450, type: 3}
       propertyPath: m_LocalPosition.x

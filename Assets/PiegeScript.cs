@@ -85,6 +85,11 @@ public class PiegeScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!target)
+        {
+            target = GameObject.FindGameObjectWithTag("PlayerTrigger").transform;
+            targetHealth = target.GetComponent<HealthManager>();
+        }
         if(!GlobalManager.isGamePaused)
         {
             dmgTimer += Time.deltaTime;
@@ -92,7 +97,7 @@ public class PiegeScript : MonoBehaviour
             distance = Physics2D.Raycast(transform.position, direction, detectionRadius, player);
             hit = Physics2D.Raycast(transform.position, direction, detectionRadius + 0.5f, player);
 
-            if (distance && distance.collider.CompareTag("PlayerTrigger"))
+            if (distance && distance.collider && distance.collider.CompareTag("PlayerTrigger"))
             {
                 if (!isBzzing)
                 {

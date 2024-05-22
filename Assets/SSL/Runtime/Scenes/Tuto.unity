@@ -4746,6 +4746,19 @@ PrefabInstance:
       propertyPath: m_Name
       value: Globals
       objectReference: {fileID: 0}
+    - target: {fileID: 3437015734408126753, guid: 94f9aa042a0272d48b2ca66309414450, type: 3}
+      propertyPath: Dialogs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3437015734408126753, guid: 94f9aa042a0272d48b2ca66309414450, type: 3}
+      propertyPath: Dialogs.Array.data[0]
+      value: 'Marchand : Bienvenue Anotis !'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3437015734408126753, guid: 94f9aa042a0272d48b2ca66309414450, type: 3}
+      propertyPath: Dialogs.Array.data[1]
+      value: "Marchand : Voici des masques de pouvoir, \xE9quipe-les afin de surmonter
+        les obstacles !"
+      objectReference: {fileID: 0}
     - target: {fileID: 3501867196321704839, guid: 94f9aa042a0272d48b2ca66309414450, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

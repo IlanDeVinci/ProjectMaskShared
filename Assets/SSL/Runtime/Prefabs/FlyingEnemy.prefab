@@ -10208,7 +10208,7 @@ MonoBehaviour:
   target: {fileID: 0}
   player:
     serializedVersion: 2
-    m_Bits: 3520
+    m_Bits: 1216
   world:
     serializedVersion: 2
     m_Bits: 192

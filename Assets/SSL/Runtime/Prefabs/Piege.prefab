@@ -5136,7 +5136,7 @@ MonoBehaviour:
     speed: 1
   light2D: {fileID: 8701821031093738025}
   particle: {fileID: 7196143909599928917}
-  amountOfHits: 10
+  amountOfHits: 5
   hitDamage: 1
   detectionRadius: 2
   player:

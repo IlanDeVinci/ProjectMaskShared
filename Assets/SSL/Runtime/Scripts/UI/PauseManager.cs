@@ -19,45 +19,7 @@ public class PauseManager : MonoBehaviour
     private Tween tween;
     private Sequence sequence;
 
-    public void NextLevel()
-    {
-        if (SceneManager.GetActiveScene().name == "Tuto")
-        {
-            StartCoroutine(GoNext("Level 2"));
-        }
-        else
-        {
-            StartCoroutine(GoNext("BossScene"));
-
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Debug.Log("collide");
-
-        if (collision.CompareTag("Player") || collision.CompareTag("PlayerTrigger"))
-        {
-            Debug.Log("Player");
-            if(SceneManager.GetActiveScene().name == "Tuto")
-            {
-                StartCoroutine(GoNext("Level 2"));
-            }
-            else
-            {
-                StartCoroutine(GoNext("BossScene"));
-
-            }
-        }
-    }
-
-    private IEnumerator GoNext (string name)
-    {
-        Fade();
-        yield return new WaitForSeconds(1);
-        fade.color = Color.black;
-        SceneManager.LoadScene(name);
-    }
+    
     public void Fade()
     {
         tween = Tween.Alpha(fade, 1, 1, cycleMode: CycleMode.Yoyo, cycles: 2, useUnscaledTime: true);
@@ -163,7 +125,6 @@ public class PauseManager : MonoBehaviour
             }
         }
         if(Input.GetKeyDown(KeyCode.O)) {
-            NextLevel();
         }
     }
 }

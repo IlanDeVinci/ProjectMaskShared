@@ -273,13 +273,5 @@ public class EnemyEntity : MonoBehaviour
             }
         }
     }
-    private void OnGUI(){
-            GUILayout.Label($"IsEnemyTouchingGround: {IsEnemyTouchingGround}");
-            GUILayout.Label($"IsEnemyTouchingWallRight: {IsEnemyTouchingWallRight}");
-            GUILayout.Label($"IsEnemyTouchingWallLeft: {IsEnemyTouchingWallLeft}");
-            GUILayout.Label($"Vertical Speed: {_verticalSpeed}");
-            GUILayout.Label($"Horizontal Speed: {_horizontalSpeed}");
-            GUILayout.Label($"DirectionToPlayer: {_directionToPlayer}");
-            GUILayout.Label($"IsAttacking: {isAttacking}");
-        }
+
 }
